@@ -37,7 +37,7 @@ class AdzunaConfig:
     monthly_call_budget: int = 1000
 
     @classmethod
-    def from_env(cls) -> "AdzunaConfig":
+    def from_env(cls) -> AdzunaConfig:
         return cls(app_id=_require("ADZUNA_APP_ID"), app_key=_require("ADZUNA_APP_KEY"))
 
 
@@ -52,7 +52,7 @@ class ReedConfig:
     results_per_page: int = 100
 
     @classmethod
-    def from_env(cls) -> "ReedConfig":
+    def from_env(cls) -> ReedConfig:
         return cls(api_key=_require("REED_API_KEY"))
 
 
@@ -74,7 +74,7 @@ class Settings:
     max_retries: int = 3
 
     @classmethod
-    def from_env(cls) -> "Settings":
+    def from_env(cls) -> Settings:
         return cls(
             database_url=_require("DATABASE_URL"),
             adzuna=AdzunaConfig.from_env(),

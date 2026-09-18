@@ -4,7 +4,7 @@ A six agent system that ingests live UK job postings, extracts the requirements
 behind each one, scores them against a CV, forecasts skill demand, and emails a
 ranked weekly shortlist automatically.
 
-![CI](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml)
 
 ## Status
 

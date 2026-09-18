@@ -19,9 +19,10 @@ import html
 import logging
 import re
 import unicodedata
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass, field
 from datetime import date, datetime
-from typing import Any, Iterable, Protocol
+from typing import Any, Protocol
 
 import httpx
 
@@ -170,7 +171,9 @@ def _parse_date(value: str | None) -> date | None:
         return None
     for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%d/%m/%Y", "%Y-%m-%d"):
         try:
-            return datetime.strptime(value[:19] if "T" in value else value, fmt).date()
+            # Only the calendar date is kept, so a naive parse is deliberate here.
+            parsed = datetime.strptime(value[:19] if "T" in value else value, fmt)  # noqa: DTZ007
+            return parsed.date()
         except ValueError:
             continue
     logger.warning("Unrecognised date format from provider: %r", value)

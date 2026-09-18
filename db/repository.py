@@ -9,8 +9,8 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
-from typing import Iterator, Sequence
 
 import psycopg
 from psycopg.rows import dict_row

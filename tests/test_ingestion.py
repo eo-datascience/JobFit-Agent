@@ -22,7 +22,6 @@ from agents.ingestion import (
 )
 from config import AdzunaConfig, ReedConfig
 
-
 # ---------------------------------------------------------------------------
 # Text cleaning
 # ---------------------------------------------------------------------------

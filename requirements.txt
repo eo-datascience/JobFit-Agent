@@ -21,4 +21,4 @@ apscheduler>=3.10
 # Dev
 pytest>=8.0
 pytest-cov>=5.0
-ruff>=0.5
+ruff==0.16.8
