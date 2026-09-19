@@ -58,11 +58,28 @@ def main() -> int:
         limit_per_query=args.limit,
     )
 
-    full_text = sum(1 for p in result.canonical if p.has_full_description)
+    by_source: dict[str, int] = {}
+    for posting in result.canonical:
+        by_source[posting.source] = by_source.get(posting.source, 0) + 1
+
+    full = [p for p in result.canonical if p.has_full_description]
+    mean_full = sum(len(p.description) for p in full) // len(full) if full else 0
+
     logger.info(
-        "Fetched %d, kept %d, dropped %d duplicates. %d of %d carry a full description.",
-        result.fetched, result.inserted, result.duplicate_count, full_text, result.inserted,
+        "Fetched %d, kept %d, dropped %d duplicates.",
+        result.fetched, result.inserted, result.duplicate_count,
     )
+    logger.info("Canonical postings by source: %s", by_source)
+    logger.info(
+        "%d of %d are parseable by the extraction agent, averaging %d characters.",
+        len(full), result.inserted, mean_full,
+    )
+    if len(full) < result.inserted:
+        logger.info(
+            "The remaining %d are Adzuna only, which has no detail endpoint, so they "
+            "stay as excerpts and will be skipped during extraction.",
+            result.inserted - len(full),
+        )
 
     if args.dry_run:
         for posting in result.canonical[:10]:
