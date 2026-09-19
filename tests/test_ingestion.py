@@ -146,12 +146,12 @@ ADZUNA_RESPONSE = {
     ]
 }
 
-REED_RESPONSE = {
+REED_SEARCH_RESPONSE = {
     "results": [
         {
             "jobId": 998877,
             "jobTitle": "Data Engineer",
-            "jobDescription": "<p>" + ("Detailed responsibilities. " * 40) + "</p>",
+            "jobDescription": "Snippet of the description, truncated by Reed's search endpoint...",
             "employerName": "Acme Limited",
             "locationName": "London",
             "minimumSalary": 55000,
@@ -184,22 +184,56 @@ def test_adzuna_parsing_marks_descriptions_as_partial():
     assert posting.posted_at == date(2026, 9, 1)
 
 
-def test_reed_parsing_marks_descriptions_as_full_and_salary_as_stated():
-    client = ReedClient(ReedConfig(api_key="key"), client=_stub_client(REED_RESPONSE))
-    posting = client.fetch("data engineer", "London")[0]
+def _reed_two_endpoint_client(detail_body: str, detail_status: int = 200) -> httpx.Client:
+    """Stub both Reed endpoints: /search returns a snippet, /jobs/{id} the full text."""
 
-    assert posting.source == "reed"
-    assert posting.has_full_description is True
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "/jobs/" in request.url.path:
+            return httpx.Response(detail_status, json={"jobDescription": detail_body})
+        return httpx.Response(200, json=REED_SEARCH_RESPONSE)
+
+    return httpx.Client(transport=httpx.MockTransport(handler))
+
+
+def test_reed_search_alone_is_never_treated_as_a_full_description():
+    """Reed's /search endpoint returns a snippet. Without a detail fetch the
+    posting must not be offered to the extraction agent as complete."""
+    client = ReedClient(ReedConfig(api_key="key"), client=_stub_client(REED_SEARCH_RESPONSE))
+    posting = client.fetch("data engineer", "London", fetch_details=False)[0]
+
+    assert posting.has_full_description is False
     assert posting.salary_is_predicted is False
-    assert "<p>" not in posting.description
     assert posting.posted_at == date(2026, 9, 1)
 
 
-def test_reed_short_body_is_not_treated_as_a_full_description():
-    """A stub posting should not be handed to the extraction agent as if it
-    carried real content."""
-    payload = {"results": [{**REED_RESPONSE["results"][0], "jobDescription": "See website."}]}
-    client = ReedClient(ReedConfig(api_key="key"), client=_stub_client(payload))
+def test_reed_detail_fetch_replaces_the_snippet_and_marks_it_full():
+    full_body = "<p>" + ("Detailed responsibilities. " * 40) + "</p>"
+    client = ReedClient(ReedConfig(api_key="key"), client=_reed_two_endpoint_client(full_body))
+
+    posting = client.fetch("data engineer", "London")[0]
+
+    assert posting.has_full_description is True
+    assert len(posting.description) > 400
+    assert "<p>" not in posting.description
+
+
+def test_reed_detail_fetch_failure_leaves_the_posting_usable_but_not_full():
+    """A failed detail call must not lose the posting, and must not pretend
+    the snippet is the whole description."""
+    client = ReedClient(
+        ReedConfig(api_key="key"), client=_reed_two_endpoint_client("", detail_status=500)
+    )
+
+    postings = client.fetch("data engineer", "London")
+
+    assert len(postings) == 1
+    assert postings[0].has_full_description is False
+
+
+def test_reed_detail_fetch_does_not_mark_a_stub_body_as_full():
+    client = ReedClient(
+        ReedConfig(api_key="key"), client=_reed_two_endpoint_client("See our website.")
+    )
 
     assert client.fetch("data engineer", "London")[0].has_full_description is False
 
@@ -213,7 +247,10 @@ def test_run_ingestion_deduplicates_the_same_role_across_both_providers():
     adzuna = AdzunaClient(
         AdzunaConfig(app_id="id", app_key="key"), client=_stub_client(ADZUNA_RESPONSE)
     )
-    reed = ReedClient(ReedConfig(api_key="key"), client=_stub_client(REED_RESPONSE))
+    reed = ReedClient(
+        ReedConfig(api_key="key"),
+        client=_reed_two_endpoint_client("<p>" + ("Detail. " * 80) + "</p>"),
+    )
 
     result = run_ingestion([adzuna, reed], queries=["data engineer"], location="London")
 

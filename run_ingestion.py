@@ -22,6 +22,13 @@ logging.basicConfig(
     format="%(asctime)s  %(levelname)-7s %(name)s  %(message)s",
     datefmt="%H:%M:%S",
 )
+
+# httpx logs the full request URL at INFO level, which for Adzuna includes
+# app_id and app_key as query parameters. Anything above WARNING keeps those
+# credentials out of the console, out of log files and out of screenshots.
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
+
 logger = logging.getLogger("jobfit.ingestion")
 
 
@@ -29,13 +36,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="JobFit Agent: ingestion")
     parser.add_argument("--dry-run", action="store_true", help="Do not write to the database")
     parser.add_argument("--limit", type=int, default=50, help="Results per query per source")
+    parser.add_argument(
+        "--no-details",
+        action="store_true",
+        help="Skip Reed detail fetching. Much faster, but descriptions stay as snippets.",
+    )
     args = parser.parse_args()
 
     load_dotenv()
     settings = Settings.from_env()
 
     sources = [
-        ReedClient(settings.reed),
+        ReedClient(settings.reed, fetch_details=not args.no_details),
         AdzunaClient(settings.adzuna),
     ]
 

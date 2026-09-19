@@ -21,10 +21,12 @@ ranked weekly shortlist automatically.
 
 Reed and Adzuna are not used for redundancy. They do different jobs.
 
-Reed returns the full job description, which the extraction agent needs in
-order to parse requirements at all. Adzuna returns excerpts, but exposes salary
-histograms and regional trend data that Reed does not, which the forecasting
-agent needs. Adzuna salaries are frequently modelled rather than employer
+Reed is the only one of the two that can supply a complete job description,
+which the extraction agent needs in order to parse requirements at all. Its
+search endpoint returns only a snippet, so the full text is fetched separately
+from its detail endpoint, one request per posting. Adzuna returns excerpts with
+no detail endpoint, but exposes salary histograms and regional trend data that
+Reed does not, which the forecasting agent needs. Adzuna salaries are frequently modelled rather than employer
 stated, so postings carry a `salary_is_predicted` flag and scoring weights a
 stated range above an inferred one.
 
@@ -45,8 +47,9 @@ reed.co.uk/developers/jobseeker.
 ## Running
 
 ```bash
-python run_ingestion.py --dry-run    # fetch and report, write nothing
-python run_ingestion.py              # fetch, deduplicate and persist
+python run_ingestion.py --dry-run               # fetch and report, write nothing
+python run_ingestion.py --dry-run --no-details  # same, but skip Reed detail calls
+python run_ingestion.py                         # fetch, deduplicate and persist
 pytest                               # run the suite
 ruff check .                         # lint
 ```

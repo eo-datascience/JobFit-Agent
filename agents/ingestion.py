@@ -228,19 +228,42 @@ class AdzunaClient:
 
 
 class ReedClient:
-    """Full job descriptions. Primary source for per posting detail."""
+    """Primary source for per posting detail.
+
+    Reed's /search endpoint returns only a snippet of the description. The
+    complete text lives behind /jobs/{jobId}, one request per posting, so
+    detail fetching is a separate opt in step rather than something every
+    search pays for. The extraction agent cannot parse a snippet, so any
+    posting whose detail has not been fetched is flagged accordingly.
+    """
 
     name = "reed"
 
-    def __init__(self, config, client: httpx.Client | None = None) -> None:
+    # Below this length a description is a stub or a redirect notice rather
+    # than a real posting body.
+    MIN_FULL_DESCRIPTION_CHARS = 400
+
+    def __init__(
+        self,
+        config,
+        client: httpx.Client | None = None,
+        fetch_details: bool = True,
+    ) -> None:
         self.config = config
+        self.fetch_details = fetch_details
         # Reed uses HTTP basic auth with the API key as the username and an
         # empty password.
         self._client = client or httpx.Client(
             timeout=20.0, auth=(config.api_key, "")
         )
 
-    def fetch(self, query: str, location: str, limit: int = 100) -> list[Posting]:
+    def fetch(
+        self,
+        query: str,
+        location: str,
+        limit: int = 100,
+        fetch_details: bool | None = None,
+    ) -> list[Posting]:
         params = {
             "keywords": query,
             "locationName": location,
@@ -249,7 +272,35 @@ class ReedClient:
         response = self._client.get(f"{self.config.base_url}/search", params=params)
         response.raise_for_status()
         results = response.json().get("results", [])
-        return [self._to_posting(item) for item in results]
+        postings = [self._to_posting(item) for item in results]
+
+        should_fetch = self.fetch_details if fetch_details is None else fetch_details
+        if should_fetch:
+            logger.info("Fetching full descriptions for %d reed postings", len(postings))
+            for posting in postings:
+                self._enrich_with_detail(posting)
+
+        return postings
+
+    def _enrich_with_detail(self, posting: Posting) -> None:
+        """Replace the search snippet with the full description.
+
+        A failure here is logged and skipped rather than raised. The posting
+        survives with its snippet and is simply not marked as full, so the
+        extraction agent will pass over it instead of parsing a fragment.
+        """
+        try:
+            response = self._client.get(f"{self.config.base_url}/jobs/{posting.source_job_id}")
+            response.raise_for_status()
+        except httpx.HTTPError as exc:
+            logger.warning("Detail fetch failed for reed job %s: %s", posting.source_job_id, exc)
+            return
+
+        detail = response.json()
+        description = clean_text(detail.get("jobDescription"))
+        if len(description) > len(posting.description):
+            posting.description = description
+        posting.has_full_description = len(posting.description) >= self.MIN_FULL_DESCRIPTION_CHARS
 
     def _to_posting(self, item: dict[str, Any]) -> Posting:
         description = clean_text(item.get("jobDescription"))
@@ -258,9 +309,9 @@ class ReedClient:
             source_job_id=str(item.get("jobId", "")),
             title=clean_text(item.get("jobTitle")),
             description=description,
-            # Reed returns the complete description, but a very short body
-            # usually means a redirect stub rather than a real posting.
-            has_full_description=len(description) > 400,
+            # The search endpoint returns a snippet. Only a successful detail
+            # fetch can set this to True.
+            has_full_description=False,
             company=clean_text(item.get("employerName")) or None,
             location=clean_text(item.get("locationName")) or None,
             contract_type="contract" if item.get("contractType") else None,
