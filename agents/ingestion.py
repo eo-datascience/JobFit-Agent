@@ -44,7 +44,17 @@ _TITLE_NOISE = {
 
 _HTML_TAG = re.compile(r"<[^>]+>")
 _NON_ALNUM = re.compile(r"[^a-z0-9\s]")
-_WHITESPACE = re.compile(r"\s+")
+_WHITESPACE = re.compile(r"[ \t]+")
+_BLANK_LINES = re.compile(r"\n{3,}")
+
+# Block level tags that represent a line break in the rendered posting. These
+# become newlines before tags are stripped, because the extraction agent reads
+# section headings such as "Essential:" and needs the line structure to find
+# where one section ends and the next begins.
+_BLOCK_TAG = re.compile(
+    r"</?(?:p|br|div|li|ul|ol|h[1-6]|tr|table|section|article)\b[^>]*>",
+    re.IGNORECASE,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -90,18 +100,24 @@ class Posting:
 
 
 def clean_text(value: str | None) -> str:
-    """Strip HTML, decode entities and collapse whitespace.
+    """Strip HTML and decode entities while preserving line structure.
 
-    Reed returns HTML in its descriptions and Adzuna returns entity encoded
-    plain text, so both are put through the same cleaner rather than trusting
-    either provider's formatting.
+    Reed returns HTML and Adzuna returns entity encoded plain text, so both go
+    through the same cleaner. Block level tags become newlines first, because
+    the extraction agent reads section headings such as "Essential:" and needs
+    to know where one line ends and the next begins. Collapsing everything to
+    a single line would make those headings undetectable.
     """
     if not value:
         return ""
     text = html.unescape(value)
+    text = _BLOCK_TAG.sub("\n", text)
     text = _HTML_TAG.sub(" ", text)
     text = unicodedata.normalize("NFKC", text)
-    return _WHITESPACE.sub(" ", text).strip()
+    text = _WHITESPACE.sub(" ", text)
+    # Tidy the newlines without destroying them.
+    text = "\n".join(line.strip() for line in text.split("\n"))
+    return _BLANK_LINES.sub("\n\n", text).strip()
 
 
 def _normalise_tokens(value: str | None, noise: set[str]) -> str:

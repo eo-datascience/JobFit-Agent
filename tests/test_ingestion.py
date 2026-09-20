@@ -32,13 +32,27 @@ from config import AdzunaConfig, ReedConfig
     [
         ("<p>Senior <b>Data</b> Engineer</p>", "Senior Data Engineer"),
         ("Python &amp; SQL required", "Python & SQL required"),
-        ("  multiple   spaces\n\tcollapsed  ", "multiple spaces collapsed"),
+        ("  multiple   spaces   collapsed  ", "multiple spaces collapsed"),
         (None, ""),
         ("", ""),
     ],
 )
 def test_clean_text_strips_markup_and_normalises_whitespace(raw, expected):
     assert clean_text(raw) == expected
+
+
+def test_clean_text_preserves_line_structure():
+    """The extraction agent reads section headings, so block level tags must
+    become newlines rather than being flattened away."""
+    html_body = "<p>Essential:</p><ul><li>Python</li><li>SQL</li></ul><p>Desirable:</p><p>Docker</p>"
+
+    lines = [line for line in clean_text(html_body).split("\n") if line]
+
+    assert lines == ["Essential:", "Python", "SQL", "Desirable:", "Docker"]
+
+
+def test_clean_text_does_not_leave_runs_of_blank_lines():
+    assert "\n\n\n" not in clean_text("<p>A</p><br><br><br><p>B</p>")
 
 
 # ---------------------------------------------------------------------------
