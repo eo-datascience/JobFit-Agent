@@ -187,6 +187,42 @@ NON_DOMAIN_TITLE_TOKENS: list[str] = [
 ]
 
 
+# Skills grouped by what they are for. Two different tools in the same category
+# are partially interchangeable: someone who knows Prefect can pick up Airflow
+# far faster than someone who has never orchestrated anything. Scoring awards
+# partial credit for a same category match, which is the difference between
+# "you do not have this" and "you have something close".
+SKILL_CATEGORIES: dict[str, list[str]] = {
+    "orchestration": ["Airflow", "Prefect", "Dagster", "Luigi", "Azure Data Factory"],
+    "cloud": ["AWS", "Azure", "GCP"],
+    "warehouse": ["Snowflake", "BigQuery", "Redshift", "Databricks", "Delta Lake", "Data Warehousing"],
+    "database": ["PostgreSQL", "MySQL", "MongoDB", "Cassandra", "Elasticsearch"],
+    "distributed": ["PySpark", "Apache Spark", "Hadoop", "Kafka", "Flink"],
+    "dataframe": ["pandas", "NumPy", "Polars"],
+    "ml_framework": ["scikit-learn", "TensorFlow", "PyTorch", "XGBoost", "LightGBM"],
+    "ml_concept": ["Machine Learning", "Deep Learning", "Statistics", "Time Series"],
+    "nlp": ["NLP", "LLMs", "RAG", "Hugging Face"],
+    "bi": ["Power BI", "Tableau", "Looker", "Qlik", "Matplotlib"],
+    "container": ["Docker", "Kubernetes"],
+    "infra": ["Terraform", "CI/CD", "Linux"],
+    "web_framework": ["FastAPI", "Flask", "Django", "Streamlit"],
+    "language": ["Python", "R", "Scala", "Java", "JavaScript", "Go", "C++", "C#"],
+    "pipeline": ["ETL", "dbt", "Data Modelling", "Data Quality"],
+    "practice": ["Git", "Testing", "Agile", "REST APIs", "Bash"],
+    "analytics": ["SQL", "Excel", "A/B Testing"],
+    "ml_ops": ["MLflow"],
+    "governance": ["Data Governance"],
+    "vision": ["Computer Vision"],
+}
+
+
+def category_of(skill: str) -> str | None:
+    for category, members in SKILL_CATEGORIES.items():
+        if skill in members:
+            return category
+    return None
+
+
 def canonical_skills() -> list[str]:
     return sorted(SKILL_TAXONOMY.keys())
 

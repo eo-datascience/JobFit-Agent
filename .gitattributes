@@ -1,0 +1,7 @@
+# Normalise line endings so Windows and Linux checkouts agree, and stop git
+# warning about LF to CRLF conversion on every commit.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.zip binary

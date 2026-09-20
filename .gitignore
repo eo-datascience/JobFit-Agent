@@ -8,3 +8,4 @@ htmlcov/
 venv/
 *.egg-info/
 data/raw/
+cv.yml

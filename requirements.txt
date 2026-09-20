@@ -12,11 +12,11 @@ uvicorn>=0.29
 apscheduler>=3.10
 
 # Later phases
-# spacy>=3.7
-# sentence-transformers>=3.0
 # prophet>=1.1.5
 # anthropic>=0.40
 # sendgrid>=6.11
+
+pyyaml>=6.0
 
 # Dev
 pytest>=8.0

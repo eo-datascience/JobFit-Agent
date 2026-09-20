@@ -12,7 +12,7 @@ ranked weekly shortlist automatically.
 |---|---|---|
 | 1. Ingestion | 1 | Built |
 | 2. Skill extraction | 2 | Built |
-| 3. Fit scoring | 3 | Not started |
+| 3. Fit scoring | 3 | Built |
 | 4. Demand forecast | 4 | Not started |
 | 5. Weekly digest | 5 | Not started |
 | 6. Outcome monitor | 6 | Not started |
@@ -62,6 +62,41 @@ extracted at full confidence. Adzuna excerpts are extracted on a reduced basis
 and marked partial, which tells the scoring agent that a missing skill proves
 nothing rather than counting against the role.
 
+## How scoring works
+
+Four weighted components: skills at 0.45, seniority at 0.25, salary at 0.15 and
+location at 0.15. Essential skills count for more than desirable ones, because
+missing a stated requirement is a different thing from missing a bonus.
+
+Adjacent experience earns partial credit through explicit skill families. A
+candidate who knows Databricks is not a Snowflake match, but they are much
+closer than someone who knows neither, and the two sit in the same warehouse
+family. The original design called for sentence transformer embeddings here.
+That was dropped, because both the CV and the posting are already normalised
+through the same taxonomy, so synonyms match exactly and embeddings would have
+added a 90MB download and a CI dependency for no gain. Families also have the
+advantage that a partial match can be explained in a sentence, where an
+embedding similarity of 0.73 cannot.
+
+On a partial extraction the skills component is removed entirely and its weight
+is redistributed across the others, because an Adzuna excerpt that never
+mentions Python is not a role that does not want Python.
+
+That redistribution creates a trap, and running the agent on live postings
+exposed it. Seniority, salary and location are all easy to score highly on, so
+spreading the skills weight across them inflates provisional scores. Two
+excerpt only postings scored 95 and pushed a Reed role with five of six skills
+matched down to third place. Knowing less was producing a better score.
+
+Provisional scores are therefore ranked in a separate tier and can never
+outrank a fully analysed role, however high the number. Tiering is used rather
+than an arbitrary discount because the honest claim is not that a provisional
+score should be marked down by some amount, only that it is not comparable in
+the first place.
+
+Every line of the explanation is built from a field the scoring step computed.
+Nothing in it is generated, so the explanation and the score cannot drift apart.
+
 ## Setup
 
 ```bash
@@ -81,6 +116,8 @@ python run_ingestion.py --dry-run --no-details  # same, but skip Reed detail cal
 python run_ingestion.py                         # fetch, deduplicate and persist
 python run_extraction.py                        # extract requirements, no API cost
 python run_extraction.py --use-model            # also call Claude on full postings
+python run_scoring.py                           # score everything against cv.yml
+python run_scoring.py --min-score 60 --top 20   # only roles worth a look
 pytest                               # run the suite
 ruff check .                         # lint
 ```
