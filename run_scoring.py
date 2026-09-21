@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from agents.cv import CV
 from agents.extraction import extract_many, in_domain_only
 from agents.ingestion import AdzunaClient, ReedClient, run_ingestion
+from agents.outcomes import load_weights
 from agents.scoring import explain, score
 from config import Settings
 
@@ -62,6 +63,8 @@ def main() -> int:
 
     requirements = in_domain_only(extract_many(result.canonical))
     by_id = {p.source_job_id: p for p in result.canonical}
+    # Learned weights if the outcome monitor has adopted any, otherwise the originals.
+    weights = load_weights()
 
     scored = []
     for req in requirements:
@@ -75,6 +78,7 @@ def main() -> int:
             salary_max=posting.salary_max,
             salary_is_predicted=posting.salary_is_predicted,
             location=posting.location,
+            weights=weights,
         )
         scored.append((fit, posting))
 

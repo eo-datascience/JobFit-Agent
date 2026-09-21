@@ -66,7 +66,10 @@ def _fit(job_id: str, total: int, provisional: bool = False, **overrides) -> Fit
 
 
 def _scored(*specs) -> list[tuple[FitScore, Posting]]:
-    return [(_fit(j, t, p), _posting(j)) for j, t, p in specs]
+    # Each role gets its own title, so the fixture describes distinct
+    # opportunities. Identical titles at one employer are treated as a single
+    # repeated listing, which is tested separately.
+    return [(_fit(j, t, p), _posting(j, title=f"Data Engineer {j}")) for j, t, p in specs]
 
 
 class RecordingSender:
@@ -353,3 +356,126 @@ def test_resend_errors_do_not_leak_the_api_key():
         sender.send("me@example.com", "s", "h", "t")
 
     assert "re_SECRET123" not in str(excinfo.value)
+
+
+def test_a_failure_recording_recommendations_leaves_roles_unsent(tmp_path, monkeypatch):
+    """The first live send happened before recommendations were recorded, so
+    ten roles were marked sent but unknown to the outcome monitor. If recording
+    fails, the roles must stay unmarked so they are offered again."""
+
+    def broken_record(*args, **kwargs):
+        raise OSError("disk full")
+
+    monkeypatch.setattr("agents.digest.record_recommendations", broken_record)
+    seen_path = tmp_path / "seen.json"
+    digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
+
+    with pytest.raises(OSError):
+        deliver(digest, RecordingSender(), "me@example.com", "Emmanuel", seen_path,
+                recommendations_path=tmp_path / "recs.json")
+
+    assert load_seen(seen_path) == set()
+
+
+def test_a_successful_send_records_recommendations_and_marks_seen(tmp_path):
+    from agents.outcomes import load_recommendations
+
+    seen_path = tmp_path / "seen.json"
+    recs_path = tmp_path / "recs.json"
+    digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
+
+    deliver(digest, RecordingSender(), "me@example.com", "Emmanuel", seen_path,
+            recommendations_path=recs_path)
+
+    assert load_seen(seen_path) == {"reed:1"}
+    assert "reed:1" in load_recommendations(recs_path)
+
+
+# ---------------------------------------------------------------------------
+# Repeat listings
+# ---------------------------------------------------------------------------
+
+
+def test_one_employers_identical_listing_takes_only_one_slot():
+    """The first live digest spent four of ten slots on one employer's
+    identical role, posted separately in four locations."""
+    scored = [
+        (_fit(str(i), 77), _posting(str(i), title="Trainee Ai Engineer",
+                                    company="IT Career Switch", location=loc))
+        for i, loc in enumerate(["London", "Leeds", "Manchester", "Bristol"])
+    ] + [(_fit("other", 70), _posting("other", title="Data Analyst", company="Acme Ltd"))]
+
+    digest = compile_digest(scored, set(), WEEK)
+    titles = [e.posting.title for e in digest.entries]
+
+    assert titles.count("Trainee Ai Engineer") == 1
+    assert "Data Analyst" in titles
+    assert digest.skipped_repeat_listing == 3
+
+
+def test_collapsed_locations_are_kept_rather_than_discarded():
+    """The four copies were in different parts of London. Hiding the other
+    three would lose information that matters, since one location may be far
+    easier to reach. They take no slot, but they are still shown."""
+    scored = [
+        (_fit(str(i), 77), _posting(str(i), title="Trainee Ai Engineer",
+                                    company="IT Career Switch", location=loc))
+        for i, loc in enumerate(["E151AZ", "W52TD", "SW34LY", "E145HQ"])
+    ]
+
+    digest = compile_digest(scored, set(), WEEK)
+    kept = digest.entries[0]
+
+    assert kept.posting.location == "E151AZ"
+    assert kept.other_locations == ["W52TD", "SW34LY", "E145HQ"]
+
+
+def test_other_locations_appear_in_both_email_formats():
+    entry = DigestEntry(
+        posting=_posting("1", location="E151AZ"),
+        fit=_fit("1", 77),
+        other_locations=["W52TD", "SW34LY"],
+    )
+    digest = Digest(week_of=WEEK, entries=[entry])
+
+    assert "Also listed in 2 other locations" in render_html(digest, "Emmanuel")
+    assert "W52TD" in render_text(digest)
+
+
+def test_a_full_digest_still_attaches_later_copies_of_kept_listings():
+    """Once the shortlist is full, a later copy of a role already in it should
+    still add its location rather than being lost."""
+    scored = [(_fit(f"f{i}", 95 - i), _posting(f"f{i}", title=f"Role {i}"))
+              for i in range(MAX_ENTRIES)]
+    scored.append((_fit("dup", 60), _posting("dup", title="Role 0", location="Leeds")))
+
+    digest = compile_digest(scored, set(), WEEK)
+    role_zero = next(e for e in digest.entries if e.posting.title == "Role 0")
+
+    assert "Leeds" in role_zero.other_locations
+
+
+def test_repeat_detection_ignores_case_and_spacing():
+    scored = [
+        (_fit("1", 80), _posting("1", title="Data  Engineer", company="Acme Ltd")),
+        (_fit("2", 79), _posting("2", title="data engineer", company="ACME LTD")),
+    ]
+    assert len(compile_digest(scored, set(), WEEK).entries) == 1
+
+
+def test_the_same_title_at_different_employers_is_kept():
+    """Two companies both hiring a Data Engineer are two real opportunities."""
+    scored = [
+        (_fit("1", 80), _posting("1", title="Data Engineer", company="Acme Ltd")),
+        (_fit("2", 79), _posting("2", title="Data Engineer", company="Beta plc")),
+    ]
+    assert len(compile_digest(scored, set(), WEEK).entries) == 2
+
+
+def test_the_highest_scoring_copy_of_a_repeat_listing_is_the_one_kept():
+    scored = [
+        (_fit("low", 70), _posting("low", title="Data Engineer", company="Acme Ltd")),
+        (_fit("high", 88), _posting("high", title="Data Engineer", company="Acme Ltd")),
+    ]
+    kept = compile_digest(scored, set(), WEEK).entries
+    assert [e.posting.source_job_id for e in kept] == ["high"]

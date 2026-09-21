@@ -31,6 +31,7 @@ from typing import Protocol
 import httpx
 
 from agents.ingestion import Posting, redact_url
+from agents.outcomes import RECOMMENDATIONS_PATH, Recommendation, record_recommendations
 from agents.scoring import FitScore, explain
 
 logger = logging.getLogger(__name__)
@@ -53,6 +54,10 @@ MAX_ENTRIES = 10
 class DigestEntry:
     posting: Posting
     fit: FitScore
+    # Other locations where the same employer listed the same role. They take
+    # no slot of their own, but the candidate still sees them, because one of
+    # those locations may be far easier to reach.
+    other_locations: list[str] = field(default_factory=list)
 
     @property
     def key(self) -> str:
@@ -65,6 +70,7 @@ class Digest:
     entries: list[DigestEntry] = field(default_factory=list)
     provisional: list[DigestEntry] = field(default_factory=list)
     skipped_already_sent: int = 0
+    skipped_repeat_listing: int = 0
 
     @property
     def is_empty(self) -> bool:
@@ -119,6 +125,7 @@ def compile_digest(
     """
     digest = Digest(week_of=week_of)
     ranked = sorted(scored, key=lambda pair: pair[0].rank_key, reverse=True)
+    listings_taken: dict[str, DigestEntry] = {}
 
     for fit, posting in ranked:
         entry = DigestEntry(posting=posting, fit=fit)
@@ -127,15 +134,39 @@ def compile_digest(
             continue
         if fit.total < min_score:
             continue
+        # One slot per employer and role. The first live digest spent four of
+        # its ten slots on one employer's identical listing, posted separately
+        # in four locations. Ingestion rightly keeps those apart, since they
+        # are distinct postings, but a shortlist should not.
+        listing = _listing_identity(posting)
+        if listing in listings_taken:
+            kept = listings_taken[listing]
+            if posting.location and posting.location not in kept.other_locations \
+                    and posting.location != kept.posting.location:
+                kept.other_locations.append(posting.location)
+            digest.skipped_repeat_listing += 1
+            continue
         if len(digest.entries) + len(digest.provisional) >= limit:
-            break
+            # Keep scanning rather than stopping, so that later copies of a
+            # listing already in the digest can still attach their locations.
+            continue
+        listings_taken[listing] = entry
         (digest.provisional if fit.is_provisional else digest.entries).append(entry)
 
     logger.info(
-        "Digest for week of %s: %d fully analysed, %d provisional, %d skipped as already sent.",
-        week_of, len(digest.entries), len(digest.provisional), digest.skipped_already_sent,
+        "Digest for week of %s: %d fully analysed, %d provisional, %d skipped as already "
+        "sent, %d skipped as repeat listings.",
+        week_of, len(digest.entries), len(digest.provisional),
+        digest.skipped_already_sent, digest.skipped_repeat_listing,
     )
     return digest
+
+
+def _listing_identity(posting: Posting) -> str:
+    """Employer and role, ignoring location and case."""
+    title = " ".join((posting.title or "").lower().split())
+    company = " ".join((posting.company or "").lower().split())
+    return f"{company}|{title}"
 
 
 # ---------------------------------------------------------------------------
@@ -184,6 +215,12 @@ def _render_entry(entry: DigestEntry) -> str:
     if f.missing_essential:
         rows.append(f'<div style="font-size:13px;color:#a33"><b>Missing essentials:</b> '
                     f'{_e(", ".join(f.missing_essential))}</div>')
+    if entry.other_locations:
+        count = len(entry.other_locations)
+        rows.append(
+            f'<div style="font-size:13px;color:#555">Also listed in {count} other '
+            f'location{"s" if count != 1 else ""}: {_e(", ".join(entry.other_locations))}</div>'
+        )
 
     # Table cells rather than inline blocks. Outlook and several webmail
     # clients ignore display and min-width, which ran the score straight into
@@ -243,6 +280,8 @@ def render_text(digest: Digest) -> str:
             lines.append(f"{e.fit.total}/100  {e.posting.title}")
             lines.append(f"        {e.posting.company or ''}, {e.posting.location or ''}")
             lines.append(f"        {explain(e.fit).splitlines()[0]}")
+            if e.other_locations:
+                lines.append(f"        Also listed in: {', '.join(e.other_locations)}")
             if e.posting.url:
                 lines.append(f"        {e.posting.url}")
             lines.append("")
@@ -331,12 +370,35 @@ class SendGridSender:
             )
 
 
+def snapshot(digest: Digest) -> list[Recommendation]:
+    """Freeze the component scores behind each recommendation.
+
+    The outcome monitor learns from these rather than from rescored postings,
+    because by the time an outcome arrives the weights, the CV and the posting
+    may all have changed, and learning from scores the candidate never saw
+    would be learning from the wrong thing.
+    """
+    return [
+        Recommendation(
+            key=e.key,
+            title=e.posting.title,
+            company=e.posting.company,
+            total=e.fit.total,
+            components={c.name: round(c.score, 4) for c in e.fit.components},
+            provisional=e.fit.is_provisional,
+            recommended_on=digest.week_of.isoformat(),
+        )
+        for e in digest.entries + digest.provisional
+    ]
+
+
 def deliver(
     digest: Digest,
     sender: Sender,
     to: str,
     candidate_name: str,
     seen_path: Path = DEFAULT_SEEN_PATH,
+    recommendations_path: Path = RECOMMENDATIONS_PATH,
 ) -> bool:
     """Send the digest, and record it as sent only if sending succeeded.
 
@@ -358,6 +420,13 @@ def deliver(
         text_body=render_text(digest),
     )
     # Only reached if send() did not raise.
+    #
+    # Recommendations are recorded before the postings are marked as sent. If
+    # the order were reversed and recording failed, those roles would be hidden
+    # from future digests and unknown to the outcome monitor, silently and for
+    # good. In this order a failure leaves them unmarked, so they are offered
+    # again next week, and recording is idempotent, so a repeat is harmless.
+    record_recommendations(snapshot(digest), recommendations_path)
     mark_seen(digest.keys, seen_path)
     logger.info("Digest sent to %s with %d roles.", to, len(digest.keys))
     return True

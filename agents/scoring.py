@@ -235,8 +235,13 @@ def score(
     salary_max: float | None = None,
     salary_is_predicted: bool = False,
     location: str | None = None,
+    weights: dict[str, float] | None = None,
 ) -> FitScore:
     """Produce a fit score between zero and one hundred.
+
+    Weights default to the hand set values above. The outcome monitor can
+    supply learned weights instead, which is how real application results feed
+    back into future scoring.
 
     On a partial extraction the skills component is dropped and its weight is
     spread across the remaining components, because an Adzuna excerpt that does
@@ -248,7 +253,7 @@ def score(
     location_score, location_detail = score_location(cv, location)
 
     partial_extraction = requirements.confidence is Confidence.PARTIAL
-    weights = dict(WEIGHTS)
+    weights = dict(weights or WEIGHTS)
 
     if partial_extraction:
         # Redistribute the skills weight proportionally across the rest.

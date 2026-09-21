@@ -15,7 +15,7 @@ ranked weekly shortlist automatically.
 | 3. Fit scoring | 3 | Built |
 | 4. Demand forecast | 4 | Built |
 | 5. Weekly digest | 5 | Built |
-| 6. Outcome monitor | 6 | Not started |
+| 6. Outcome monitor | 6 | Built |
 
 ## Why two job sources
 
@@ -247,6 +247,9 @@ python run_forecast.py                          # skill demand trends
 python run_forecast.py --snapshot               # also record this run as history
 python run_digest.py --preview                  # render the email locally, send nothing
 python run_digest.py                            # send it, no approval step
+python run_outcomes.py list                     # roles the digest sent you
+python run_outcomes.py record reed:12345 interview
+python run_outcomes.py learn                    # see what the evidence suggests
 pytest                               # run the suite
 ruff check .                         # lint
 ```
