@@ -14,7 +14,7 @@ ranked weekly shortlist automatically.
 | 2. Skill extraction | 2 | Built |
 | 3. Fit scoring | 3 | Built |
 | 4. Demand forecast | 4 | Built |
-| 5. Weekly digest | 5 | Not started |
+| 5. Weekly digest | 5 | Built |
 | 6. Outcome monitor | 6 | Not started |
 
 ## Why two job sources
@@ -181,6 +181,47 @@ installed, which is common on Windows given its compiled backend, the agent
 degrades to a least squares trend and labels the result rather than producing
 nothing.
 
+## How the digest acts safely without approval
+
+The digest is the first agent that acts rather than reports. It emails a ranked
+shortlist every week with no approval step, so the failure modes that matter
+are the ones a person would never notice.
+
+A posting is recorded as sent only after the send succeeds. Recording first
+would mean a failed send permanently hides those roles with no trace of why,
+which for a tool meant to surface opportunities is the worst possible failure.
+A corrupted record of sent postings fails loudly rather than being treated as
+empty, since that would resend everything.
+
+Every value from a job board is escaped before it enters the email, and links
+are only rendered for http and https addresses. Titles and company names come
+from APIs this system does not control.
+
+An empty digest is not sent. An email saying nothing new trains the reader to
+ignore the sender, which undermines the weeks when something matters.
+
+Provisional roles appear in their own section with greyed scores, so a high
+number built without a skills comparison cannot be read as a stronger match
+than a fully analysed role above it. The email uses table layout rather than
+inline styling, because Outlook and several webmail clients ignore the latter.
+
+Email is sent through Resend by default. SendGrid was the original choice, but
+it retired its permanent free plan in May 2025, leaving a sixty day trial and
+then a paid plan, which does not suit a job that sends one email a week
+indefinitely. Resend has a permanent free tier of three thousand emails a month.
+Every provider sits behind the same Sender interface, so the switch required
+one new class and no changes anywhere else in the agent. SendGrid remains
+available as an alternative.
+
+Without a verified domain, Resend sends from its shared test address, which
+only delivers to the email the account was created with. For a digest sent to
+its own author that costs nothing, and the error message says so explicitly if
+the recipient is set to anyone else.
+
+Both providers are called over plain HTTP rather than through their SDKs, so
+every send path is tested with the same mock transport as the job board
+clients, with no key and no network.
+
 ## Setup
 
 ```bash
@@ -204,6 +245,8 @@ python run_scoring.py                           # score everything against cv.ym
 python run_scoring.py --min-score 60 --top 20   # only roles worth a look
 python run_forecast.py                          # skill demand trends
 python run_forecast.py --snapshot               # also record this run as history
+python run_digest.py --preview                  # render the email locally, send nothing
+python run_digest.py                            # send it, no approval step
 pytest                               # run the suite
 ruff check .                         # lint
 ```

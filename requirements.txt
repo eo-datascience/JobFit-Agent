@@ -14,7 +14,6 @@ apscheduler>=3.10
 # Later phases
 # prophet>=1.1.5
 # anthropic>=0.40
-# sendgrid>=6.11
 
 pyyaml>=6.0
 

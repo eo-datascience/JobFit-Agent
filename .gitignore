@@ -9,3 +9,5 @@ venv/
 *.egg-info/
 data/raw/
 cv.yml
+digest_preview.html
+data/sent_postings.json
