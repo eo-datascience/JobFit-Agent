@@ -13,7 +13,7 @@ ranked weekly shortlist automatically.
 | 1. Ingestion | 1 | Built |
 | 2. Skill extraction | 2 | Built |
 | 3. Fit scoring | 3 | Built |
-| 4. Demand forecast | 4 | Not started |
+| 4. Demand forecast | 4 | Built |
 | 5. Weekly digest | 5 | Not started |
 | 6. Outcome monitor | 6 | Not started |
 
@@ -97,6 +97,90 @@ the first place.
 Every line of the explanation is built from a field the scoring step computed.
 Nothing in it is generated, so the explanation and the score cannot drift apart.
 
+## How forecasting avoids inventing a trend
+
+A new deployment has no history, so nothing can be forecast until the pipeline
+has run weekly for a month or more. History is therefore reconstructed from the
+dates postings were published, which job boards supply and which cover roughly
+the last one to two months.
+
+That reconstruction carries an artefact that would have invalidated every
+result. Older postings get filled and delisted, so the number surviving from a
+given week falls the further back you look. Counting mentions per week would
+show every skill rising toward the present, in every run, regardless of what
+the market was doing. The series therefore records the share of each week's
+postings mentioning a skill rather than the raw count, which is unaffected by
+how many of that week's postings are still listed.
+
+Weeks with fewer than eight surviving postings are dropped, because two
+postings makes every skill either nought or fifty percent.
+
+The first live run of this agent was wrong in three separate ways, and each is
+now covered by a regression test. The dropped weeks were being put back as
+zeros by the gap filling written for recorded snapshots, so ten real
+measurements became thirty five weeks of mostly invented zeros. Gap filling is
+correct for real weekly runs, where a missing skill genuinely had no demand,
+and wrong for reconstructed history, where a missing week simply could not be
+measured. It now applies only to the former.
+
+The run also happened on a Monday, so the current week held roughly one day of
+postings and most skills had not appeared in it yet. That partial week was
+being read as current demand, which made almost everything look as though it
+had collapsed. The week in progress is now excluded, and the baseline is a
+trailing three week mean rather than the single latest point.
+
+Finally, a skill with no recent mentions was being reported as rising by one
+hundred percent, which has no meaning. Growth from zero is now labelled as
+emerging, without a figure.
+
+A second live run found one more. Kubernetes was reported as rising by 155
+percent at three percent of postings, which on this volume is roughly one
+posting a week. The guard that rejects thin skills required five mentions, but
+in reconstructed mode it was summing percentage shares rather than counting
+postings, and eight weeks at three percent sums to twenty four. The guard now
+counts the real postings behind a skill and requires twenty four of them before
+a share trend is reported.
+
+Share series are also classified and displayed in percentage points rather than
+relative change. On a small base a single extra posting clears any percentage
+threshold, which is how one listing became a 155 percent surge.
+
+A third run then reported Python falling twenty points in a month, from 38 to
+18 percent of postings, which is not a plausible market move. One of the nine
+usable weeks was from January, eight months before the others. Postings that
+survive that long are not a random sample of their week: they are
+disproportionately the roles nobody could fill, which skew specialist and
+senior. Share corrects for how many postings survive, but not for which ones,
+so that week carried a different skill mix and dragged every trend line toward
+it. The linear fallback compounded this by regressing on list position rather
+than elapsed time, placing January beside July as if they were consecutive.
+
+Reconstruction now only looks back twelve weeks, and regression uses real
+elapsed time. Reproducing the run with a steady 38 percent share plus one stale
+week gave a twelve point fall before the fix and no change after it.
+
+This is the limit of reconstructed history. It can correct for survivorship in
+volume but not fully in composition, which is why recorded snapshots replace it
+as soon as enough of them exist.
+
+The fourth run swung the other way entirely, with every major skill rising by
+ten to eighteen points. When every skill moves in the same direction by a
+similar amount, the cause is the denominator rather than the skills. Full Reed
+descriptions yield eight or ten skills each, while Adzuna excerpts yield one or
+two, so as the proportion of excerpts in a week changed, every skill's share
+moved with it. Only fully described postings now contribute to the share.
+
+The report also checks itself. If at least 85 percent of trending skills move
+the same way at once, it warns that this is more likely a shift in the data than
+in demand. Real markets rarely move every skill together, and this check would
+have flagged both the falling run and the rising one.
+
+Observation frequency and forecast frequency are both weekly, so the mismatch
+that ruins forecasts elsewhere cannot arise here. Where Prophet is not
+installed, which is common on Windows given its compiled backend, the agent
+degrades to a least squares trend and labels the result rather than producing
+nothing.
+
 ## Setup
 
 ```bash
@@ -118,6 +202,8 @@ python run_extraction.py                        # extract requirements, no API c
 python run_extraction.py --use-model            # also call Claude on full postings
 python run_scoring.py                           # score everything against cv.yml
 python run_scoring.py --min-score 60 --top 20   # only roles worth a look
+python run_forecast.py                          # skill demand trends
+python run_forecast.py --snapshot               # also record this run as history
 pytest                               # run the suite
 ruff check .                         # lint
 ```

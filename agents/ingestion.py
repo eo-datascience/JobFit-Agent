@@ -42,6 +42,17 @@ _TITLE_NOISE = {
     "remote", "onsite", "urgent", "new", "immediate", "start",
 }
 
+# Query parameters that carry credentials. Any URL that reaches a log line is
+# passed through redact_url first, because an HTTP error's message embeds the
+# full request URL, and for Adzuna that includes the application key.
+_SECRET_PARAMS = re.compile(r"(app_key|app_id|api_key|apikey|key|token)=[^&\s'\"]+", re.IGNORECASE)
+
+
+def redact_url(text: object) -> str:
+    """Replace credential query parameters with a placeholder."""
+    return _SECRET_PARAMS.sub(r"\1=REDACTED", str(text))
+
+
 _HTML_TAG = re.compile(r"<[^>]+>")
 _NON_ALNUM = re.compile(r"[^a-z0-9\s]")
 _WHITESPACE = re.compile(r"[ \t]+")
@@ -309,7 +320,9 @@ class ReedClient:
             response = self._client.get(f"{self.config.base_url}/jobs/{posting.source_job_id}")
             response.raise_for_status()
         except httpx.HTTPError as exc:
-            logger.warning("Detail fetch failed for reed job %s: %s", posting.source_job_id, exc)
+            logger.warning(
+                "Detail fetch failed for reed job %s: %s", posting.source_job_id, redact_url(exc)
+            )
             return
 
         detail = response.json()
@@ -380,7 +393,9 @@ def run_ingestion(
             try:
                 batch = source.fetch(query, location, limit_per_query)
             except httpx.HTTPError as exc:
-                logger.error("Fetch failed for %s query %r: %s", source.name, query, exc)
+                logger.error(
+                    "Fetch failed for %s query %r: %s", source.name, query, redact_url(exc)
+                )
                 continue
             logger.info("Fetched %d postings from %s for %r", len(batch), source.name, query)
             collected.extend(batch)

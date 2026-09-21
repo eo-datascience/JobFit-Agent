@@ -18,6 +18,7 @@ from agents.ingestion import (
     build_dedup_key,
     clean_text,
     deduplicate,
+    redact_url,
     run_ingestion,
 )
 from config import AdzunaConfig, ReedConfig
@@ -292,3 +293,41 @@ def test_one_failing_provider_does_not_abort_the_run():
 
     assert result.inserted == 1
     assert result.canonical[0].source == "adzuna"
+
+
+# ---------------------------------------------------------------------------
+# Credential redaction
+# ---------------------------------------------------------------------------
+
+
+def test_redact_url_removes_adzuna_credentials():
+    """A 502 from Adzuna put the full request URL, key included, into an error
+    log line. Anything logged must pass through redaction first."""
+    message = (
+        "Server error '502 Bad Gateway' for url "
+        "'https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=0d869dc9"
+        "&app_key=ca6e01681c6765740b6086a07022d0b6&what=data+analyst'"
+    )
+
+    redacted = redact_url(message)
+
+    assert "0d869dc9" not in redacted
+    assert "ca6e01681c6765740b6086a07022d0b6" not in redacted
+    assert "app_key=REDACTED" in redacted
+    assert "what=data+analyst" in redacted
+
+
+def test_a_failing_provider_does_not_leak_credentials_into_logs(caplog):
+    def failing(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(502, request=request)
+
+    adzuna = AdzunaClient(
+        AdzunaConfig(app_id="SECRETID", app_key="SECRETKEY"),
+        client=httpx.Client(transport=httpx.MockTransport(failing)),
+    )
+
+    with caplog.at_level("ERROR"):
+        run_ingestion([adzuna], queries=["data analyst"], location="London")
+
+    assert "SECRETKEY" not in caplog.text
+    assert "SECRETID" not in caplog.text
