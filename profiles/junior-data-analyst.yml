@@ -1,0 +1,18 @@
+name: Junior Data Analyst
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - SQL
+  - Excel
+  - Power BI
+  - Tableau
+  - Python
+  - pandas
+  - Statistics
+  - A/B Testing
+summary: >
+  Reporting and analysis, building dashboards and answering business questions
+  from data.

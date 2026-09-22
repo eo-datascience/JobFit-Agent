@@ -222,6 +222,24 @@ Both providers are called over plain HTTP rather than through their SDKs, so
 every send path is tested with the same mock transport as the job board
 clients, with no key and no network.
 
+## The public dashboard
+
+Every run publishes a snapshot that a React and TypeScript site renders: this
+week's postings as a narrowing funnel, a filterable list of roles with the
+reasoning behind each score, what the market is asking for, and a written record
+of the twelve bugs that real data exposed.
+
+Visitors choose which of three sample profiles to score against, and every
+figure on the site recalculates, including the funnel. The scoring is the real
+scorer, so a junior data analyst and a junior machine learning engineer get
+genuinely different shortlists from the same postings.
+
+Nothing personal reaches it. The export takes postings, extractions and public
+sample profiles, and is never handed a real CV, the roles already sent, or any
+application outcome, so privacy is a property of the function's inputs rather
+than something to remember. Full job descriptions are not republished either.
+None of the sample profiles carries a salary floor, since a real one is private.
+
 ## Deployment
 
 The digest runs every Monday on GitHub Actions, with no machine of mine

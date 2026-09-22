@@ -13,10 +13,11 @@ on:
         type: boolean
         default: false
 
-# The job reads this repository and never writes to it. All writes go to the
-# private state repository, using a separate token scoped to that repo alone.
+# The job writes one file to this repository, the public dashboard snapshot,
+# which is what triggers Netlify to rebuild the site. Everything private goes
+# to the separate state repository, using a token scoped to that repo alone.
 permissions:
-  contents: read
+  contents: write
 
 # Two overlapping runs could both send a digest before either recorded it as
 # sent. Queue them instead.
@@ -32,8 +33,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Check out private state
         id: state
@@ -68,6 +67,26 @@ jobs:
             python run_weekly.py --preview
           else
             python run_weekly.py
+          fi
+
+      # Only this one file, named explicitly. A blanket "git add ." here would
+      # sweep in the checked out private state, which must never reach a public
+      # repository.
+      - name: Publish the dashboard snapshot
+        if: always()
+        run: |
+          git config user.name "jobfit-agent"
+          git config user.email "jobfit-agent@users.noreply.github.com"
+          if [ ! -s frontend/public/data/dashboard.json ]; then
+            echo "No snapshot was produced, so there is nothing to publish."
+            exit 0
+          fi
+          git add frontend/public/data/dashboard.json
+          if git diff --cached --quiet; then
+            echo "The snapshot is unchanged."
+          else
+            git commit -m "Dashboard for $(date -u +%Y-%m-%d)"
+            git push
           fi
 
       # Runs even when the job above failed, because some state may still have

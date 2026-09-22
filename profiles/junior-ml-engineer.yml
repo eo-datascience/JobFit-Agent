@@ -1,0 +1,20 @@
+name: Junior Machine Learning Engineer
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - Python
+  - scikit-learn
+  - pandas
+  - NumPy
+  - Machine Learning
+  - PyTorch
+  - MLflow
+  - NLP
+  - Git
+  - Docker
+summary: >
+  Training, evaluating and deploying machine learning models, with some
+  natural language processing.

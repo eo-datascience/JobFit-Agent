@@ -1,0 +1,16 @@
+# Netlify builds the site from this repository on every push. The weekly job
+# commits a fresh snapshot each Monday, which is what triggers the rebuild.
+
+[build]
+  # Paths below are relative to this base, which is why publish is "dist"
+  # rather than "frontend/dist".
+  base = "frontend"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Client side routing: every unknown path is served the app, which then decides
+# what to render. Without this, refreshing /roles returns a 404 from Netlify.
+# frontend/public/_redirects says the same thing and ships in the build output.

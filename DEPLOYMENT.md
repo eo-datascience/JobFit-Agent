@@ -157,6 +157,38 @@ commit should appear in jobfit-state.
 
 After that, it runs every Monday by itself.
 
+### Step 8. Connect the site to Netlify
+
+The weekly job commits a fresh snapshot to this repository every Monday, and
+Netlify rebuilds the site whenever that happens. No Netlify token is needed
+anywhere, because Netlify pulls from GitHub rather than the workflow pushing
+to Netlify.
+
+Sign in at netlify.com with GitHub, choose **Add new site**, then **Import an
+existing project**, and pick the **JobFit-Agent** repository.
+
+Netlify reads `netlify.toml` from the repository, so the build settings should
+already be filled in: base `frontend`, command `npm ci && npm run build`,
+publish directory `dist`. Leave them as they are and deploy.
+
+The first build may show an empty state saying no snapshot has been published.
+That is correct until the weekly job runs once. Trigger it by hand from the
+Actions tab and the site fills in a minute later.
+
+## Working on the site locally
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+The site reads `frontend/public/data/dashboard.json`. For real data, run
+`python run_weekly.py --export-only` from the project root. For synthetic data
+that needs no API keys, run `python scripts/make_sample_data.py`, which writes a
+separate gitignored file that only the development server reads, so invented
+postings can never reach the live site.
+
 ## Every week
 
 When you apply to a role or hear back, record it on your laptop. Pull first so

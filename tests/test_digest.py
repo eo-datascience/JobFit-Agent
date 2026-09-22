@@ -139,7 +139,7 @@ def test_a_successful_send_records_the_postings(tmp_path):
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
     sender = RecordingSender()
 
-    sent = deliver(digest, sender, "me@example.com", "Emmanuel Olusolade", seen_path)
+    sent = deliver(digest, sender, "me@example.com", "Sample Candidate", seen_path)
 
     assert sent is True
     assert len(sender.sent) == 1
@@ -154,7 +154,7 @@ def test_a_failed_send_does_not_mark_anything_as_sent(tmp_path):
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
 
     with pytest.raises(RuntimeError):
-        deliver(digest, FailingSender(), "me@example.com", "Emmanuel", seen_path)
+        deliver(digest, FailingSender(), "me@example.com", "Sample", seen_path)
 
     assert load_seen(seen_path) == set()
 
@@ -165,7 +165,7 @@ def test_after_a_failed_send_the_same_roles_are_offered_again(tmp_path):
 
     with pytest.raises(RuntimeError):
         deliver(compile_digest(scored, load_seen(seen_path), WEEK), FailingSender(),
-                "me@example.com", "Emmanuel", seen_path)
+                "me@example.com", "Sample", seen_path)
 
     retry = compile_digest(scored, load_seen(seen_path), WEEK)
     assert [e.posting.source_job_id for e in retry.entries] == ["1"]
@@ -174,7 +174,7 @@ def test_after_a_failed_send_the_same_roles_are_offered_again(tmp_path):
 def test_an_empty_digest_is_not_sent(tmp_path):
     """An email saying nothing new trains the reader to ignore the sender."""
     sender = RecordingSender()
-    sent = deliver(Digest(week_of=WEEK), sender, "me@example.com", "Emmanuel", tmp_path / "s.json")
+    sent = deliver(Digest(week_of=WEEK), sender, "me@example.com", "Sample", tmp_path / "s.json")
 
     assert sent is False
     assert sender.sent == []
@@ -206,7 +206,7 @@ def test_untrusted_titles_are_escaped():
     hostile = _posting("1", title='<script>alert("x")</script> Data Engineer')
     digest = Digest(week_of=WEEK, entries=[DigestEntry(posting=hostile, fit=_fit("1", 90))])
 
-    html_body = render_html(digest, "Emmanuel")
+    html_body = render_html(digest, "Sample")
 
     assert "<script>" not in html_body
     assert "&lt;script&gt;" in html_body
@@ -216,7 +216,7 @@ def test_a_real_company_name_with_markup_characters_renders_safely():
     posting = _posting("1", company="Smith & Jones <Consulting>")
     digest = Digest(week_of=WEEK, entries=[DigestEntry(posting=posting, fit=_fit("1", 90))])
 
-    html_body = render_html(digest, "Emmanuel")
+    html_body = render_html(digest, "Sample")
 
     assert "Smith &amp; Jones &lt;Consulting&gt;" in html_body
 
@@ -225,14 +225,14 @@ def test_non_http_links_are_not_rendered_as_links():
     posting = _posting("1", url="javascript:alert(1)")
     digest = Digest(week_of=WEEK, entries=[DigestEntry(posting=posting, fit=_fit("1", 90))])
 
-    assert "javascript:" not in render_html(digest, "Emmanuel")
+    assert "javascript:" not in render_html(digest, "Sample")
 
 
 def test_predicted_salaries_are_labelled_as_estimates():
     posting = _posting("1", salary_is_predicted=True)
     digest = Digest(week_of=WEEK, entries=[DigestEntry(posting=posting, fit=_fit("1", 90))])
 
-    assert "estimated" in render_html(digest, "Emmanuel")
+    assert "estimated" in render_html(digest, "Sample")
 
 
 def test_missing_essentials_are_shown_so_the_score_is_explained():
@@ -240,7 +240,7 @@ def test_missing_essentials_are_shown_so_the_score_is_explained():
         week_of=WEEK,
         entries=[DigestEntry(posting=_posting("1"), fit=_fit("1", 70, missing=["Airflow"]))],
     )
-    assert "Airflow" in render_html(digest, "Emmanuel")
+    assert "Airflow" in render_html(digest, "Sample")
 
 
 def test_the_plain_text_version_carries_every_role():
@@ -287,7 +287,7 @@ def test_a_sendgrid_rejection_raises_so_nothing_is_marked_sent(tmp_path):
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
 
     with pytest.raises(RuntimeError, match="403"):
-        deliver(digest, sender, "me@example.com", "Emmanuel", seen_path)
+        deliver(digest, sender, "me@example.com", "Sample", seen_path)
 
     assert load_seen(seen_path) == set()
 
@@ -341,7 +341,7 @@ def test_resend_wrong_recipient_explains_the_fix_and_records_nothing(tmp_path):
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
 
     with pytest.raises(RuntimeError, match="DIGEST_TO_EMAIL"):
-        deliver(digest, sender, "someone-else@example.com", "Emmanuel", seen_path)
+        deliver(digest, sender, "someone-else@example.com", "Sample", seen_path)
 
     assert load_seen(seen_path) == set()
 
@@ -371,7 +371,7 @@ def test_a_failure_recording_recommendations_leaves_roles_unsent(tmp_path, monke
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
 
     with pytest.raises(OSError):
-        deliver(digest, RecordingSender(), "me@example.com", "Emmanuel", seen_path,
+        deliver(digest, RecordingSender(), "me@example.com", "Sample", seen_path,
                 recommendations_path=tmp_path / "recs.json")
 
     assert load_seen(seen_path) == set()
@@ -384,7 +384,7 @@ def test_a_successful_send_records_recommendations_and_marks_seen(tmp_path):
     recs_path = tmp_path / "recs.json"
     digest = compile_digest(_scored(("1", 90, False)), set(), WEEK)
 
-    deliver(digest, RecordingSender(), "me@example.com", "Emmanuel", seen_path,
+    deliver(digest, RecordingSender(), "me@example.com", "Sample", seen_path,
             recommendations_path=recs_path)
 
     assert load_seen(seen_path) == {"reed:1"}
@@ -438,7 +438,7 @@ def test_other_locations_appear_in_both_email_formats():
     )
     digest = Digest(week_of=WEEK, entries=[entry])
 
-    assert "Also listed in 2 other locations" in render_html(digest, "Emmanuel")
+    assert "Also listed in 2 other locations" in render_html(digest, "Sample")
     assert "W52TD" in render_text(digest)
 
 

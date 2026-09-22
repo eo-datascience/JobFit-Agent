@@ -1,0 +1,20 @@
+name: Junior Data Engineer
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - Python
+  - SQL
+  - PySpark
+  - Airflow
+  - ETL
+  - AWS
+  - Docker
+  - Git
+  - Data Warehousing
+  - Data Modelling
+summary: >
+  Building and maintaining data pipelines, moving data reliably between
+  systems and modelling it for analysis.

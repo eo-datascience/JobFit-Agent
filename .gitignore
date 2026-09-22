@@ -14,4 +14,19 @@ digest_preview.html
 # set by JOBFIT_STATE_DIR. Locally it may sit here, but it never belongs in
 # this public repository, since it records where the candidate applied and how
 # each application went.
-data/
+#
+# Anchored with a leading slash on purpose. Unanchored, "data/" also matches
+# frontend/public/data/, which would stop the weekly job committing the public
+# dashboard snapshot and freeze the site on its first week.
+/data/
+
+# Frontend build output and dependencies.
+frontend/node_modules/
+frontend/dist/
+
+# Synthetic data for developing the site offline. Never committed, so it can
+# never be published as though it were a live run.
+frontend/public/data/sample.json
+
+# The private state repository is checked out here by the weekly job.
+/state/
