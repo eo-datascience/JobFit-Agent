@@ -33,6 +33,7 @@ import httpx
 from agents.ingestion import Posting, redact_url
 from agents.outcomes import RECOMMENDATIONS_PATH, Recommendation, record_recommendations
 from agents.scoring import FitScore, explain
+from paths import SEEN_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +44,7 @@ RESEND_URL = "https://api.resend.com/emails"
 # email address the Resend account was created with. For a digest sent to its
 # own author that restriction costs nothing.
 RESEND_TEST_SENDER = "onboarding@resend.dev"
-DEFAULT_SEEN_PATH = Path("data/sent_postings.json")
+DEFAULT_SEEN_PATH = SEEN_PATH
 
 # Hard ceiling on how many roles one email carries. A digest is a shortlist;
 # thirty roles is a job board.

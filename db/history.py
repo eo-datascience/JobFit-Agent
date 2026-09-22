@@ -20,10 +20,11 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from agents.extraction import Requirements
+from paths import HISTORY_PATH
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_HISTORY_PATH = Path("data/skill_history.json")
+DEFAULT_HISTORY_PATH = HISTORY_PATH
 
 
 @dataclass

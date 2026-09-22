@@ -2,8 +2,8 @@
 
 Usage:
     python run_outcomes.py list                          # roles the digest sent you
-    python run_outcomes.py record reed:57364886 applied  # you applied
-    python run_outcomes.py record reed:57364886 interview
+    python run_outcomes.py record reed:12345678 applied  # you applied
+    python run_outcomes.py record reed:12345678 interview
     python run_outcomes.py learn                         # show what would change
     python run_outcomes.py learn --apply                 # adopt it
     python run_outcomes.py revert                        # undo the last adjustment
@@ -124,7 +124,7 @@ def main() -> int:
     sub.add_parser("list", help="Show roles the digest has sent you").set_defaults(func=cmd_list)
 
     rec = sub.add_parser("record", help="Record what happened with a role")
-    rec.add_argument("key", help="The key shown by `list`, for example reed:57364886")
+    rec.add_argument("key", help="The key shown by `list`, for example reed:12345678")
     rec.add_argument("outcome", choices=RECORDABLE)
     rec.set_defaults(func=cmd_record)
 

@@ -33,6 +33,7 @@ from agents.forecasting import (
 from agents.ingestion import AdzunaClient, ReedClient, run_ingestion
 from config import Settings
 from db import history
+from paths import CV_PATH, HISTORY_PATH
 
 logging.basicConfig(
     level=logging.INFO,
@@ -45,7 +46,7 @@ logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
 logging.getLogger("prophet").setLevel(logging.WARNING)
 logger = logging.getLogger("jobfit.forecast")
 
-HISTORY_PATH = Path("data/skill_history.json")
+
 
 
 def main() -> int:
@@ -53,7 +54,7 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=50, help="Postings per query per source")
     parser.add_argument("--bootstrap", action="store_true", help="Force reconstruction from posting dates")
     parser.add_argument("--snapshot", action="store_true", help="Record this run into the history store")
-    parser.add_argument("--cv", default="cv.yml", help="Used to flag rising skills you lack")
+    parser.add_argument("--cv", default=str(CV_PATH), help="Used to flag rising skills you lack")
     args = parser.parse_args()
 
     load_dotenv()

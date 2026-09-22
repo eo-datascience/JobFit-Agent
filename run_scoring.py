@@ -22,6 +22,7 @@ from agents.ingestion import AdzunaClient, ReedClient, run_ingestion
 from agents.outcomes import load_weights
 from agents.scoring import explain, score
 from config import Settings
+from paths import CV_PATH
 
 logging.basicConfig(
     level=logging.INFO,
@@ -35,7 +36,7 @@ logger = logging.getLogger("jobfit.scoring")
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="JobFit Agent: fit scoring")
-    parser.add_argument("--cv", default="cv.yml", help="Path to your CV file")
+    parser.add_argument("--cv", default=str(CV_PATH), help="Path to your CV file")
     parser.add_argument("--limit", type=int, default=25, help="Postings per query per source")
     parser.add_argument("--top", type=int, default=10, help="How many results to show")
     parser.add_argument("--min-score", type=int, default=0, help="Hide anything below this")

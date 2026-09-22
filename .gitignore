@@ -7,12 +7,11 @@ htmlcov/
 .venv/
 venv/
 *.egg-info/
-data/raw/
 cv.yml
 digest_preview.html
-data/sent_postings.json
 
-# Personal job search records. The repository is public, and these list which
-# companies were applied to and how each application went. Never commit them.
-data/outcomes.json
-data/recommendations.json
+# All runtime state. In deployment it lives in a separate private repository,
+# set by JOBFIT_STATE_DIR. Locally it may sit here, but it never belongs in
+# this public repository, since it records where the candidate applied and how
+# each application went.
+data/

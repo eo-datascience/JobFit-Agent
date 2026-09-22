@@ -1,0 +1,89 @@
+name: Weekly digest
+
+# Runs every Monday at 07:00 UTC, which is 08:00 in London during summer time
+# and 07:00 in winter. GitHub may start scheduled runs a few minutes late under
+# load. It can also be triggered by hand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      preview:
+        description: "Preview only: run everything but send nothing and record nothing"
+        type: boolean
+        default: false
+
+# The job reads this repository and never writes to it. All writes go to the
+# private state repository, using a separate token scoped to that repo alone.
+permissions:
+  contents: read
+
+# Two overlapping runs could both send a digest before either recorded it as
+# sent. Queue them instead.
+concurrency:
+  group: weekly-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out private state
+        id: state
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/jobfit-state
+          token: ${{ secrets.STATE_REPO_TOKEN }}
+          path: state
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run the weekly job
+        env:
+          JOBFIT_STATE_DIR: state
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          REED_API_KEY: ${{ secrets.REED_API_KEY }}
+          EMAIL_PROVIDER: resend
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DIGEST_TO_EMAIL: ${{ secrets.DIGEST_TO_EMAIL }}
+          PREVIEW: ${{ inputs.preview }}
+        run: |
+          if [ "$PREVIEW" = "true" ]; then
+            python run_weekly.py --preview
+          else
+            python run_weekly.py
+          fi
+
+      # Runs even when the job above failed, because some state may still have
+      # changed, such as the skill snapshot taken before a failed send. Sending
+      # is ordered so that a failure never marks a role as sent, which makes
+      # saving partial state safe. Skipped entirely if the state checkout failed.
+      - name: Save state
+        if: always() && steps.state.outcome == 'success'
+        working-directory: state
+        run: |
+          git config user.name "jobfit-agent"
+          git config user.email "jobfit-agent@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No state changes to save."
+          else
+            git commit -m "Weekly run $(date -u +%Y-%m-%d)"
+            git push
+          fi

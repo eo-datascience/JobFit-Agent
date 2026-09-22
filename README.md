@@ -222,6 +222,33 @@ Both providers are called over plain HTTP rather than through their SDKs, so
 every send path is tested with the same mock transport as the job board
 clients, with no key and no network.
 
+## Deployment
+
+The digest runs every Monday on GitHub Actions, with no machine of mine
+involved. See [DEPLOYMENT.md](DEPLOYMENT.md) for setup.
+
+The design problem was memory. The system remembers which roles it has sent,
+what it recommended, application outcomes and skill history, and a scheduled
+runner starts from a blank machine every time. That memory also has to be shared
+with a laptop, where outcomes are recorded, and some of it is private, since it
+records where the candidate applied and how each application went.
+
+State therefore lives in a separate private repository. This public repository
+holds code only, and the scheduled job checks out both, then commits changes
+back to the private one. That separates code from personal data structurally,
+rather than relying on remembering what not to commit, and every week's state
+becomes a versioned commit with a full history of what was recommended and when.
+
+The laptop and the scheduled job never write the same file, so syncing between
+them cannot conflict. The candidate owns the CV, outcomes and weights; the
+scheduled job owns the sent record, recommendations and skill history.
+
+The weekly job fetches postings once and feeds every step from that fetch.
+Running the forecast and the digest separately would have made roughly four
+hundred redundant Reed requests a week. It also exits non zero when nothing was
+ingested, so a week where both job boards were down fails visibly instead of
+passing green with no email sent.
+
 ## Setup
 
 ```bash
@@ -250,6 +277,7 @@ python run_digest.py                            # send it, no approval step
 python run_outcomes.py list                     # roles the digest sent you
 python run_outcomes.py record reed:12345 interview
 python run_outcomes.py learn                    # see what the evidence suggests
+python run_weekly.py --preview                  # the whole scheduled job, sending nothing
 pytest                               # run the suite
 ruff check .                         # lint
 ```

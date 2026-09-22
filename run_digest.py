@@ -38,6 +38,7 @@ from agents.ingestion import AdzunaClient, ReedClient, run_ingestion
 from agents.outcomes import load_weights
 from agents.scoring import score
 from config import Settings
+from paths import CV_PATH
 
 logging.basicConfig(
     level=logging.INFO,
@@ -53,7 +54,7 @@ PREVIEW_PATH = Path("digest_preview.html")
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="JobFit Agent: weekly digest")
-    parser.add_argument("--cv", default="cv.yml")
+    parser.add_argument("--cv", default=str(CV_PATH))
     parser.add_argument("--limit", type=int, default=50, help="Postings per query per source")
     parser.add_argument("--min-score", type=int, default=60)
     parser.add_argument("--preview", action="store_true", help="Render locally, send nothing")

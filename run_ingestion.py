@@ -90,6 +90,11 @@ def main() -> int:
         logger.info("Dry run: nothing written.")
         return 0
 
+    if not settings.database_url:
+        logger.error("DATABASE_URL is not set, so nothing can be persisted. Use --dry-run, "
+                     "or add a Postgres connection string to .env.")
+        return 1
+
     with repository.connect(settings.database_url) as conn:
         repository.apply_schema(conn)
         run_id = repository.start_run(conn, source="combined", query=",".join(settings.search_queries))

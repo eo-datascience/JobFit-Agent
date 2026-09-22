@@ -58,7 +58,6 @@ class ReedConfig:
 
 @dataclass(frozen=True)
 class Settings:
-    database_url: str
     adzuna: AdzunaConfig
     reed: ReedConfig
     search_queries: list[str] = field(
@@ -72,11 +71,15 @@ class Settings:
     search_location: str = "London"
     request_timeout_seconds: float = 20.0
     max_retries: int = 3
+    # Optional. Only persisting postings with run_ingestion.py uses it. The
+    # weekly digest keeps its state in plain files, so requiring a database at
+    # startup would stop the scheduled job before it did anything.
+    database_url: str | None = None
 
     @classmethod
     def from_env(cls) -> Settings:
         return cls(
-            database_url=_require("DATABASE_URL"),
             adzuna=AdzunaConfig.from_env(),
             reed=ReedConfig.from_env(),
+            database_url=os.environ.get("DATABASE_URL") or None,
         )

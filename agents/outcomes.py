@@ -48,12 +48,15 @@ from enum import Enum
 from pathlib import Path
 
 from agents.scoring import WEIGHTS
+from paths import OUTCOMES_PATH as _OUTCOMES_PATH
+from paths import RECOMMENDATIONS_PATH as _RECOMMENDATIONS_PATH
+from paths import WEIGHTS_PATH as _WEIGHTS_PATH
 
 logger = logging.getLogger(__name__)
 
-RECOMMENDATIONS_PATH = Path("data/recommendations.json")
-OUTCOMES_PATH = Path("data/outcomes.json")
-WEIGHTS_PATH = Path("data/weights.json")
+RECOMMENDATIONS_PATH = _RECOMMENDATIONS_PATH
+OUTCOMES_PATH = _OUTCOMES_PATH
+WEIGHTS_PATH = _WEIGHTS_PATH
 
 # An application with no reply after this long counts as no response.
 RESPONSE_WINDOW_DAYS = 21
