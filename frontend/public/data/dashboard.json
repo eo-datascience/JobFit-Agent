@@ -1,18 +1,18 @@
 {
  "schema_version": 1,
- "generated_at": "2026-09-23T01:13:17+00:00",
+ "generated_at": "2026-09-23T01:52:32+00:00",
  "week_of": "2026-09-23",
  "pipeline": {
   "fetched": 400,
-  "duplicates": 93,
-  "canonical": 307,
+  "duplicates": 91,
+  "canonical": 309,
   "by_source": {
-   "reed": 135,
+   "reed": 137,
    "adzuna": 172
   },
-  "full_confidence": 135,
+  "full_confidence": 137,
   "partial_confidence": 172,
-  "in_domain": 301,
+  "in_domain": 303,
   "out_of_domain": 6,
   "excluded": [
    {
@@ -47,7 +47,7 @@
    }
   ],
   "salary": {
-   "stated_count": 160,
+   "stated_count": 162,
    "median_minimum": 40000.0
   },
   "shortlist_threshold": 60
@@ -70,7 +70,7 @@
     "pandas"
    ],
    "summary": "Reporting and analysis, building dashboards and answering business questions from data.\n",
-   "above_threshold": 178,
+   "above_threshold": 180,
    "shortlist": [
     "reed-57315540",
     "reed-57277444",
@@ -80,10 +80,10 @@
     "reed-57364493",
     "reed-57325340",
     "reed-57335495",
-    "reed-57312261",
-    "reed-57249645"
+    "reed-57335503",
+    "reed-57312261"
    ],
-   "repeat_listings": 13
+   "repeat_listings": 14
   },
   {
    "id": "junior-data-engineer",
@@ -103,20 +103,20 @@
     "SQL"
    ],
    "summary": "Building and maintaining data pipelines, moving data reliably between systems and modelling it for analysis.\n",
-   "above_threshold": 181,
+   "above_threshold": 183,
    "shortlist": [
     "reed-57379454",
     "reed-57335495",
+    "reed-57335503",
     "reed-57364886",
     "reed-57315540",
-    "reed-57335504",
+    "reed-57335496",
     "reed-57343183",
     "reed-57354497",
     "reed-57364884",
-    "reed-57063183",
-    "reed-57375464"
+    "reed-57063183"
    ],
-   "repeat_listings": 11
+   "repeat_listings": 12
   },
   {
    "id": "junior-ml-engineer",
@@ -136,20 +136,20 @@
     "scikit-learn"
    ],
    "summary": "Training, evaluating and deploying machine learning models, with some natural language processing.\n",
-   "above_threshold": 178,
+   "above_threshold": 180,
    "shortlist": [
     "reed-57285383",
     "reed-57335495",
-    "reed-56396179",
+    "reed-57335503",
+    "reed-56401347",
     "reed-57364884",
     "reed-57364886",
     "reed-57231160",
     "reed-57376561",
     "reed-57284018",
-    "reed-57300649",
-    "reed-57325823"
+    "reed-57300649"
    ],
-   "repeat_listings": 24
+   "repeat_listings": 25
   }
  ],
  "roles": [
@@ -1987,178 +1987,6 @@
    "also_listed_in": []
   },
   {
-   "id": "reed-57319436",
-   "source": "reed",
-   "title": "AI Engineer",
-   "company": "167 Solutions Ltd",
-   "location": "London",
-   "salary_min": 40000.0,
-   "salary_max": 70000.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/ai-engineer/57319436",
-   "posted_at": "2026-09-07",
-   "confidence": "full",
-   "seniority": null,
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "AWS",
-     "essential": true
-    },
-    {
-     "name": "Agile",
-     "essential": true
-    },
-    {
-     "name": "CI/CD",
-     "essential": false
-    },
-    {
-     "name": "ETL",
-     "essential": false
-    },
-    {
-     "name": "Git",
-     "essential": false
-    },
-    {
-     "name": "JavaScript",
-     "essential": false
-    },
-    {
-     "name": "LLMs",
-     "essential": false
-    },
-    {
-     "name": "Terraform",
-     "essential": false
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 48,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.2,
-       "weight": 0.45,
-       "detail": "0 of 8 skills matched directly, 3 by related experience, missing essential: AWS"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [
-      "Agile",
-      "Git",
-      "JavaScript"
-     ],
-     "missing_essential": [
-      "AWS"
-     ]
-    },
-    "junior-data-engineer": {
-     "total": 64,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.55,
-       "weight": 0.45,
-       "detail": "3 of 8 skills matched directly, 2 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "AWS",
-      "ETL",
-      "Git"
-     ],
-     "partial": [
-      "Agile",
-      "JavaScript"
-     ],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 52,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.3,
-       "weight": 0.45,
-       "detail": "1 of 8 skills matched directly, 3 by related experience, missing essential: AWS"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Git"
-     ],
-     "partial": [
-      "Agile",
-      "JavaScript",
-      "LLMs"
-     ],
-     "missing_essential": [
-      "AWS"
-     ]
-    }
-   },
-   "also_listed_in": []
-  },
-  {
    "id": "reed-57268813",
    "source": "reed",
    "title": "AI Engineer",
@@ -2333,6 +2161,178 @@
       "RAG"
      ],
      "missing_essential": []
+    }
+   },
+   "also_listed_in": []
+  },
+  {
+   "id": "reed-57319436",
+   "source": "reed",
+   "title": "AI Engineer",
+   "company": "167 Solutions Ltd",
+   "location": "London",
+   "salary_min": 40000.0,
+   "salary_max": 70000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/ai-engineer/57319436",
+   "posted_at": "2026-09-07",
+   "confidence": "full",
+   "seniority": null,
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "AWS",
+     "essential": true
+    },
+    {
+     "name": "Agile",
+     "essential": true
+    },
+    {
+     "name": "CI/CD",
+     "essential": false
+    },
+    {
+     "name": "ETL",
+     "essential": false
+    },
+    {
+     "name": "Git",
+     "essential": false
+    },
+    {
+     "name": "JavaScript",
+     "essential": false
+    },
+    {
+     "name": "LLMs",
+     "essential": false
+    },
+    {
+     "name": "Terraform",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 48,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.2,
+       "weight": 0.45,
+       "detail": "0 of 8 skills matched directly, 3 by related experience, missing essential: AWS"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [
+      "Agile",
+      "Git",
+      "JavaScript"
+     ],
+     "missing_essential": [
+      "AWS"
+     ]
+    },
+    "junior-data-engineer": {
+     "total": 64,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.55,
+       "weight": 0.45,
+       "detail": "3 of 8 skills matched directly, 2 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "AWS",
+      "ETL",
+      "Git"
+     ],
+     "partial": [
+      "Agile",
+      "JavaScript"
+     ],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 52,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.3,
+       "weight": 0.45,
+       "detail": "1 of 8 skills matched directly, 3 by related experience, missing essential: AWS"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Git"
+     ],
+     "partial": [
+      "Agile",
+      "JavaScript",
+      "LLMs"
+     ],
+     "missing_essential": [
+      "AWS"
+     ]
     }
    },
    "also_listed_in": []
@@ -3858,6 +3858,433 @@
    "also_listed_in": []
   },
   {
+   "id": "reed-57361706",
+   "source": "reed",
+   "title": "AI Strategy Lead",
+   "company": "Tenth Revolution Group",
+   "location": "London",
+   "salary_min": 75000.0,
+   "salary_max": 110000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/ai-strategy-lead/57361706",
+   "posted_at": "2026-09-18",
+   "confidence": "full",
+   "seniority": "lead",
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "LLMs",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 29,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.0,
+       "weight": 0.45,
+       "detail": "0 of 1 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "lead is 3 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 29,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.0,
+       "weight": 0.45,
+       "detail": "0 of 1 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "lead is 3 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 52,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "0 of 1 skills matched directly, 1 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "lead is 3 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [
+      "LLMs"
+     ],
+     "missing_essential": []
+    }
+   },
+   "also_listed_in": []
+  },
+  {
+   "id": "reed-57236727",
+   "source": "reed",
+   "title": "AI Engineer - London",
+   "company": "Adecco",
+   "location": "London",
+   "salary_min": 47000.0,
+   "salary_max": 51000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/ai-engineer-london/57236727",
+   "posted_at": "2026-08-14",
+   "confidence": "full",
+   "seniority": null,
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "Azure",
+     "essential": true
+    },
+    {
+     "name": "LLMs",
+     "essential": true
+    },
+    {
+     "name": "Python",
+     "essential": true
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 54,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.333,
+       "weight": 0.45,
+       "detail": "1 of 3 skills matched directly, missing essential: Azure, LLMs"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [],
+     "missing_essential": [
+      "Azure",
+      "LLMs"
+     ]
+    },
+    "junior-data-engineer": {
+     "total": 62,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 3 skills matched directly, 1 by related experience, missing essential: LLMs"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "Azure"
+     ],
+     "missing_essential": [
+      "LLMs"
+     ]
+    },
+    "junior-ml-engineer": {
+     "total": 62,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 3 skills matched directly, 1 by related experience, missing essential: Azure"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "LLMs"
+     ],
+     "missing_essential": [
+      "Azure"
+     ]
+    }
+   },
+   "also_listed_in": []
+  },
+  {
+   "id": "reed-57258209",
+   "source": "reed",
+   "title": "AI Evaluation Engineer",
+   "company": "TXP Technology x People",
+   "location": "London",
+   "salary_min": 700.0,
+   "salary_max": 750.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/ai-evaluation-engineer/57258209",
+   "posted_at": "2026-08-20",
+   "confidence": "full",
+   "seniority": null,
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "A/B Testing",
+     "essential": false
+    },
+    {
+     "name": "LLMs",
+     "essential": false
+    },
+    {
+     "name": "Python",
+     "essential": false
+    },
+    {
+     "name": "RAG",
+     "essential": false
+    },
+    {
+     "name": "Testing",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 66,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.6,
+       "weight": 0.45,
+       "detail": "3 of 5 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "A/B Testing",
+      "Python",
+      "Testing"
+     ],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 57,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.4,
+       "weight": 0.45,
+       "detail": "1 of 5 skills matched directly, 2 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "A/B Testing",
+      "Testing"
+     ],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 62,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 5 skills matched directly, 3 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.25,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "LLMs",
+      "RAG",
+      "Testing"
+     ],
+     "missing_essential": []
+    }
+   },
+   "also_listed_in": []
+  },
+  {
    "id": "reed-57335504",
    "source": "reed",
    "title": "Junior AI Developer",
@@ -3990,7 +4417,9 @@
      "missing_essential": []
     }
    },
-   "also_listed_in": []
+   "also_listed_in": [
+    "London"
+   ]
   },
   {
    "id": "reed-57335495",
@@ -4287,6 +4716,185 @@
      "missing_essential": [
       "AWS"
      ]
+    }
+   },
+   "also_listed_in": []
+  },
+  {
+   "id": "reed-57227617",
+   "source": "reed",
+   "title": "Data Science & AI Senior Consultant",
+   "company": "Deerfoot Recruitment Solutions Ltd",
+   "location": "London",
+   "salary_min": 60000.0,
+   "salary_max": 80000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/data-science-ai-senior-consultant/57227617",
+   "posted_at": "2026-08-12",
+   "confidence": "full",
+   "seniority": "senior",
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "AWS",
+     "essential": false
+    },
+    {
+     "name": "Azure",
+     "essential": false
+    },
+    {
+     "name": "Databricks",
+     "essential": false
+    },
+    {
+     "name": "GCP",
+     "essential": false
+    },
+    {
+     "name": "LLMs",
+     "essential": false
+    },
+    {
+     "name": "Machine Learning",
+     "essential": false
+    },
+    {
+     "name": "NLP",
+     "essential": false
+    },
+    {
+     "name": "PySpark",
+     "essential": false
+    },
+    {
+     "name": "Python",
+     "essential": false
+    },
+    {
+     "name": "Statistics",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 40,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.25,
+       "weight": 0.45,
+       "detail": "2 of 10 skills matched directly, 1 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "senior is 2 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Python",
+      "Statistics"
+     ],
+     "partial": [
+      "Machine Learning"
+     ],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 49,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.45,
+       "weight": 0.45,
+       "detail": "3 of 10 skills matched directly, 3 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "senior is 2 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "AWS",
+      "PySpark",
+      "Python"
+     ],
+     "partial": [
+      "Azure",
+      "Databricks",
+      "GCP"
+     ],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 47,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.4,
+       "weight": 0.45,
+       "detail": "3 of 10 skills matched directly, 2 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 0.2,
+       "weight": 0.25,
+       "detail": "senior is 2 levels above the profile's experience"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.15,
+       "detail": "in London"
+      }
+     ],
+     "matched": [
+      "Machine Learning",
+      "NLP",
+      "Python"
+     ],
+     "partial": [
+      "LLMs",
+      "Statistics"
+     ],
+     "missing_essential": []
     }
    },
    "also_listed_in": []
@@ -4905,773 +5513,13 @@
     "CM201WG",
     "SM11EA",
     "RM175TT",
-    "RM13BB",
-    "DA14FH",
-    "KT11EU",
     "RM82JN",
     "IG117LU",
     "BR11RY",
-    "EN27AX"
-   ]
-  },
-  {
-   "id": "reed-57361706",
-   "source": "reed",
-   "title": "AI Strategy Lead",
-   "company": "Tenth Revolution Group",
-   "location": "London",
-   "salary_min": 75000.0,
-   "salary_max": 110000.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/ai-strategy-lead/57361706",
-   "posted_at": "2026-09-18",
-   "confidence": "full",
-   "seniority": "lead",
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "LLMs",
-     "essential": false
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 29,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.0,
-       "weight": 0.45,
-       "detail": "0 of 1 skills matched directly"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "lead is 3 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [],
-     "missing_essential": []
-    },
-    "junior-data-engineer": {
-     "total": 29,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.0,
-       "weight": 0.45,
-       "detail": "0 of 1 skills matched directly"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "lead is 3 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 52,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.5,
-       "weight": 0.45,
-       "detail": "0 of 1 skills matched directly, 1 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "lead is 3 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [
-      "LLMs"
-     ],
-     "missing_essential": []
-    }
-   },
-   "also_listed_in": []
-  },
-  {
-   "id": "reed-57236727",
-   "source": "reed",
-   "title": "AI Engineer - London",
-   "company": "Adecco",
-   "location": "London",
-   "salary_min": 47000.0,
-   "salary_max": 51000.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/ai-engineer-london/57236727",
-   "posted_at": "2026-08-14",
-   "confidence": "full",
-   "seniority": null,
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "Azure",
-     "essential": true
-    },
-    {
-     "name": "LLMs",
-     "essential": true
-    },
-    {
-     "name": "Python",
-     "essential": true
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 54,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.333,
-       "weight": 0.45,
-       "detail": "1 of 3 skills matched directly, missing essential: Azure, LLMs"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [],
-     "missing_essential": [
-      "Azure",
-      "LLMs"
-     ]
-    },
-    "junior-data-engineer": {
-     "total": 62,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.5,
-       "weight": 0.45,
-       "detail": "1 of 3 skills matched directly, 1 by related experience, missing essential: LLMs"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [
-      "Azure"
-     ],
-     "missing_essential": [
-      "LLMs"
-     ]
-    },
-    "junior-ml-engineer": {
-     "total": 62,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.5,
-       "weight": 0.45,
-       "detail": "1 of 3 skills matched directly, 1 by related experience, missing essential: Azure"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [
-      "LLMs"
-     ],
-     "missing_essential": [
-      "Azure"
-     ]
-    }
-   },
-   "also_listed_in": []
-  },
-  {
-   "id": "reed-57258209",
-   "source": "reed",
-   "title": "AI Evaluation Engineer",
-   "company": "TXP Technology x People",
-   "location": "London",
-   "salary_min": 700.0,
-   "salary_max": 750.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/ai-evaluation-engineer/57258209",
-   "posted_at": "2026-08-20",
-   "confidence": "full",
-   "seniority": null,
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "A/B Testing",
-     "essential": false
-    },
-    {
-     "name": "LLMs",
-     "essential": false
-    },
-    {
-     "name": "Python",
-     "essential": false
-    },
-    {
-     "name": "RAG",
-     "essential": false
-    },
-    {
-     "name": "Testing",
-     "essential": false
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 66,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.6,
-       "weight": 0.45,
-       "detail": "3 of 5 skills matched directly"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "A/B Testing",
-      "Python",
-      "Testing"
-     ],
-     "partial": [],
-     "missing_essential": []
-    },
-    "junior-data-engineer": {
-     "total": 57,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.4,
-       "weight": 0.45,
-       "detail": "1 of 5 skills matched directly, 2 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [
-      "A/B Testing",
-      "Testing"
-     ],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 62,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.5,
-       "weight": 0.45,
-       "detail": "1 of 5 skills matched directly, 3 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.25,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [
-      "LLMs",
-      "RAG",
-      "Testing"
-     ],
-     "missing_essential": []
-    }
-   },
-   "also_listed_in": []
-  },
-  {
-   "id": "reed-57227617",
-   "source": "reed",
-   "title": "Data Science & AI Senior Consultant",
-   "company": "Deerfoot Recruitment Solutions Ltd",
-   "location": "London",
-   "salary_min": 60000.0,
-   "salary_max": 80000.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/data-science-ai-senior-consultant/57227617",
-   "posted_at": "2026-08-12",
-   "confidence": "full",
-   "seniority": "senior",
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "AWS",
-     "essential": false
-    },
-    {
-     "name": "Azure",
-     "essential": false
-    },
-    {
-     "name": "Databricks",
-     "essential": false
-    },
-    {
-     "name": "GCP",
-     "essential": false
-    },
-    {
-     "name": "LLMs",
-     "essential": false
-    },
-    {
-     "name": "Machine Learning",
-     "essential": false
-    },
-    {
-     "name": "NLP",
-     "essential": false
-    },
-    {
-     "name": "PySpark",
-     "essential": false
-    },
-    {
-     "name": "Python",
-     "essential": false
-    },
-    {
-     "name": "Statistics",
-     "essential": false
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 40,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.25,
-       "weight": 0.45,
-       "detail": "2 of 10 skills matched directly, 1 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "senior is 2 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Python",
-      "Statistics"
-     ],
-     "partial": [
-      "Machine Learning"
-     ],
-     "missing_essential": []
-    },
-    "junior-data-engineer": {
-     "total": 49,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.45,
-       "weight": 0.45,
-       "detail": "3 of 10 skills matched directly, 3 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "senior is 2 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "AWS",
-      "PySpark",
-      "Python"
-     ],
-     "partial": [
-      "Azure",
-      "Databricks",
-      "GCP"
-     ],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 47,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.4,
-       "weight": 0.45,
-       "detail": "3 of 10 skills matched directly, 2 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 0.2,
-       "weight": 0.25,
-       "detail": "senior is 2 levels above the profile's experience"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.15,
-       "detail": "in London"
-      }
-     ],
-     "matched": [
-      "Machine Learning",
-      "NLP",
-      "Python"
-     ],
-     "partial": [
-      "LLMs",
-      "Statistics"
-     ],
-     "missing_essential": []
-    }
-   },
-   "also_listed_in": []
-  },
-  {
-   "id": "reed-56396179",
-   "source": "reed",
-   "title": "Trainee Ai Engineer",
-   "company": "IT Career Switch",
-   "location": "SE137HB",
-   "salary_min": 25000.0,
-   "salary_max": 45000.0,
-   "salary_is_predicted": false,
-   "url": "https://www.reed.co.uk/jobs/trainee-ai-engineer/56396179",
-   "posted_at": "2026-01-29",
-   "confidence": "full",
-   "seniority": "junior",
-   "years_experience": null,
-   "skills": [
-    {
-     "name": "Azure",
-     "essential": false
-    },
-    {
-     "name": "Git",
-     "essential": false
-    },
-    {
-     "name": "Machine Learning",
-     "essential": false
-    },
-    {
-     "name": "Python",
-     "essential": false
-    }
-   ],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 60,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.5,
-       "weight": 0.45,
-       "detail": "1 of 4 skills matched directly, 2 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 1.0,
-       "weight": 0.25,
-       "detail": "junior matches the profile's level"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 0.2,
-       "weight": 0.15,
-       "detail": "SE137HB is outside the profile's preferred areas"
-      }
-     ],
-     "matched": [
-      "Python"
-     ],
-     "partial": [
-      "Git",
-      "Machine Learning"
-     ],
-     "missing_essential": []
-    },
-    "junior-data-engineer": {
-     "total": 65,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.625,
-       "weight": 0.45,
-       "detail": "2 of 4 skills matched directly, 1 by related experience"
-      },
-      {
-       "name": "seniority",
-       "score": 1.0,
-       "weight": 0.25,
-       "detail": "junior matches the profile's level"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 0.2,
-       "weight": 0.15,
-       "detail": "SE137HB is outside the profile's preferred areas"
-      }
-     ],
-     "matched": [
-      "Git",
-      "Python"
-     ],
-     "partial": [
-      "Azure"
-     ],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 71,
-     "provisional": false,
-     "components": [
-      {
-       "name": "skills",
-       "score": 0.75,
-       "weight": 0.45,
-       "detail": "3 of 4 skills matched directly"
-      },
-      {
-       "name": "seniority",
-       "score": 1.0,
-       "weight": 0.25,
-       "detail": "junior matches the profile's level"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.15,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 0.2,
-       "weight": 0.15,
-       "detail": "SE137HB is outside the profile's preferred areas"
-      }
-     ],
-     "matched": [
-      "Git",
-      "Machine Learning",
-      "Python"
-     ],
-     "partial": [],
-     "missing_essential": []
-    }
-   },
-   "also_listed_in": [
-    "SE17PB",
-    "SE109NN",
-    "SW181DG",
-    "E16QL"
+    "EN27AX",
+    "RM13BB",
+    "DA14FH",
+    "KT11EU"
    ]
   },
   {
@@ -5816,6 +5664,141 @@
      "missing_essential": [
       "CI/CD"
      ]
+    }
+   },
+   "also_listed_in": []
+  },
+  {
+   "id": "reed-57335496",
+   "source": "reed",
+   "title": "Trainee AI Engineer",
+   "company": "Newto Training",
+   "location": "United Kingdom",
+   "salary_min": 20000.0,
+   "salary_max": 50000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/trainee-ai-engineer/57335496",
+   "posted_at": "2026-09-11",
+   "confidence": "full",
+   "seniority": "junior",
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "Azure",
+     "essential": false
+    },
+    {
+     "name": "Python",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 60,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 2 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "United Kingdom is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 71,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.75,
+       "weight": 0.45,
+       "detail": "1 of 2 skills matched directly, 1 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "United Kingdom is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "Azure"
+     ],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 60,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 2 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "United Kingdom is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [],
+     "missing_essential": []
     }
    },
    "also_listed_in": []
@@ -8060,6 +8043,160 @@
     }
    },
    "also_listed_in": []
+  },
+  {
+   "id": "reed-56401347",
+   "source": "reed",
+   "title": "Trainee Ai Engineer",
+   "company": "IT Career Switch",
+   "location": "SW181DG",
+   "salary_min": 25000.0,
+   "salary_max": 45000.0,
+   "salary_is_predicted": false,
+   "url": "https://www.reed.co.uk/jobs/trainee-ai-engineer/56401347",
+   "posted_at": "2026-01-30",
+   "confidence": "full",
+   "seniority": "junior",
+   "years_experience": null,
+   "skills": [
+    {
+     "name": "Azure",
+     "essential": false
+    },
+    {
+     "name": "Git",
+     "essential": false
+    },
+    {
+     "name": "Machine Learning",
+     "essential": false
+    },
+    {
+     "name": "Python",
+     "essential": false
+    }
+   ],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 60,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.5,
+       "weight": 0.45,
+       "detail": "1 of 4 skills matched directly, 2 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "SW181DG is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Python"
+     ],
+     "partial": [
+      "Git",
+      "Machine Learning"
+     ],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 65,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.625,
+       "weight": 0.45,
+       "detail": "2 of 4 skills matched directly, 1 by related experience"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "SW181DG is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Git",
+      "Python"
+     ],
+     "partial": [
+      "Azure"
+     ],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 71,
+     "provisional": false,
+     "components": [
+      {
+       "name": "skills",
+       "score": 0.75,
+       "weight": 0.45,
+       "detail": "3 of 4 skills matched directly"
+      },
+      {
+       "name": "seniority",
+       "score": 1.0,
+       "weight": 0.25,
+       "detail": "junior matches the profile's level"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.15,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 0.2,
+       "weight": 0.15,
+       "detail": "SW181DG is outside the profile's preferred areas"
+      }
+     ],
+     "matched": [
+      "Git",
+      "Machine Learning",
+      "Python"
+     ],
+     "partial": [],
+     "missing_essential": []
+    }
+   },
+   "also_listed_in": [
+    "E16QL",
+    "SE137HB",
+    "SE17PB",
+    "SE109NN"
+   ]
   },
   {
    "id": "reed-57311081",
@@ -14803,7 +14940,7 @@
    "salary_min": 61153.77,
    "salary_max": 61153.77,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182268?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=C2257BB2375E249BC2823BF9E2926BB9DA71C119",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182268?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=C2257BB2375E249BC2823BF9E2926BB9DA71C119",
    "posted_at": "2026-08-29",
    "confidence": "partial",
    "seniority": null,
@@ -14921,7 +15058,7 @@
    "salary_min": 59484.39,
    "salary_max": 59484.39,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5825674473?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=047ECF86FBC4C645EC9D051D996F2083A2E9CE2F",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5825674473?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=047ECF86FBC4C645EC9D051D996F2083A2E9CE2F",
    "posted_at": "2026-08-02",
    "confidence": "partial",
    "seniority": "senior",
@@ -15021,7 +15158,7 @@
    "salary_min": 40691.61,
    "salary_max": 40691.61,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856134374?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=E6515D67B6C5D7862ACBFF9E5A407A33C5CF2D45",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856134374?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=E6515D67B6C5D7862ACBFF9E5A407A33C5CF2D45",
    "posted_at": "2026-08-26",
    "confidence": "partial",
    "seniority": null,
@@ -15121,7 +15258,7 @@
    "salary_min": 57004.62,
    "salary_max": 57004.62,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861079746?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=ECB8D201E974F7CFEC8BF20EB589110D9AB1072F",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861079746?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=ECB8D201E974F7CFEC8BF20EB589110D9AB1072F",
    "posted_at": "2026-08-29",
    "confidence": "partial",
    "seniority": null,
@@ -15221,7 +15358,7 @@
    "salary_min": 53498.93,
    "salary_max": 53498.93,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858065627?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=0D109B1B708432EB3219D82B2267F8D3358D2150",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858065627?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=0D109B1B708432EB3219D82B2267F8D3358D2150",
    "posted_at": "2026-08-27",
    "confidence": "partial",
    "seniority": null,
@@ -15321,7 +15458,7 @@
    "salary_min": 82374.54,
    "salary_max": 82374.54,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5891693568?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F263EAAE6C84356C15EDB95571565E1355F28144",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5891693568?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=F263EAAE6C84356C15EDB95571565E1355F28144",
    "posted_at": "2026-09-20",
    "confidence": "partial",
    "seniority": "senior",
@@ -15430,7 +15567,7 @@
    "salary_min": 76031.87,
    "salary_max": 76031.87,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5825674468?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=874BD8DD9349398F078E8C07626A5E3D655D5193",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5825674468?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=874BD8DD9349398F078E8C07626A5E3D655D5193",
    "posted_at": "2026-08-02",
    "confidence": "partial",
    "seniority": null,
@@ -15530,7 +15667,7 @@
    "salary_min": 70362.59,
    "salary_max": 70362.59,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5855111717?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=9DFE347D9CCF495CBE90FE0EFA25D27DDD028811",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5855111717?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=9DFE347D9CCF495CBE90FE0EFA25D27DDD028811",
    "posted_at": "2026-08-25",
    "confidence": "partial",
    "seniority": null,
@@ -15630,7 +15767,7 @@
    "salary_min": 99653.15,
    "salary_max": 99653.15,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858065628?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F5BCF1E49D68347D0528001CA3EC190F3A67DDAD",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858065628?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=F5BCF1E49D68347D0528001CA3EC190F3A67DDAD",
    "posted_at": "2026-08-27",
    "confidence": "partial",
    "seniority": "lead",
@@ -15730,7 +15867,7 @@
    "salary_min": 79473.76,
    "salary_max": 79473.76,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863587380?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=39F99CE1DAC7AADACC37D7603E78E9D9EDA92E2C",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863587380?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=39F99CE1DAC7AADACC37D7603E78E9D9EDA92E2C",
    "posted_at": "2026-09-01",
    "confidence": "partial",
    "seniority": null,
@@ -15854,7 +15991,7 @@
    "salary_min": 118828.91,
    "salary_max": 118828.91,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838382610?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=67D4501BC9C8C6760EA164518C3DCE55DAED1730",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838382610?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=67D4501BC9C8C6760EA164518C3DCE55DAED1730",
    "posted_at": "2026-08-12",
    "confidence": "partial",
    "seniority": "lead",
@@ -15954,7 +16091,7 @@
    "salary_min": 51479.84,
    "salary_max": 51479.84,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052568?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=C17336A01DCEF28076A44A09FF91E8B63B3F1B00",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052568?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=C17336A01DCEF28076A44A09FF91E8B63B3F1B00",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": "senior",
@@ -16054,7 +16191,7 @@
    "salary_min": 62390.02,
    "salary_max": 62390.02,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856597194?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=BF30C4233BE5DE7DD372A2A86D2556C210B000F8",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856597194?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=BF30C4233BE5DE7DD372A2A86D2556C210B000F8",
    "posted_at": "2026-08-26",
    "confidence": "partial",
    "seniority": "lead",
@@ -16463,7 +16600,7 @@
    "salary_min": 53785.41,
    "salary_max": 53785.41,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883635315?se=2jWG8eu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F6B13960625248CE4E30822FF23E73CC0F169F47",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883635315?se=pO0ba_G28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=F6B13960625248CE4E30822FF23E73CC0F169F47",
    "posted_at": "2026-09-14",
    "confidence": "partial",
    "seniority": null,
@@ -19566,7 +19703,7 @@
    "salary_min": 59720.11,
    "salary_max": 59720.11,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182379?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=D71E752B956AC96C324BB06E6D3A557F4B4E6037",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182379?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=D71E752B956AC96C324BB06E6D3A557F4B4E6037",
    "posted_at": "2026-08-29",
    "confidence": "partial",
    "seniority": "junior",
@@ -19679,7 +19816,7 @@
    "salary_min": 91433.52,
    "salary_max": 91433.52,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856595576?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=320EF5129EFFAE33D92F5E0F1E6A056FEF7EA227",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856595576?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=320EF5129EFFAE33D92F5E0F1E6A056FEF7EA227",
    "posted_at": "2026-08-26",
    "confidence": "partial",
    "seniority": null,
@@ -19779,7 +19916,7 @@
    "salary_min": 76759.7,
    "salary_max": 76759.7,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856595725?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=1D3E7CA1966616D98CDFB52CD84828B593BF4954",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856595725?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=1D3E7CA1966616D98CDFB52CD84828B593BF4954",
    "posted_at": "2026-08-26",
    "confidence": "partial",
    "seniority": "lead",
@@ -19879,7 +20016,7 @@
    "salary_min": 77684.89,
    "salary_max": 77684.89,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182231?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=2435D28B37E3AF1F05EA6E0D6D8B76D9EA0B6B4B",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182231?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=2435D28B37E3AF1F05EA6E0D6D8B76D9EA0B6B4B",
    "posted_at": "2026-08-29",
    "confidence": "partial",
    "seniority": null,
@@ -19992,7 +20129,7 @@
    "salary_min": 56947.14,
    "salary_max": 56947.14,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052593?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=43EE64497A889B5A2B5E5B6B8DB725EDB9DAB5C1",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052593?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=43EE64497A889B5A2B5E5B6B8DB725EDB9DAB5C1",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": null,
@@ -20092,7 +20229,7 @@
    "salary_min": 84130.16,
    "salary_max": 84130.16,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5882114720?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=C13F5CF6C3298F8AE24E81459E2D1131312EC3AF",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5882114720?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=C13F5CF6C3298F8AE24E81459E2D1131312EC3AF",
    "posted_at": "2026-09-13",
    "confidence": "partial",
    "seniority": "lead",
@@ -20203,7 +20340,7 @@
    "salary_min": 68410.57,
    "salary_max": 68410.57,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869066529?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=4E230E63BD1C708667E053692197952E1A8E6EB7",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869066529?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=4E230E63BD1C708667E053692197952E1A8E6EB7",
    "posted_at": "2026-09-03",
    "confidence": "partial",
    "seniority": null,
@@ -20303,7 +20440,7 @@
    "salary_min": 136500.0,
    "salary_max": 143000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889719472?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=032B73186FF6F6720817FEFA7D7202B70498B23F",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889719472?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=032B73186FF6F6720817FEFA7D7202B70498B23F",
    "posted_at": "2026-09-18",
    "confidence": "partial",
    "seniority": null,
@@ -20403,7 +20540,7 @@
    "salary_min": 80353.38,
    "salary_max": 80353.38,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5821090850?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=D89DFE16624DA4429E0506AA4E3145C1A3BC6ED0",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5821090850?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=D89DFE16624DA4429E0506AA4E3145C1A3BC6ED0",
    "posted_at": "2026-07-30",
    "confidence": "partial",
    "seniority": "senior",
@@ -20503,7 +20640,7 @@
    "salary_min": 57379.22,
    "salary_max": 57379.22,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052603?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=B0CB5A2A30B5C8429B430999FD2B5ECE9F8CE8FA",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874052603?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=B0CB5A2A30B5C8429B430999FD2B5ECE9F8CE8FA",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": "senior",
@@ -20603,7 +20740,7 @@
    "salary_min": 61539.25,
    "salary_max": 61539.25,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058965?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=5BABCFD6BDDA535333D636EE9A9F2AE708CFF22E",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058965?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=5BABCFD6BDDA535333D636EE9A9F2AE708CFF22E",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": "senior",
@@ -20703,7 +20840,7 @@
    "salary_min": 80623.42,
    "salary_max": 80623.42,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840061946?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=5D03949D785F3B857F62060E4F1B5F8CE7CC0F9E",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840061946?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=5D03949D785F3B857F62060E4F1B5F8CE7CC0F9E",
    "posted_at": "2026-08-13",
    "confidence": "partial",
    "seniority": "senior",
@@ -20803,7 +20940,7 @@
    "salary_min": 91918.49,
    "salary_max": 91918.49,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838617888?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=FA15BEB8878C72844C647AF7E4ECD3FA4FACC186",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838617888?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=FA15BEB8878C72844C647AF7E4ECD3FA4FACC186",
    "posted_at": "2026-08-12",
    "confidence": "partial",
    "seniority": "senior",
@@ -20903,7 +21040,7 @@
    "salary_min": 61191.4,
    "salary_max": 61191.4,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5855111747?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=03DEEC9B0011676ED2DAA822ABB2985A679B47FC",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5855111747?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=03DEEC9B0011676ED2DAA822ABB2985A679B47FC",
    "posted_at": "2026-08-25",
    "confidence": "partial",
    "seniority": "lead",
@@ -21014,7 +21151,7 @@
    "salary_min": 64628.78,
    "salary_max": 64628.78,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5894273971?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=6E6BCAE002F7ABBE6F3E9D5131B6F935CB5FC87C",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5894273971?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=6E6BCAE002F7ABBE6F3E9D5131B6F935CB5FC87C",
    "posted_at": "2026-09-22",
    "confidence": "partial",
    "seniority": null,
@@ -21114,7 +21251,7 @@
    "salary_min": 76059.06,
    "salary_max": 76059.06,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5894405753?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=ABF4DEE8171B62261B8540197081B7B4D56A6A35",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5894405753?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=ABF4DEE8171B62261B8540197081B7B4D56A6A35",
    "posted_at": "2026-09-23",
    "confidence": "partial",
    "seniority": null,
@@ -22078,7 +22215,7 @@
    "salary_min": 57793.03,
    "salary_max": 57793.03,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5849683891?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=6377BCDE2011E1B22F4DA306BD037BA9EA3B1C90",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5849683891?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=6377BCDE2011E1B22F4DA306BD037BA9EA3B1C90",
    "posted_at": "2026-08-20",
    "confidence": "partial",
    "seniority": "junior",
@@ -22191,7 +22328,7 @@
    "salary_min": 55445.02,
    "salary_max": 55445.02,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5887443031?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=43BB272064A955265FAC082AF9BE965509425E92",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5887443031?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=43BB272064A955265FAC082AF9BE965509425E92",
    "posted_at": "2026-09-17",
    "confidence": "partial",
    "seniority": null,
@@ -22298,7 +22435,7 @@
    "salary_min": 54120.26,
    "salary_max": 54120.26,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869138521?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F6E2C7FED5C051BD3125D433DC97D27E6E3A6D8B",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869138521?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=F6E2C7FED5C051BD3125D433DC97D27E6E3A6D8B",
    "posted_at": "2026-09-03",
    "confidence": "partial",
    "seniority": null,
@@ -22405,7 +22542,7 @@
    "salary_min": 65015.52,
    "salary_max": 65015.52,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863586477?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=62BEC8AB3D39F17E4A6B2016B146A9568CF72A11",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863586477?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=62BEC8AB3D39F17E4A6B2016B146A9568CF72A11",
    "posted_at": "2026-09-01",
    "confidence": "partial",
    "seniority": null,
@@ -22522,7 +22659,7 @@
    "salary_min": 40000.0,
    "salary_max": 45000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5886127586?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=8D3D9A2940435EDE6930AA6014F530B9651EC703",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5886127586?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=8D3D9A2940435EDE6930AA6014F530B9651EC703",
    "posted_at": "2026-09-16",
    "confidence": "partial",
    "seniority": "mid",
@@ -22644,7 +22781,7 @@
    "salary_min": 117000.0,
    "salary_max": 143000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883859566?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=788CA6E98EFABE16C87FE22BA101B0649BC45ED4",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883859566?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=788CA6E98EFABE16C87FE22BA101B0649BC45ED4",
    "posted_at": "2026-09-14",
    "confidence": "partial",
    "seniority": null,
@@ -22762,7 +22899,7 @@
    "salary_min": 45000.0,
    "salary_max": 54150.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5878830374?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=44DE4E66A1A9F8F20CE3023D2DC6BFE62E9D4BDD",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5878830374?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=44DE4E66A1A9F8F20CE3023D2DC6BFE62E9D4BDD",
    "posted_at": "2026-09-10",
    "confidence": "partial",
    "seniority": null,
@@ -22873,7 +23010,7 @@
    "salary_min": 70000.0,
    "salary_max": 80000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883807229?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=CA6D8E9DD80DD05049BAF372415B94D676B3404F",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883807229?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=CA6D8E9DD80DD05049BAF372415B94D676B3404F",
    "posted_at": "2026-09-14",
    "confidence": "partial",
    "seniority": null,
@@ -22973,7 +23110,7 @@
    "salary_min": 75000.0,
    "salary_max": 100000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5822390407?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=DEF0CAC60F9F0C1E028BD3019FEE8524705820D0",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5822390407?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=DEF0CAC60F9F0C1E028BD3019FEE8524705820D0",
    "posted_at": "2026-07-31",
    "confidence": "partial",
    "seniority": null,
@@ -23080,7 +23217,7 @@
    "salary_min": 119600.0,
    "salary_max": 122200.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5864625332?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=9778C51CCA0ECCF85B69CC566FB1F7269748FD7F",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5864625332?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=9778C51CCA0ECCF85B69CC566FB1F7269748FD7F",
    "posted_at": "2026-09-01",
    "confidence": "partial",
    "seniority": null,
@@ -23187,7 +23324,7 @@
    "salary_min": 95000.0,
    "salary_max": 110000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5875603599?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=401B8A7934E68BA0104C6A07EAEB55499973375D",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5875603599?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=401B8A7934E68BA0104C6A07EAEB55499973375D",
    "posted_at": "2026-09-08",
    "confidence": "partial",
    "seniority": null,
@@ -23287,7 +23424,7 @@
    "salary_min": 50000.0,
    "salary_max": 80000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889320280?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=84CF729EFB65A43A25DC0B8ACF9386050325720E",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889320280?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=84CF729EFB65A43A25DC0B8ACF9386050325720E",
    "posted_at": "2026-09-18",
    "confidence": "partial",
    "seniority": null,
@@ -23387,7 +23524,7 @@
    "salary_min": 117000.0,
    "salary_max": 130000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5878485909?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=5D7094509AED48834492EDF37BEEB34D75223360",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5878485909?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=5D7094509AED48834492EDF37BEEB34D75223360",
    "posted_at": "2026-09-10",
    "confidence": "partial",
    "seniority": null,
@@ -23510,7 +23647,7 @@
    "salary_min": 70000.0,
    "salary_max": 90000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5870727681?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=5B97CEFD4FD8B5E56F7DDBD5939EDA569EFF3C28",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5870727681?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=5B97CEFD4FD8B5E56F7DDBD5939EDA569EFF3C28",
    "posted_at": "2026-09-04",
    "confidence": "partial",
    "seniority": null,
@@ -23610,7 +23747,7 @@
    "salary_min": 80000.0,
    "salary_max": 90000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869444136?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=748E5929ED76749048AADB8EF26B6C891E20E6B4",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5869444136?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=748E5929ED76749048AADB8EF26B6C891E20E6B4",
    "posted_at": "2026-09-03",
    "confidence": "partial",
    "seniority": null,
@@ -23710,7 +23847,7 @@
    "salary_min": 60165.32,
    "salary_max": 60165.32,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883635356?se=8KsD8uu28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F31DE3E18B883185C13181EB57F250C9E982D817",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5883635356?se=ZvpGbPG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=F31DE3E18B883185C13181EB57F250C9E982D817",
    "posted_at": "2026-09-14",
    "confidence": "partial",
    "seniority": null,
@@ -23832,7 +23969,7 @@
    "salary_min": 100000.0,
    "salary_max": 100000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5890307584?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=FE26176F6DF2386D367D170FD277BF02D5FCD8FD",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5890307584?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=FE26176F6DF2386D367D170FD277BF02D5FCD8FD",
    "posted_at": "2026-09-19",
    "confidence": "partial",
    "seniority": "lead",
@@ -23953,7 +24090,7 @@
    "salary_min": 54178.77,
    "salary_max": 54178.77,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856592811?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=6DB08A8FBC90C718BDFF656F69882F0A3F7AD9F6",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5856592811?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=6DB08A8FBC90C718BDFF656F69882F0A3F7AD9F6",
    "posted_at": "2026-08-26",
    "confidence": "partial",
    "seniority": "senior",
@@ -24062,7 +24199,7 @@
    "salary_min": 55778.61,
    "salary_max": 55778.61,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058969?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=9814FD6F1B8B412383824868913C2078DB6C7347",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058969?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=9814FD6F1B8B412383824868913C2078DB6C7347",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": null,
@@ -24171,7 +24308,7 @@
    "salary_min": 55714.02,
    "salary_max": 55714.02,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5817418398?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=3DF8638C0DA472014DB9719682B998FC9E55D9B7",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5817418398?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=3DF8638C0DA472014DB9719682B998FC9E55D9B7",
    "posted_at": "2026-07-27",
    "confidence": "partial",
    "seniority": null,
@@ -24280,7 +24417,7 @@
    "salary_min": 65459.8,
    "salary_max": 65459.8,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5862027497?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=B00993494658E7C57C5ECD7810341A04D98D39AB",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5862027497?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=B00993494658E7C57C5ECD7810341A04D98D39AB",
    "posted_at": "2026-08-30",
    "confidence": "partial",
    "seniority": "lead",
@@ -24389,7 +24526,7 @@
    "salary_min": 59592.9,
    "salary_max": 59592.9,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858064328?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=B6A163C0C4DFB5492191FBC578C2BBDCFB90EB11",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858064328?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=B6A163C0C4DFB5492191FBC578C2BBDCFB90EB11",
    "posted_at": "2026-08-27",
    "confidence": "partial",
    "seniority": "lead",
@@ -24498,7 +24635,7 @@
    "salary_min": 100000.0,
    "salary_max": 100000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5888654441?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=2A16EC6AECA9A5EE7A175A39085183A0A7023608",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5888654441?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=2A16EC6AECA9A5EE7A175A39085183A0A7023608",
    "posted_at": "2026-09-18",
    "confidence": "partial",
    "seniority": null,
@@ -24607,7 +24744,7 @@
    "salary_min": 59891.22,
    "salary_max": 59891.22,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058960?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=2613904434FC1F67DE07DD87BF11189164A734B0",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5874058960?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=2613904434FC1F67DE07DD87BF11189164A734B0",
    "posted_at": "2026-09-07",
    "confidence": "partial",
    "seniority": "senior",
@@ -24847,7 +24984,7 @@
    "salary_min": 80000.0,
    "salary_max": 120000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5830845157?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=176CD05976322972F51979FA9985B53CA37306B0",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5830845157?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=176CD05976322972F51979FA9985B53CA37306B0",
    "posted_at": "2026-08-06",
    "confidence": "partial",
    "seniority": "senior",
@@ -24958,7 +25095,7 @@
    "salary_min": 60000.0,
    "salary_max": 70000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5749243663?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=3B5B8DAA8A385676FD461476646D18E8FFF17D4A",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5749243663?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=3B5B8DAA8A385676FD461476646D18E8FFF17D4A",
    "posted_at": "2026-06-02",
    "confidence": "partial",
    "seniority": null,
@@ -26844,7 +26981,7 @@
    "salary_min": 60805.77,
    "salary_max": 60805.77,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5817418805?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=79A7581142EAE662F94809391C628BF14508D472",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5817418805?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=79A7581142EAE662F94809391C628BF14508D472",
    "posted_at": "2026-07-27",
    "confidence": "partial",
    "seniority": null,
@@ -27718,7 +27855,7 @@
    "salary_min": 76787.3,
    "salary_max": 76787.3,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5830845201?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=F996CFC96B11322F5AA02A186171F2C540A3D1C2",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5830845201?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=F996CFC96B11322F5AA02A186171F2C540A3D1C2",
    "posted_at": "2026-08-06",
    "confidence": "partial",
    "seniority": "senior",
@@ -27850,7 +27987,7 @@
    "salary_min": 58000.0,
    "salary_max": 60000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858378129?se=hCCC8uu28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=BA39E253A7C4DED5F6E95DB6E87CC533D4B14947",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5858378129?se=cKqBbfG28RG6-LerT6N-jw&utm_medium=api&utm_source=0d869dc9&v=BA39E253A7C4DED5F6E95DB6E87CC533D4B14947",
    "posted_at": "2026-08-27",
    "confidence": "partial",
    "seniority": "senior",
@@ -27965,7 +28102,7 @@
    "salary_min": 71829.23,
    "salary_max": 71829.23,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838381458?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=16724A4F9650B061C6F788C6F84950F31715427D",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838381458?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=16724A4F9650B061C6F788C6F84950F31715427D",
    "posted_at": "2026-08-12",
    "confidence": "partial",
    "seniority": "lead",
@@ -28065,7 +28202,7 @@
    "salary_min": 77002.09,
    "salary_max": 77002.09,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355544?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=5AC716F8E769489B42BF66DD9C12210F5BF8D15D",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355544?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=5AC716F8E769489B42BF66DD9C12210F5BF8D15D",
    "posted_at": "2026-08-13",
    "confidence": "partial",
    "seniority": "senior",
@@ -28165,7 +28302,7 @@
    "salary_min": 88466.81,
    "salary_max": 88466.81,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838383439?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=D6B8AFFFD1A039CBFADDF1DB5DAC87CD80F8A8F6",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5838383439?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=D6B8AFFFD1A039CBFADDF1DB5DAC87CD80F8A8F6",
    "posted_at": "2026-08-12",
    "confidence": "partial",
    "seniority": "junior",
@@ -28265,7 +28402,7 @@
    "salary_min": 46263.4,
    "salary_max": 46263.4,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182353?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=9B7D2E1142A3B2B572CCAA707DBE965F707754DC",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5861182353?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=9B7D2E1142A3B2B572CCAA707DBE965F707754DC",
    "posted_at": "2026-08-29",
    "confidence": "partial",
    "seniority": null,
@@ -28365,7 +28502,7 @@
    "salary_min": 64723.58,
    "salary_max": 64723.58,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355765?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=82F5727EC0088B4B952CB9A4392E9E9710EF0DD4",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355765?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=82F5727EC0088B4B952CB9A4392E9E9710EF0DD4",
    "posted_at": "2026-08-13",
    "confidence": "partial",
    "seniority": "senior",
@@ -28465,7 +28602,7 @@
    "salary_min": 64740.31,
    "salary_max": 64740.31,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355710?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=BD5EBDC58D5D454750F21E22C49A33691F13ED75",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5840355710?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=BD5EBDC58D5D454750F21E22C49A33691F13ED75",
    "posted_at": "2026-08-13",
    "confidence": "partial",
    "seniority": "senior",
@@ -28565,7 +28702,7 @@
    "salary_min": 22880.0,
    "salary_max": 22880.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5859492510?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=3BA1DA314E8ACAAAC83DBD01B04E2A78C30BD2C1",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5859492510?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=3BA1DA314E8ACAAAC83DBD01B04E2A78C30BD2C1",
    "posted_at": "2026-08-28",
    "confidence": "partial",
    "seniority": null,
@@ -28665,7 +28802,7 @@
    "salary_min": 81034.05,
    "salary_max": 81034.05,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5846799328?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=B5CD816CC0AEE80551483B0265982FB9B06E040B",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5846799328?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=B5CD816CC0AEE80551483B0265982FB9B06E040B",
    "posted_at": "2026-08-18",
    "confidence": "partial",
    "seniority": "lead",
@@ -29072,7 +29209,7 @@
    "salary_min": 57140.1,
    "salary_max": 57140.1,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863586463?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=1F1D3FFEEEBA331F28760EB86DC2DE0FDA22FA8B",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5863586463?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=1F1D3FFEEEBA331F28760EB86DC2DE0FDA22FA8B",
    "posted_at": "2026-09-01",
    "confidence": "partial",
    "seniority": null,
@@ -29210,7 +29347,7 @@
    "salary_min": 60000.0,
    "salary_max": 85000.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5884589518?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=6ED66D21EB20500D0415E2E60B59DBA91B09014D",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5884589518?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=6ED66D21EB20500D0415E2E60B59DBA91B09014D",
    "posted_at": "2026-09-15",
    "confidence": "partial",
    "seniority": null,
@@ -29310,7 +29447,7 @@
    "salary_min": 9100.0,
    "salary_max": 113100.0,
    "salary_is_predicted": false,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889227282?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=E47D765366677D16B670560F90E1FAC8DD4B73F7",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5889227282?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=E47D765366677D16B670560F90E1FAC8DD4B73F7",
    "posted_at": "2026-09-18",
    "confidence": "partial",
    "seniority": null,
@@ -29412,7 +29549,7 @@
    "salary_min": 49693.11,
    "salary_max": 49693.11,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5868913954?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=452C20273BDA4041BBF810AEC9FA203DC12A95B5",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5868913954?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=452C20273BDA4041BBF810AEC9FA203DC12A95B5",
    "posted_at": "2026-09-03",
    "confidence": "partial",
    "seniority": null,
@@ -30944,6 +31081,106 @@
    "also_listed_in": []
   },
   {
+   "id": "adzuna-5852091745",
+   "source": "adzuna",
+   "title": "Data Analyst",
+   "company": "Hackajob Ltd",
+   "location": "South West London, London",
+   "salary_min": 64596.43,
+   "salary_max": 64596.43,
+   "salary_is_predicted": true,
+   "url": "https://www.adzuna.co.uk/jobs/details/5852091745?utm_medium=api&utm_source=0d869dc9",
+   "posted_at": "2026-08-22",
+   "confidence": "partial",
+   "seniority": null,
+   "years_experience": null,
+   "skills": [],
+   "scores": {
+    "junior-data-analyst": {
+     "total": 71,
+     "provisional": true,
+     "components": [
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.455,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.273,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.273,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-data-engineer": {
+     "total": 71,
+     "provisional": true,
+     "components": [
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.455,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.273,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.273,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [],
+     "missing_essential": []
+    },
+    "junior-ml-engineer": {
+     "total": 71,
+     "provisional": true,
+     "components": [
+      {
+       "name": "seniority",
+       "score": 0.6,
+       "weight": 0.455,
+       "detail": "level not stated, treated as neutral"
+      },
+      {
+       "name": "salary",
+       "score": 0.6,
+       "weight": 0.273,
+       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
+      },
+      {
+       "name": "location",
+       "score": 1.0,
+       "weight": 0.273,
+       "detail": "in London"
+      }
+     ],
+     "matched": [],
+     "partial": [],
+     "missing_essential": []
+    }
+   },
+   "also_listed_in": []
+  },
+  {
    "id": "adzuna-5889037929",
    "source": "adzuna",
    "title": "Data Analyst",
@@ -31031,106 +31268,6 @@
        "score": 1.0,
        "weight": 0.455,
        "detail": "junior matches the profile's level"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.273,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.273,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [],
-     "missing_essential": []
-    }
-   },
-   "also_listed_in": []
-  },
-  {
-   "id": "adzuna-5852091745",
-   "source": "adzuna",
-   "title": "Data Analyst",
-   "company": "Hackajob Ltd",
-   "location": "South West London, London",
-   "salary_min": 64596.43,
-   "salary_max": 64596.43,
-   "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/details/5852091745?utm_medium=api&utm_source=0d869dc9",
-   "posted_at": "2026-08-22",
-   "confidence": "partial",
-   "seniority": null,
-   "years_experience": null,
-   "skills": [],
-   "scores": {
-    "junior-data-analyst": {
-     "total": 71,
-     "provisional": true,
-     "components": [
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.455,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.273,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.273,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [],
-     "missing_essential": []
-    },
-    "junior-data-engineer": {
-     "total": 71,
-     "provisional": true,
-     "components": [
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.455,
-       "detail": "level not stated, treated as neutral"
-      },
-      {
-       "name": "salary",
-       "score": 0.6,
-       "weight": 0.273,
-       "detail": "the profile sets no salary floor, so pay is rewarded without a threshold"
-      },
-      {
-       "name": "location",
-       "score": 1.0,
-       "weight": 0.273,
-       "detail": "in London"
-      }
-     ],
-     "matched": [],
-     "partial": [],
-     "missing_essential": []
-    },
-    "junior-ml-engineer": {
-     "total": 71,
-     "provisional": true,
-     "components": [
-      {
-       "name": "seniority",
-       "score": 0.6,
-       "weight": 0.455,
-       "detail": "level not stated, treated as neutral"
       },
       {
        "name": "salary",
@@ -31770,7 +31907,7 @@
    "salary_min": 73149.4,
    "salary_max": 73149.4,
    "salary_is_predicted": true,
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5893585736?se=pMoM8-u28RGYrbZ8FeGpwg&utm_medium=api&utm_source=0d869dc9&v=F49B4415BC4356F91DCDB683B5D1E4B9A218A098",
+   "url": "https://www.adzuna.co.uk/jobs/land/ad/5893585736?se=4Kv_bvG28RG17I8Hj0wZow&utm_medium=api&utm_source=0d869dc9&v=F49B4415BC4356F91DCDB683B5D1E4B9A218A098",
    "posted_at": "2026-09-22",
    "confidence": "partial",
    "seniority": "senior",
@@ -31969,187 +32106,484 @@
    "also_listed_in": []
   }
  ],
+ "scoring": {
+  "weights": {
+   "skills": 0.45,
+   "seniority": 0.25,
+   "salary": 0.15,
+   "location": 0.15
+  },
+  "essential_multiplier": 2.0,
+  "category_match_credit": 0.5,
+  "seniority_order": [
+   "junior",
+   "mid",
+   "senior",
+   "lead"
+  ],
+  "remote_markers": [
+   "remote",
+   "work from home",
+   "wfh",
+   "anywhere"
+  ],
+  "aliases": {
+   "python": "Python",
+   "python3": "Python",
+   "r programming": "R",
+   "rstats": "R",
+   "r language": "R",
+   "r studio": "R",
+   "rstudio": "R",
+   "r/python": "R",
+   "python/r": "R",
+   "sql": "SQL",
+   "t-sql": "SQL",
+   "tsql": "SQL",
+   "pl/sql": "SQL",
+   "plsql": "SQL",
+   "ansi sql": "SQL",
+   "scala": "Scala",
+   "java": "Java",
+   "javascript": "JavaScript",
+   "js": "JavaScript",
+   "typescript": "JavaScript",
+   "ts": "JavaScript",
+   "golang": "Go",
+   "go programming": "Go",
+   "c++": "C++",
+   "cpp": "C++",
+   "c#": "C#",
+   "csharp": "C#",
+   "bash": "Bash",
+   "shell scripting": "Bash",
+   "shell script": "Bash",
+   "pyspark": "PySpark",
+   "apache spark": "Apache Spark",
+   "spark": "Apache Spark",
+   "pandas": "pandas",
+   "numpy": "NumPy",
+   "polars": "Polars",
+   "dbt": "dbt",
+   "data build tool": "dbt",
+   "hadoop": "Hadoop",
+   "mapreduce": "Hadoop",
+   "kafka": "Kafka",
+   "apache kafka": "Kafka",
+   "apache flink": "Flink",
+   "flink": "Flink",
+   "airflow": "Airflow",
+   "apache airflow": "Airflow",
+   "prefect": "Prefect",
+   "dagster": "Dagster",
+   "luigi": "Luigi",
+   "azure data factory": "Azure Data Factory",
+   "adf": "Azure Data Factory",
+   "snowflake": "Snowflake",
+   "bigquery": "BigQuery",
+   "big query": "BigQuery",
+   "redshift": "Redshift",
+   "databricks": "Databricks",
+   "postgresql": "PostgreSQL",
+   "postgres": "PostgreSQL",
+   "mysql": "MySQL",
+   "mongodb": "MongoDB",
+   "mongo": "MongoDB",
+   "cassandra": "Cassandra",
+   "elasticsearch": "Elasticsearch",
+   "elastic search": "Elasticsearch",
+   "delta lake": "Delta Lake",
+   "scikit-learn": "scikit-learn",
+   "scikit learn": "scikit-learn",
+   "sklearn": "scikit-learn",
+   "tensorflow": "TensorFlow",
+   "pytorch": "PyTorch",
+   "torch": "PyTorch",
+   "xgboost": "XGBoost",
+   "lightgbm": "LightGBM",
+   "hugging face": "Hugging Face",
+   "huggingface": "Hugging Face",
+   "transformers library": "Hugging Face",
+   "mlflow": "MLflow",
+   "machine learning": "Machine Learning",
+   "ml models": "Machine Learning",
+   "predictive modelling": "Machine Learning",
+   "predictive modeling": "Machine Learning",
+   "deep learning": "Deep Learning",
+   "neural networks": "Deep Learning",
+   "nlp": "NLP",
+   "natural language processing": "NLP",
+   "text mining": "NLP",
+   "computer vision": "Computer Vision",
+   "image recognition": "Computer Vision",
+   "time series": "Time Series",
+   "forecasting": "Time Series",
+   "prophet": "Time Series",
+   "arima": "Time Series",
+   "a/b testing": "A/B Testing",
+   "ab testing": "A/B Testing",
+   "experimentation": "A/B Testing",
+   "hypothesis testing": "A/B Testing",
+   "statistics": "Statistics",
+   "statistical analysis": "Statistics",
+   "statistical modelling": "Statistics",
+   "statistical modeling": "Statistics",
+   "llm": "LLMs",
+   "llms": "LLMs",
+   "large language model": "LLMs",
+   "large language models": "LLMs",
+   "generative ai": "LLMs",
+   "genai": "LLMs",
+   "rag": "RAG",
+   "retrieval augmented generation": "RAG",
+   "retrieval-augmented generation": "RAG",
+   "aws": "AWS",
+   "amazon web services": "AWS",
+   "s3": "AWS",
+   "ec2": "AWS",
+   "lambda": "AWS",
+   "glue": "AWS",
+   "sagemaker": "AWS",
+   "azure": "Azure",
+   "microsoft azure": "Azure",
+   "azure ml": "Azure",
+   "synapse": "Azure",
+   "gcp": "GCP",
+   "google cloud": "GCP",
+   "google cloud platform": "GCP",
+   "vertex ai": "GCP",
+   "docker": "Docker",
+   "containerisation": "Docker",
+   "containerization": "Docker",
+   "kubernetes": "Kubernetes",
+   "k8s": "Kubernetes",
+   "terraform": "Terraform",
+   "infrastructure as code": "Terraform",
+   "iac": "Terraform",
+   "ci/cd": "CI/CD",
+   "cicd": "CI/CD",
+   "continuous integration": "CI/CD",
+   "continuous deployment": "CI/CD",
+   "github actions": "CI/CD",
+   "jenkins": "CI/CD",
+   "linux": "Linux",
+   "unix": "Linux",
+   "power bi": "Power BI",
+   "powerbi": "Power BI",
+   "tableau": "Tableau",
+   "looker": "Looker",
+   "qlik": "Qlik",
+   "qlikview": "Qlik",
+   "qlik sense": "Qlik",
+   "excel": "Excel",
+   "advanced excel": "Excel",
+   "vba": "Excel",
+   "matplotlib": "Matplotlib",
+   "seaborn": "Matplotlib",
+   "plotly": "Matplotlib",
+   "git": "Git",
+   "github": "Git",
+   "gitlab": "Git",
+   "version control": "Git",
+   "rest api": "REST APIs",
+   "rest apis": "REST APIs",
+   "restful": "REST APIs",
+   "api development": "REST APIs",
+   "fastapi": "FastAPI",
+   "flask": "Flask",
+   "django": "Django",
+   "streamlit": "Streamlit",
+   "unit testing": "Testing",
+   "pytest": "Testing",
+   "test driven": "Testing",
+   "tdd": "Testing",
+   "testing": "Testing",
+   "agile": "Agile",
+   "scrum": "Agile",
+   "kanban": "Agile",
+   "sprint": "Agile",
+   "data modelling": "Data Modelling",
+   "data modeling": "Data Modelling",
+   "dimensional modelling": "Data Modelling",
+   "star schema": "Data Modelling",
+   "data quality": "Data Quality",
+   "data validation": "Data Quality",
+   "great expectations": "Data Quality",
+   "etl": "ETL",
+   "elt": "ETL",
+   "data pipeline": "ETL",
+   "data pipelines": "ETL",
+   "data ingestion": "ETL",
+   "data governance": "Data Governance",
+   "gdpr": "Data Governance",
+   "data privacy": "Data Governance",
+   "data lineage": "Data Governance",
+   "data warehouse": "Data Warehousing",
+   "data warehousing": "Data Warehousing",
+   "data lake": "Data Warehousing",
+   "lakehouse": "Data Warehousing"
+  },
+  "categories": {
+   "Airflow": "orchestration",
+   "Prefect": "orchestration",
+   "Dagster": "orchestration",
+   "Luigi": "orchestration",
+   "Azure Data Factory": "orchestration",
+   "AWS": "cloud",
+   "Azure": "cloud",
+   "GCP": "cloud",
+   "Snowflake": "warehouse",
+   "BigQuery": "warehouse",
+   "Redshift": "warehouse",
+   "Databricks": "warehouse",
+   "Delta Lake": "warehouse",
+   "Data Warehousing": "warehouse",
+   "PostgreSQL": "database",
+   "MySQL": "database",
+   "MongoDB": "database",
+   "Cassandra": "database",
+   "Elasticsearch": "database",
+   "PySpark": "distributed",
+   "Apache Spark": "distributed",
+   "Hadoop": "distributed",
+   "Kafka": "distributed",
+   "Flink": "distributed",
+   "pandas": "dataframe",
+   "NumPy": "dataframe",
+   "Polars": "dataframe",
+   "scikit-learn": "ml_framework",
+   "TensorFlow": "ml_framework",
+   "PyTorch": "ml_framework",
+   "XGBoost": "ml_framework",
+   "LightGBM": "ml_framework",
+   "Machine Learning": "ml_concept",
+   "Deep Learning": "ml_concept",
+   "Statistics": "ml_concept",
+   "Time Series": "ml_concept",
+   "NLP": "nlp",
+   "LLMs": "nlp",
+   "RAG": "nlp",
+   "Hugging Face": "nlp",
+   "Power BI": "bi",
+   "Tableau": "bi",
+   "Looker": "bi",
+   "Qlik": "bi",
+   "Matplotlib": "bi",
+   "Docker": "container",
+   "Kubernetes": "container",
+   "Terraform": "infra",
+   "CI/CD": "infra",
+   "Linux": "infra",
+   "FastAPI": "web_framework",
+   "Flask": "web_framework",
+   "Django": "web_framework",
+   "Streamlit": "web_framework",
+   "Python": "language",
+   "R": "language",
+   "Scala": "language",
+   "Java": "language",
+   "JavaScript": "language",
+   "Go": "language",
+   "C++": "language",
+   "C#": "language",
+   "ETL": "pipeline",
+   "dbt": "pipeline",
+   "Data Modelling": "pipeline",
+   "Data Quality": "pipeline",
+   "Git": "practice",
+   "Testing": "practice",
+   "Agile": "practice",
+   "REST APIs": "practice",
+   "Bash": "practice",
+   "SQL": "analytics",
+   "Excel": "analytics",
+   "A/B Testing": "analytics",
+   "MLflow": "ml_ops",
+   "Data Governance": "governance",
+   "Computer Vision": "vision"
+  }
+ },
  "skills": {
-  "described": 130,
+  "described": 132,
   "demand": [
    {
     "skill": "Python",
-    "postings": 92,
-    "share": 70.8,
-    "essential_share": 23.9
+    "postings": 94,
+    "share": 71.2,
+    "essential_share": 23.4
    },
    {
     "skill": "Machine Learning",
     "postings": 62,
-    "share": 47.7,
+    "share": 47.0,
     "essential_share": 17.7
    },
    {
     "skill": "LLMs",
     "postings": 54,
-    "share": 41.5,
+    "share": 40.9,
     "essential_share": 16.7
    },
    {
     "skill": "AWS",
     "postings": 48,
-    "share": 36.9,
+    "share": 36.4,
     "essential_share": 25.0
    },
    {
     "skill": "SQL",
     "postings": 43,
-    "share": 33.1,
+    "share": 32.6,
     "essential_share": 30.2
    },
    {
     "skill": "RAG",
     "postings": 38,
-    "share": 29.2,
+    "share": 28.8,
     "essential_share": 5.3
    },
    {
     "skill": "Azure",
-    "postings": 30,
-    "share": 23.1,
-    "essential_share": 26.7
+    "postings": 32,
+    "share": 24.2,
+    "essential_share": 25.0
    },
    {
     "skill": "Data Governance",
     "postings": 30,
-    "share": 23.1,
+    "share": 22.7,
     "essential_share": 6.7
    },
    {
     "skill": "CI/CD",
     "postings": 27,
-    "share": 20.8,
+    "share": 20.5,
     "essential_share": 33.3
    },
    {
     "skill": "scikit-learn",
     "postings": 26,
-    "share": 20.0,
+    "share": 19.7,
     "essential_share": 3.8
    },
    {
     "skill": "Excel",
     "postings": 26,
-    "share": 20.0,
+    "share": 19.7,
     "essential_share": 7.7
    },
    {
     "skill": "Testing",
     "postings": 25,
-    "share": 19.2,
+    "share": 18.9,
     "essential_share": 16.0
-   },
-   {
-    "skill": "Hugging Face",
-    "postings": 24,
-    "share": 18.5,
-    "essential_share": 4.2
    },
    {
     "skill": "pandas",
     "postings": 24,
-    "share": 18.5,
+    "share": 18.2,
     "essential_share": 95.8
+   },
+   {
+    "skill": "Hugging Face",
+    "postings": 24,
+    "share": 18.2,
+    "essential_share": 4.2
    },
    {
     "skill": "NumPy",
     "postings": 24,
-    "share": 18.5,
+    "share": 18.2,
     "essential_share": 100.0
    },
    {
     "skill": "Deep Learning",
     "postings": 24,
-    "share": 18.5,
+    "share": 18.2,
     "essential_share": 4.2
    },
    {
     "skill": "Matplotlib",
     "postings": 23,
-    "share": 17.7,
+    "share": 17.4,
     "essential_share": 95.7
    },
    {
     "skill": "Git",
     "postings": 22,
-    "share": 16.9,
+    "share": 16.7,
     "essential_share": 31.8
    },
    {
     "skill": "ETL",
     "postings": 22,
-    "share": 16.9,
+    "share": 16.7,
     "essential_share": 13.6
    },
    {
     "skill": "Streamlit",
     "postings": 22,
-    "share": 16.9,
+    "share": 16.7,
     "essential_share": 0.0
    },
    {
     "skill": "Tableau",
     "postings": 18,
-    "share": 13.8,
+    "share": 13.6,
     "essential_share": 0.0
    },
    {
     "skill": "Docker",
     "postings": 13,
-    "share": 10.0,
+    "share": 9.8,
     "essential_share": 23.1
    },
    {
     "skill": "Data Quality",
     "postings": 13,
-    "share": 10.0,
+    "share": 9.8,
     "essential_share": 23.1
    },
    {
     "skill": "GCP",
     "postings": 13,
-    "share": 10.0,
+    "share": 9.8,
     "essential_share": 46.2
    },
    {
     "skill": "NLP",
     "postings": 10,
-    "share": 7.7,
+    "share": 7.6,
     "essential_share": 10.0
-   },
-   {
-    "skill": "Databricks",
-    "postings": 9,
-    "share": 6.9,
-    "essential_share": 22.2
    },
    {
     "skill": "Power BI",
     "postings": 9,
-    "share": 6.9,
+    "share": 6.8,
     "essential_share": 44.4
+   },
+   {
+    "skill": "Databricks",
+    "postings": 9,
+    "share": 6.8,
+    "essential_share": 22.2
    },
    {
     "skill": "Data Warehousing",
     "postings": 9,
-    "share": 6.9,
+    "share": 6.8,
     "essential_share": 22.2
    },
    {
     "skill": "Terraform",
     "postings": 8,
-    "share": 6.2,
+    "share": 6.1,
     "essential_share": 25.0
    },
    {
     "skill": "Kubernetes",
     "postings": 8,
-    "share": 6.2,
+    "share": 6.1,
     "essential_share": 12.5
    }
   ],
@@ -32210,8 +32644,8 @@
     "postings": 26
    },
    {
-    "a": "AWS",
-    "b": "scikit-learn",
+    "a": "Azure",
+    "b": "Python",
     "postings": 26
    }
   ],
