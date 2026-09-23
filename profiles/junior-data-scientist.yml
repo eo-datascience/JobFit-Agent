@@ -1,0 +1,24 @@
+# A public sample profile. No salary floor: a real one is private, and these
+# exist so a visitor can see how scoring behaves, not to represent a person.
+name: Junior Data Scientist
+domain: data
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - Python
+  - SQL
+  - pandas
+  - NumPy
+  - scikit-learn
+  - Machine Learning
+  - Statistics
+  - A/B Testing
+  - Matplotlib
+  - Git
+summary: >
+  Junior data scientist who has built and evaluated classical machine learning
+  models in Python, analysed experiments, and communicated findings to
+  non technical stakeholders.

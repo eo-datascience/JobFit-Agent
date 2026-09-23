@@ -54,15 +54,22 @@ export default function YourCv() {
       // one sends people off to fix something that was never broken.
       if (text.trim().length < MIN_READABLE_CHARS) {
         setError(
-          'Hardly any text could be read from that file. If it is a scanned PDF the words are ' +
-          'an image rather than text. Try a Word file, or add your skills by hand below.',
+          `Only ${text.trim().length} characters could be read from that file. If it is a ` +
+          'scanned PDF the words are an image rather than text. Try a Word file, or add your ' +
+          'skills by hand below.',
         )
       } else if (found.length === 0) {
+        // Skill matching runs against the whole taxonomy whatever field is
+        // selected, so finding nothing means nothing from any covered field
+        // appeared. Saying which fields are covered, and how much text was
+        // actually read, is the difference between a useful message and one
+        // that looks like a fault.
+        const fields = s.domains.map((d) => d.label.toLowerCase()).join(', ')
         setError(
-          'That file was read fine, but none of the skills this system tracks appear in it. ' +
-          'It only knows tools used in data and analytics work, so a CV from another field ' +
-          'will find nothing here. You can still add skills by hand below to see how the ' +
-          'scoring works.',
+          `That file was read fine, ${text.trim().length.toLocaleString()} characters of it, but ` +
+          `none of the skills this system tracks appear in it. It covers ${fields}, so a CV from ` +
+          'another line of work will find nothing here. You can still add skills by hand below ' +
+          'to see how the scoring works.',
         )
       }
     } catch (err) {
