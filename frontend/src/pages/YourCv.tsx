@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSnapshot } from '../data'
-import { ACCEPTED, ReadError, readCv } from '../cvFile'
+import { ACCEPTED, MIN_READABLE_CHARS, ReadError, readCv } from '../cvFile'
 import { findSkills, guessSeniority, rankRoles, type VisitorProfile } from '../scoring'
 import { capitalise, num, salaryRange } from '../format'
 
@@ -29,10 +29,19 @@ export default function YourCv() {
     try {
       const text = await readCv(file)
       const found = findSkills(text, rules)
-      if (found.length === 0) {
+      // Two very different problems produce no skills, and blaming the wrong
+      // one sends people off to fix something that was never broken.
+      if (text.trim().length < MIN_READABLE_CHARS) {
         setError(
-          'No skills from the taxonomy were found in that file. If it is a scanned PDF the ' +
-          'text is an image rather than words. You can still add skills by hand below.',
+          'Hardly any text could be read from that file. If it is a scanned PDF the words are ' +
+          'an image rather than text. Try a Word file, or add your skills by hand below.',
+        )
+      } else if (found.length === 0) {
+        setError(
+          'That file was read fine, but none of the skills this system tracks appear in it. ' +
+          'It only knows tools used in data and analytics work, so a CV from another field ' +
+          'will find nothing here. You can still add skills by hand below to see how the ' +
+          'scoring works.',
         )
       }
       setSkills(found)
@@ -57,7 +66,13 @@ export default function YourCv() {
     () => (profile ? rankRoles(profile, s.roles, rules) : []),
     [profile, s.roles, rules],
   )
-  const strong = ranked.filter((r) => r.fit.total >= s.pipeline.shortlist_threshold).length
+  // Counted over fully analysed roles only. Excerpt only postings score highly
+  // precisely because their skills are unknown, and they are ranked below, so
+  // including them would claim a number of strong matches that contradicts the
+  // list underneath it.
+  const threshold = s.pipeline.shortlist_threshold
+  const strong = ranked.filter((r) => !r.fit.provisional && r.fit.total >= threshold).length
+  const strongProvisional = ranked.filter((r) => r.fit.provisional && r.fit.total >= threshold).length
 
   const toggleSkill = (name: string) =>
     setSkills((current) => current && (current.includes(name)
@@ -77,6 +92,10 @@ export default function YourCv() {
           Upload your CV and it is scored against this week's {num(s.roles.length)} real UK data
           roles, using the same rules the agent uses for its owner. Your CV is read in this
           browser and never uploaded, stored or sent anywhere.
+        </p>
+        <p className="lead" style={{ marginTop: '0.75rem' }}>
+          It only covers data and analytics roles in the UK, and only recognises the tools used
+          in that work, so a CV from another field will find nothing to match.
         </p>
       </header>
 
@@ -157,12 +176,23 @@ export default function YourCv() {
             </div>
           </section>
 
+          {skills.length === 0 ? (
+            <section className="section" aria-labelledby="matches">
+              <h2 id="matches">Your matches</h2>
+              <p className="intro">
+                Nothing to score yet. Add at least one skill above and this fills in. Scoring a CV
+                with no recognised skills would rank roles on location and salary alone, which
+                would say nothing useful about fit.
+              </p>
+            </section>
+          ) : (
           <section className="section" aria-labelledby="matches">
             <h2 id="matches">Your matches</h2>
             <p className="intro">
               {strong > 0
-                ? `${strong} of this week's roles score ${s.pipeline.shortlist_threshold} or more for you. The strongest are below.`
-                : `Nothing reached ${s.pipeline.shortlist_threshold} this week. The closest are below, with what each one is missing.`}
+                ? `${strong} fully described roles score ${threshold} or more for you. The strongest are below.`
+                : `No fully described role reached ${threshold} this week. The closest are below, with what each one is missing.`}
+              {strongProvisional > 0 && ` Another ${strongProvisional} scored above ${threshold} on an excerpt alone, which cannot show whether your skills match, so they rank below the rest.`}
             </p>
 
             <ul className="roles">
@@ -197,6 +227,7 @@ export default function YourCv() {
               page knows your CV.
             </p>
           </section>
+          )}
         </>
       )}
     </>

@@ -13,6 +13,9 @@ const MAX_BYTES = 8 * 1024 * 1024
 
 export class ReadError extends Error {}
 
+/** Below this, a file almost certainly produced no readable text at all. */
+export const MIN_READABLE_CHARS = 200
+
 async function readPdf(file: File): Promise<string> {
   // The legacy build, not the default one. The default targets browsers so
   // recent that it calls methods a year or two old, and a visitor on anything
