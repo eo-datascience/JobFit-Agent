@@ -448,3 +448,14 @@ main { padding: 2.25rem 0 4rem; }
   font: inherit; font-size: 0.82rem; cursor: pointer; border: 1px solid transparent;
 }
 .chip.removable:hover { background: var(--plum-wash); color: var(--plum); }
+
+.link-button {
+  font: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--jade); font-weight: 600; text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.link-button:hover { text-decoration-thickness: 2px; }
+
+.profile-picker { display: flex; align-items: center; gap: 0.6rem; }
+.profile-picker label { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+.profile-picker select { min-width: 15rem; }

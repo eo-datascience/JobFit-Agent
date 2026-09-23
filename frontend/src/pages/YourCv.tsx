@@ -1,8 +1,9 @@
 import { useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSnapshot } from '../data'
+import { useProfile, useSnapshot } from '../data'
 import { ACCEPTED, MIN_READABLE_CHARS, ReadError, readCv } from '../cvFile'
 import { findSkills, guessSeniority, rankRoles, type VisitorProfile } from '../scoring'
+import { SAMPLE_CV, SAMPLE_CV_NAME } from '../content/sampleCv'
 import { capitalise, num, salaryRange } from '../format'
 
 const LEVELS = ['junior', 'mid', 'senior', 'lead']
@@ -10,7 +11,13 @@ const SHOWN = 15
 
 export default function YourCv() {
   const s = useSnapshot()
+  const { profile } = useProfile()
   const rules = s.scoring
+  // Scored against the field chosen at the top of the page, so a product CV is
+  // compared with product roles rather than with data ones.
+  const field = s.domains.find((d) => d.id === profile.domain)
+  const roles = useMemo(() => s.roles.filter((r) => r.domain === profile.domain),
+                        [s.roles, profile.domain])
   const fileInput = useRef<HTMLInputElement>(null)
 
   const [reading, setReading] = useState(false)
@@ -22,13 +29,27 @@ export default function YourCv() {
   const [remote, setRemote] = useState(true)
   const [floor, setFloor] = useState('')
 
+  /** Load the text of a CV, from a file or from the bundled sample. */
+  function useText(text: string, source: string) {
+    const found = findSkills(text, rules)
+    setSkills(found)
+    setSeniority(guessSeniority(text))
+    setFileName(source)
+    setError(null)
+    return found
+  }
+
+  function loadSample() {
+    useText(SAMPLE_CV, SAMPLE_CV_NAME)
+  }
+
   async function handleFile(file: File | undefined) {
     if (!file) return
     setReading(true)
     setError(null)
     try {
       const text = await readCv(file)
-      const found = findSkills(text, rules)
+      const found = useText(text, file.name)
       // Two very different problems produce no skills, and blaming the wrong
       // one sends people off to fix something that was never broken.
       if (text.trim().length < MIN_READABLE_CHARS) {
@@ -44,9 +65,6 @@ export default function YourCv() {
           'scoring works.',
         )
       }
-      setSkills(found)
-      setSeniority(guessSeniority(text))
-      setFileName(file.name)
     } catch (err) {
       setError(err instanceof ReadError ? err.message : 'That file could not be read.')
     } finally {
@@ -54,7 +72,7 @@ export default function YourCv() {
     }
   }
 
-  const profile: VisitorProfile | null = useMemo(() => skills && ({
+  const cvProfile: VisitorProfile | null = useMemo(() => skills && ({
     skills,
     seniority,
     locations: location.trim() ? [location.trim()] : [],
@@ -63,8 +81,8 @@ export default function YourCv() {
   }), [skills, seniority, location, remote, floor])
 
   const ranked = useMemo(
-    () => (profile ? rankRoles(profile, s.roles, rules) : []),
-    [profile, s.roles, rules],
+    () => (cvProfile ? rankRoles(cvProfile, roles, rules) : []),
+    [cvProfile, roles, rules],
   )
   // Counted over fully analysed roles only. Excerpt only postings score highly
   // precisely because their skills are unknown, and they are ranked below, so
@@ -89,13 +107,13 @@ export default function YourCv() {
       <header className="page-head">
         <h1>Score your own CV</h1>
         <p className="lead">
-          Upload your CV and it is scored against this week's {num(s.roles.length)} real UK data
-          roles, using the same rules the agent uses for its owner. Your CV is read in this
-          browser and never uploaded, stored or sent anywhere.
+          Upload your CV and it is scored against this week's {num(roles.length)} real UK{' '}
+          {(field?.label ?? '').toLowerCase()} roles, using the same rules the agent uses for its
+          owner. Your CV is read in this browser and never uploaded, stored or sent anywhere.
         </p>
         <p className="lead" style={{ marginTop: '0.75rem' }}>
-          It only covers data and analytics roles in the UK, and only recognises the tools used
-          in that work, so a CV from another field will find nothing to match.
+          Change the field at the top of the page to score against a different line of work.
+          Outside data, software engineering and product, there is nothing here to match against.
         </p>
       </header>
 
@@ -112,6 +130,9 @@ export default function YourCv() {
           <label htmlFor="cv" className="upload-button">
             {reading ? 'Reading your CV' : fileName ? 'Choose a different file' : 'Choose a file'}
           </label>
+          <button type="button" className="link-button" onClick={loadSample}>
+            or try it with a sample CV
+          </button>
           <span className="muted small">
             {fileName ?? 'PDF, Word .docx, or plain text. Nothing leaves this page.'}
           </span>

@@ -43,8 +43,9 @@ export default function Layout() {
           </nav>
         </div>
       </header>
-      {/* Hidden where no score is shown, so the control never looks inert. */}
-      {snapshot && snapshot.profiles.length > 1 && !['/how-it-works', '/your-cv'].includes(pathname) && <ProfileSwitch />}
+      {/* Hidden only where nothing on the page depends on it. The CV page
+          scores against the chosen field, so it needs the control. */}
+      {snapshot && snapshot.profiles.length > 1 && pathname !== '/how-it-works' && <ProfileSwitch />}
 
       <main id="main">
         <div className="frame">

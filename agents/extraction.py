@@ -26,13 +26,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Protocol
 
+from agents.domains import PRIMARY_DOMAIN, classify_domain
 from agents.ingestion import Posting
 from agents.skills_taxonomy import (
+    CASE_SENSITIVE_SKILLS,
     DESIRABLE_SECTION_HEADINGS,
-    DOMAIN_TITLE_TOKENS,
     ESSENTIAL_SECTION_HEADINGS,
     NEUTRAL_SECTION_HEADINGS,
-    NON_DOMAIN_TITLE_TOKENS,
     SENIORITY_MARKERS,
     alias_to_canonical,
 )
@@ -110,6 +110,9 @@ class Requirements:
     confidence: Confidence
     relevance: Relevance = Relevance.IN_DOMAIN
     relevance_reason: str = ""
+    # Which field the posting belongs to, or None when it belongs to none of
+    # them. The digest reads only the primary field; the site uses them all.
+    domain: str | None = PRIMARY_DOMAIN
     skills: list[ExtractedSkill] = field(default_factory=list)
     seniority: str | None = None
     years_experience: int | None = None
@@ -148,7 +151,12 @@ def find_skills(text: str) -> list[ExtractedSkill]:
         canonical = lookup[alias]
         if canonical in found:
             continue
-        pattern = re.compile(rf"(?<![\w+#]){re.escape(alias)}(?![\w+#])", re.IGNORECASE)
+        # A handful of skill names are also ordinary English words, so those
+        # match only when capitalised as the product is.
+        sensitive = canonical in CASE_SENSITIVE_SKILLS and alias == canonical.lower()
+        flags = 0 if sensitive else re.IGNORECASE
+        needle = canonical if sensitive else alias
+        pattern = re.compile(rf"(?<![\w+#]){re.escape(needle)}(?![\w+#])", flags)
         match = pattern.search(text)
         if match:
             found[canonical] = ExtractedSkill(
@@ -384,33 +392,13 @@ def validate_against_source(payload: dict[str, Any], source_text: str) -> dict[s
 
 
 def classify_relevance(title: str, skills: list[ExtractedSkill]) -> tuple[Relevance, str]:
-    """Decide whether a posting belongs to the candidate's field.
+    """Whether a posting belongs to any field this system covers.
 
-    Three rules, applied in order. An explicitly non domain title is rejected
-    outright, because a marketing role that mentions AI throughout is still a
-    marketing role and no amount of technology vocabulary changes that. A
-    recognisable data title is accepted even with no skills found, which covers
-    vague postings that never name their tooling. Otherwise the posting must
-    have produced at least one taxonomy skill to be worth scoring.
-
-    The reason is returned alongside the verdict so that an exclusion can be
-    explained rather than silently applied.
+    A thin view over classify_domain, kept because relevance is what most of
+    the pipeline cares about: a posting either gets scored or it does not.
     """
-    lowered = title.lower()
-
-    for token in NON_DOMAIN_TITLE_TOKENS:
-        if token in lowered:
-            return Relevance.OUT_OF_DOMAIN, f"title indicates a {token} role"
-
-    for token in DOMAIN_TITLE_TOKENS:
-        if token in lowered:
-            return Relevance.IN_DOMAIN, f"title matches {token}"
-
-    if skills:
-        names = ", ".join(s.name for s in skills[:3])
-        return Relevance.IN_DOMAIN, f"technical skills present ({names})"
-
-    return Relevance.OUT_OF_DOMAIN, "no recognised data role title and no technical skills found"
+    domain, reason = classify_domain(title, [s.name for s in skills])
+    return (Relevance.IN_DOMAIN if domain else Relevance.OUT_OF_DOMAIN), reason
 
 
 # ---------------------------------------------------------------------------
@@ -429,13 +417,15 @@ def extract(posting: Posting, llm: LLMClient | None = None) -> Requirements:
     searchable = f"{posting.title}\n{posting.description}"
 
     skills = mark_essential(find_skills(searchable), searchable)
-    relevance, reason = classify_relevance(posting.title, skills)
+    domain, reason = classify_domain(posting.title, [s.name for s in skills])
+    relevance = Relevance.IN_DOMAIN if domain else Relevance.OUT_OF_DOMAIN
     requirements = Requirements(
         posting_id=posting.source_job_id,
         source=posting.source,
         confidence=confidence,
         relevance=relevance,
         relevance_reason=reason,
+        domain=domain,
         skills=skills,
         seniority=detect_seniority(posting.title, posting.description),
         years_experience=detect_years(posting.description),
@@ -512,3 +502,12 @@ def in_domain_only(results: list[Requirements]) -> list[Requirements]:
     """Filter for the scoring agent. Out of domain postings stay in the
     database for the forecasting agent but never reach the digest."""
     return [r for r in results if r.relevance is Relevance.IN_DOMAIN]
+
+
+def only_domain(results: list[Requirements], domain: str) -> list[Requirements]:
+    """Postings from one field.
+
+    The digest uses this to stay in the primary field even when the wider
+    sweep has brought other fields into the same run.
+    """
+    return [r for r in results if r.domain == domain]

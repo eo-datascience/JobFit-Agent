@@ -44,6 +44,7 @@ from agents.digest import (
     load_seen,
     render_html,
 )
+from agents.domains import DOMAINS, PRIMARY_DOMAIN
 from agents.export import Profile, build_dashboard
 from agents.extraction import extract_many, in_domain_only
 from agents.forecasting import today
@@ -115,6 +116,24 @@ def main() -> int:
     )
     extracted = extract_many(result.canonical)
     requirements = in_domain_only(extracted)
+
+    # A second, shallower sweep across the other fields. It exists only so the
+    # public site can score a visitor's CV against roles in their line of work.
+    # Nothing from it reaches the digest below, the skill history, or the
+    # outcome monitor, all of which stay on the primary field alone.
+    wider: list = []
+    wider_result = None
+    if settings.wider_sweep:
+        other_queries = [q for domain in DOMAINS.values() if domain.id != PRIMARY_DOMAIN
+                         for q in domain.queries]
+        wider_result = run_ingestion(
+            sources=[ReedClient(settings.reed), AdzunaClient(settings.adzuna)],
+            queries=other_queries,
+            location=settings.search_location,
+            limit_per_query=settings.wider_sweep_limit,
+        )
+        wider = extract_many(wider_result.canonical)
+        logger.info("Wider sweep added %d postings across the other fields.", len(wider_result.canonical))
     if not requirements:
         # Both providers failing would otherwise produce an empty digest, which
         # is silently not sent, and a green run on a week with no email.
@@ -130,11 +149,13 @@ def main() -> int:
     # 3. Export the public dashboard. Before the send, so a failed email still
     #    refreshes the site: the market data does not depend on it.
     stored = history.load(HISTORY_PATH) if HISTORY_PATH.exists() else []
+    # The dashboard sees both sweeps. Everything above and below it sees only
+    # the primary field.
     dashboard = build_dashboard(
-        fetched=result.fetched,
-        duplicates=result.duplicate_count,
-        canonical=result.canonical,
-        requirements=extracted,
+        fetched=result.fetched + (wider_result.fetched if wider_result else 0),
+        duplicates=result.duplicate_count + (wider_result.duplicate_count if wider_result else 0),
+        canonical=result.canonical + (wider_result.canonical if wider_result else []),
+        requirements=extracted + wider,
         profiles=Profile.load_all(PROFILES_DIR),
         skill_series=history.as_series(stored) if stored else {},
         week_of=today(),

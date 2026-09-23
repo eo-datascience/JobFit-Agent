@@ -1,0 +1,24 @@
+# A public sample profile. No salary floor: a real one is private, and these
+# exist so a visitor can see how scoring behaves, not to represent a person.
+name: Junior Product Manager
+domain: product
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - Roadmapping
+  - User Stories
+  - Backlog Management
+  - Stakeholder Management
+  - Prioritisation
+  - Discovery
+  - Agile
+  - Jira
+  - User Research
+  - SQL
+summary: >
+  Junior product person who has run discovery with users, written stories and
+  managed a backlog alongside engineering, prioritising work with stakeholders
+  and reporting on how it landed.

@@ -19,6 +19,7 @@ from agents.extraction import (
     find_skills,
     in_domain_only,
     mark_essential,
+    only_domain,
     parse_model_json,
     validate_against_source,
 )
@@ -448,14 +449,14 @@ def test_unknown_title_with_technical_skills_is_in_domain():
     result = extract(_posting("Platform Specialist", "Strong Python, Airflow and dbt.", full=True))
 
     assert result.relevance is Relevance.IN_DOMAIN
-    assert "technical skills present" in result.relevance_reason
+    assert "skills point to" in result.relevance_reason
 
 
 def test_unknown_title_with_no_skills_is_excluded():
     result = extract(_posting("Operations Coordinator", "Manage the daily rota.", full=True))
 
     assert result.relevance is Relevance.OUT_OF_DOMAIN
-    assert "no recognised data role title" in result.relevance_reason
+    assert "no recognised job title" in result.relevance_reason
 
 
 def test_out_of_domain_postings_never_reach_the_model():
@@ -479,3 +480,68 @@ def test_in_domain_only_filters_for_the_scoring_agent():
 
     assert len(kept) == 1
     assert kept[0].relevance is Relevance.IN_DOMAIN
+
+
+# ---------------------------------------------------------------------------
+# Fields beyond data
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "title, expected",
+    [
+        ("Senior Data Engineer", "data"),
+        ("Analytics Engineer", "data"),
+        ("Backend Developer", "software"),
+        ("Full Stack Engineer", "software"),
+        ("Site Reliability Engineer", "software"),
+        ("Product Owner", "product"),
+        ("Senior Product Manager", "product"),
+        ("Scrum Master", "product"),
+        ("Marketing Manager", None),
+        ("Care Assistant", None),
+    ],
+)
+def test_postings_are_placed_in_the_right_field(title, expected):
+    assert extract(_posting(title, "Details to follow.", full=True)).domain == expected
+
+
+def test_the_most_specific_title_token_wins():
+    """A data platform engineer is a data role, not a platform engineering one,
+    even though both tokens appear in the title."""
+    assert extract(_posting("Data Platform Engineer", "Details.", full=True)).domain == "data"
+
+
+def test_skills_place_a_posting_when_the_title_does_not():
+    product = extract(_posting("Delivery Specialist", """
+Essential:
+Roadmapping, user stories and backlog refinement with stakeholder management.
+""", full=True))
+    software = extract(_posting("Technical Specialist", """
+Essential:
+React, TypeScript and Node.js building microservices.
+""", full=True))
+
+    assert product.domain == "product"
+    assert "skills point to product" in product.relevance_reason
+    assert software.domain == "software"
+
+
+def test_one_shared_skill_is_not_enough_to_place_a_posting():
+    """Almost every field mentions SQL, so a single signature match means
+    nothing."""
+    result = extract(_posting("Operations Specialist", "Some SQL is useful.", full=True))
+
+    assert result.domain is None
+    assert result.relevance is Relevance.OUT_OF_DOMAIN
+
+
+def test_only_domain_keeps_the_digest_in_its_own_field():
+    """The wider sweep brings other fields into the same run. The digest must
+    not start emailing product roles."""
+    postings = [_posting("Data Engineer", "Details.", full=True),
+                _posting("Backend Developer", "Details.", full=True),
+                _posting("Product Owner", "Details.", full=True)]
+    extracted = [extract(p) for p in postings]
+
+    assert [r.domain for r in only_domain(extracted, "data")] == ["data"]

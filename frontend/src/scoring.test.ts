@@ -36,6 +36,7 @@ function asRole(role: (typeof fixtures.cases)[number]['role'], id = '1'): Role {
     seniority: role.seniority,
     years_experience: null,
     skills: role.skills,
+    domain: 'data',
     scores: {},
     also_listed_in: [],
   }

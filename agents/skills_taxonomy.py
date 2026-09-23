@@ -27,7 +27,8 @@ SKILL_TAXONOMY: dict[str, list[str]] = {
     "SQL": ["sql", "t-sql", "tsql", "pl/sql", "plsql", "ansi sql"],
     "Scala": ["scala"],
     "Java": ["java"],
-    "JavaScript": ["javascript", "js", "typescript", "ts"],
+    "JavaScript": ["javascript", "js"],
+    "TypeScript": ["typescript", "ts"],
     # Same reasoning as R. "go" is far too common as an ordinary verb.
     "Go": ["golang", "go programming"],
     "C++": ["c++", "cpp"],
@@ -109,6 +110,48 @@ SKILL_TAXONOMY: dict[str, list[str]] = {
     "Streamlit": ["streamlit"],
     "Testing": ["unit testing", "pytest", "test driven", "tdd"],
     "Agile": ["agile", "scrum", "kanban", "sprint"],
+
+    # Software engineering
+    "React": ["react", "react.js", "reactjs"],
+    "Angular": ["angular", "angularjs"],
+    "Vue": ["vue", "vue.js", "vuejs"],
+    "Node.js": ["node.js", "nodejs", "node js"],
+    ".NET": [".net", "dotnet", "asp.net"],
+    "Spring": ["spring boot", "spring framework"],
+    "Ruby": ["ruby on rails", "rails"],
+    "PHP": ["php", "laravel"],
+    # Both of these are ordinary English words, so they need context, for the
+    # same reason a bare "r" is never an alias for the R language.
+    "Rust": ["rustlang"],
+    "Kotlin": ["kotlin"],
+    "Swift": ["swiftui"],
+    "GraphQL": ["graphql"],
+    "Microservices": ["microservices", "microservice architecture"],
+    "Redis": ["redis"],
+    "RabbitMQ": ["rabbitmq"],
+    "Jest": ["jest"],
+    "Cypress": ["cypress"],
+    "Selenium": ["selenium"],
+    "System Design": ["system design", "distributed systems", "scalable systems"],
+    "Code Review": ["code review", "pair programming"],
+    "Accessibility": ["accessibility", "wcag", "a11y"],
+
+    # Product
+    "Product Strategy": ["product strategy", "product vision"],
+    "Roadmapping": ["roadmap", "roadmapping", "product roadmap"],
+    "User Stories": ["user stories", "acceptance criteria"],
+    "Backlog Management": ["backlog", "backlog refinement", "backlog grooming"],
+    "Stakeholder Management": ["stakeholder management", "stakeholder engagement"],
+    "User Research": ["user research", "customer interviews", "usability testing"],
+    "Discovery": ["product discovery", "discovery work"],
+    "Prioritisation": ["prioritisation", "prioritization", "rice scoring", "moscow"],
+    "Wireframing": ["wireframing", "wireframes", "prototyping"],
+    "Figma": ["figma"],
+    "Jira": ["jira"],
+    "Confluence": ["confluence"],
+    "OKRs": ["okrs", "okr"],
+    "Go To Market": ["go to market", "go-to-market", "gtm"],
+    "Product Analytics": ["product analytics", "mixpanel", "amplitude"],
 
     # Data governance
     "Data Modelling": ["data modelling", "data modeling", "dimensional modelling", "star schema"],
@@ -206,7 +249,16 @@ SKILL_CATEGORIES: dict[str, list[str]] = {
     "container": ["Docker", "Kubernetes"],
     "infra": ["Terraform", "CI/CD", "Linux"],
     "web_framework": ["FastAPI", "Flask", "Django", "Streamlit"],
-    "language": ["Python", "R", "Scala", "Java", "JavaScript", "Go", "C++", "C#"],
+    "language": ["Python", "R", "Scala", "Java", "JavaScript", "TypeScript", "Go", "C++", "C#",
+                 "Ruby", "PHP", "Rust", "Kotlin", "Swift"],
+    "frontend": ["React", "Angular", "Vue", "Accessibility"],
+    "backend": ["Node.js", ".NET", "Spring", "GraphQL", "Microservices", "System Design"],
+    "message_queue": ["Redis", "RabbitMQ"],
+    "test_tooling": ["Jest", "Cypress", "Selenium"],
+    "product_planning": ["Product Strategy", "Roadmapping", "OKRs", "Prioritisation", "Go To Market"],
+    "product_delivery": ["User Stories", "Backlog Management", "Stakeholder Management"],
+    "product_research": ["User Research", "Discovery", "Wireframing", "Product Analytics"],
+    "collaboration_tools": ["Jira", "Confluence", "Figma"],
     "pipeline": ["ETL", "dbt", "Data Modelling", "Data Quality"],
     "practice": ["Git", "Testing", "Agile", "REST APIs", "Bash"],
     "analytics": ["SQL", "Excel", "A/B Testing"],
@@ -221,6 +273,16 @@ def category_of(skill: str) -> str | None:
         if skill in members:
             return category
     return None
+
+
+# Skills whose names are also ordinary English words. Matching these without
+# regard to case turns "swift delivery", "react to incidents" and "discovery
+# calls" into technical skills. In a CV the product is written capitalised and
+# the English word usually is not, so these match case sensitively. It is a
+# heuristic, and a deliberately narrow one: it applies only to this list.
+CASE_SENSITIVE_SKILLS: set[str] = {
+    "React", "Angular", "Vue", "Swift", "Rust", "Spring", "Jest", "Discovery",
+}
 
 
 def canonical_skills() -> list[str]:

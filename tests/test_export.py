@@ -62,11 +62,34 @@ def test_job_descriptions_are_never_published():
     assert MARKER not in json.dumps(dashboard)
 
 
+def _every_key(node) -> set[str]:
+    """Every key name anywhere in the snapshot."""
+    if isinstance(node, dict):
+        return set(node) | {k for v in node.values() for k in _every_key(v)}
+    if isinstance(node, list):
+        return {k for v in node for k in _every_key(v)}
+    return set()
+
+
 def test_no_private_fields_appear_anywhere():
-    dashboard = json.dumps(_build([_posting("1", "Data Engineer", DATA_ROLE)])).lower()
-    for forbidden in ("minimum_salary", "outcome", "recommendation", "sent_postings",
-                      "description", "digest_to_email", "applied", "interview"):
-        assert forbidden not in dashboard, forbidden
+    """Checked against key names rather than raw text.
+
+    A substring scan looked stricter but was wrong in both directions: it
+    matched the word "interview" inside the skill alias "customer interviews",
+    while still missing a private value stored under an innocent key.
+    """
+    dashboard = _build([_posting("1", "Data Engineer", DATA_ROLE)])
+    keys = {k.lower() for k in _every_key(dashboard)}
+
+    for forbidden in ("minimum_salary", "outcome", "outcomes", "recommendation",
+                      "recommendations", "sent_postings", "description",
+                      "digest_to_email", "applied", "interview", "cv", "cv_path"):
+        assert forbidden not in keys, forbidden
+
+    # The values that would matter most, checked directly.
+    published = json.dumps(dashboard).lower()
+    assert "@" not in published.replace("\\u0040", "")  # no email address anywhere
+    assert MARKER.lower() not in published
 
 
 def test_the_export_cannot_be_given_a_real_cv():
@@ -322,3 +345,76 @@ def test_published_categories_allow_related_experience_credit():
 
     assert categories["PostgreSQL"] == categories["MySQL"]
     assert categories.get("Airflow") == categories.get("Prefect")
+
+
+# ---------------------------------------------------------------------------
+# Several fields on one site
+# ---------------------------------------------------------------------------
+
+PRODUCT_ROLE = """We are hiring a Product Owner.
+
+Essential:
+Roadmapping, User Stories and Backlog Management. Strong Stakeholder Management.
+
+Desirable:
+Jira and Discovery.
+""" + ("Further detail about the team. " * 20)
+
+SOFTWARE_ROLE = """We are hiring a Backend Engineer.
+
+Essential:
+Strong TypeScript and Node.js. Experience with REST APIs and Docker.
+
+Desirable:
+React and Kubernetes.
+""" + ("Further detail about the team. " * 20)
+
+
+def test_roles_carry_the_field_they_belong_to():
+    dashboard = _build([
+        _posting("1", "Data Engineer", DATA_ROLE, company="A"),
+        _posting("2", "Backend Engineer", SOFTWARE_ROLE, company="B"),
+        _posting("3", "Product Owner", PRODUCT_ROLE, company="C"),
+    ])
+    fields = {r["title"]: r["domain"] for r in dashboard["roles"]}
+
+    assert fields == {"Data Engineer": "data", "Backend Engineer": "software",
+                      "Product Owner": "product"}
+
+
+def test_the_published_field_list_counts_each_one():
+    dashboard = _build([
+        _posting("1", "Data Engineer", DATA_ROLE, company="A"),
+        _posting("2", "Backend Engineer", SOFTWARE_ROLE, company="B"),
+    ])
+    counts = {d["id"]: d["roles"] for d in dashboard["domains"]}
+
+    assert counts["data"] == 1
+    assert counts["software"] == 1
+    assert counts["product"] == 0
+    assert next(d for d in dashboard["domains"] if d["primary"])["id"] == "data"
+
+
+def test_every_profile_declares_a_field():
+    dashboard = _build([_posting("1", "Data Engineer", DATA_ROLE)])
+    fields = {p["domain"] for p in dashboard["profiles"]}
+
+    assert fields <= {"data", "software", "product"}
+    assert "data" in fields
+
+
+def test_a_product_role_is_not_scored_as_a_data_role():
+    """A product posting must be kept and classified, not discarded as it was
+    when the gate was only data or not."""
+    dashboard = _build([_posting("1", "Product Owner", PRODUCT_ROLE)])
+
+    assert dashboard["pipeline"]["out_of_domain"] == 0
+    assert dashboard["roles"][0]["domain"] == "product"
+    assert any(s["name"] == "Roadmapping" for s in dashboard["roles"][0]["skills"])
+
+
+def test_roles_outside_every_field_are_still_turned_away():
+    dashboard = _build([_posting("1", "Marketing Manager", DATA_ROLE)])
+
+    assert dashboard["roles"] == []
+    assert dashboard["pipeline"]["out_of_domain"] == 1

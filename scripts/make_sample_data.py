@@ -44,6 +44,23 @@ COMPANIES = [
 LOCATIONS = ["London", "London", "London", "Canary Wharf", "Shoreditch",
              "Hammersmith", "Croydon", "Stratford"]
 
+SOFTWARE_ROLES = [
+    ("Junior Software Engineer", ["JavaScript", "Git"], ["React", "Node.js"], 34000),
+    ("Backend Engineer", ["Node.js", "REST APIs", "PostgreSQL"], ["Docker", "AWS"], 55000),
+    ("Frontend Developer", ["React", "TypeScript", "JavaScript"], ["Testing", "GraphQL"], 48000),
+    ("Full Stack Developer", ["TypeScript", "Node.js", "React"], ["Docker", "SQL"], 52000),
+    ("Platform Engineer", ["Kubernetes", "Terraform", "AWS"], ["Docker", "CI/CD"], 68000),
+]
+
+PRODUCT_ROLES = [
+    ("Junior Product Manager", ["User Stories", "Agile"], ["Jira", "SQL"], 35000),
+    ("Product Owner", ["Backlog Management", "User Stories", "Stakeholder Management"],
+     ["Jira", "Discovery"], 52000),
+    ("Product Manager", ["Roadmapping", "Product Strategy", "Prioritisation"],
+     ["User Research", "OKRs"], 62000),
+    ("Business Analyst", ["Stakeholder Management", "User Stories"], ["SQL", "Agile"], 45000),
+]
+
 ROLES = [
     ("Junior Data Analyst", ["SQL", "Excel", "Power BI"], ["Python", "Tableau"], 32000),
     ("Data Analyst", ["SQL", "Tableau", "Statistics"], ["Python", "A/B Testing"], 42000),
@@ -88,6 +105,30 @@ def main() -> None:
     postings: list[Posting] = []
     week = date(2026, 9, 21)
     index = 57300000
+
+    # The other fields are fetched shallower in the real run, so the sample
+    # reflects that rather than showing an even split.
+    for pool, count in ((SOFTWARE_ROLES, 18), (PRODUCT_ROLES, 14)):
+        for _ in range(count):
+            title, essential, desirable, salary = random.choice(pool)
+            full = random.random() < 0.6
+            source = "reed" if full else "adzuna"
+            index += random.randint(1, 900)
+            low = salary + random.choice([-4000, -2000, 0, 3000])
+            postings.append(Posting(
+                source=source,
+                source_job_id=str(index),
+                title=title,
+                description=_description(title, essential, desirable, full),
+                has_full_description=full,
+                company=random.choice(COMPANIES),
+                location=random.choice(LOCATIONS),
+                salary_min=float(low),
+                salary_max=float(low + random.choice([6000, 9000, 12000])),
+                salary_is_predicted=source == "adzuna" and random.random() < 0.5,
+                url=f"https://www.example.com/jobs/{index}",
+                posted_at=week - timedelta(days=random.randint(1, 30)),
+            ))
 
     for _ in range(64):
         title, essential, desirable, salary = random.choice(ROLES)

@@ -32,13 +32,23 @@ export interface Role {
   seniority: string | null
   years_experience: number | null
   skills: { name: string; essential: boolean }[]
+  domain: string
   scores: Record<string, ProfileScore>
   also_listed_in: string[]
+}
+
+export interface Domain {
+  id: string
+  label: string
+  blurb: string
+  primary: boolean
+  roles: number
 }
 
 export interface Profile {
   id: string
   name: string
+  domain: string
   seniority: string
   years_experience: number
   skills: string[]
@@ -91,6 +101,7 @@ export interface Snapshot {
     shortlist_threshold: number
   }
   scoring: Rules
+  domains: Domain[]
   profiles: Profile[]
   roles: Role[]
   skills: {

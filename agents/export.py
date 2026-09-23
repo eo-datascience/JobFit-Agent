@@ -25,6 +25,7 @@ from typing import Any
 
 from agents.cv import CV
 from agents.digest import _listing_identity, compile_digest
+from agents.domains import DOMAINS, PRIMARY_DOMAIN
 from agents.extraction import Confidence, Relevance, Requirements
 from agents.forecasting import MIN_WEEKS_FOR_FORECAST, Trend, build_report_from_series
 from agents.ingestion import Posting
@@ -81,11 +82,22 @@ class Profile:
 
     id: str
     cv: CV
+    # Which field this profile belongs to, so the site can pair a visitor's
+    # chosen field with a profile that makes sense in it.
+    domain: str = PRIMARY_DOMAIN
 
     @classmethod
     def load_all(cls, directory: Path) -> list[Profile]:
-        return [cls(id=path.stem, cv=CV.from_file(path))
-                for path in sorted(directory.glob("*.yml"))]
+        import yaml
+
+        profiles = []
+        for path in sorted(directory.glob("*.yml")):
+            raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            domain = str(raw.get("domain", PRIMARY_DOMAIN))
+            if domain not in DOMAINS:
+                domain = PRIMARY_DOMAIN
+            profiles.append(cls(id=path.stem, cv=CV.from_file(path), domain=domain))
+        return profiles
 
 
 def _slug(posting: Posting) -> str:
@@ -283,6 +295,7 @@ def build_dashboard(
     for posting, req, others in _collapse_repeats(in_domain, by_id):
         role = _role_payload(posting, req, profiles)
         role["also_listed_in"] = others
+        role["domain"] = req.domain or PRIMARY_DOMAIN
         roles.append(role)
 
     by_source = Counter(p.source for p in canonical)
@@ -324,8 +337,14 @@ def build_dashboard(
             },
             "shortlist_threshold": SHORTLIST_THRESHOLD,
         },
+        "domains": [
+            {"id": d.id, "label": d.label, "blurb": d.blurb,
+             "primary": d.id == PRIMARY_DOMAIN,
+             "roles": sum(1 for r in in_domain if (r.domain or PRIMARY_DOMAIN) == d.id)}
+            for d in DOMAINS.values()
+        ],
         "profiles": [
-            {"id": p.id, "name": p.cv.name, "seniority": p.cv.seniority,
+            {"id": p.id, "name": p.cv.name, "domain": p.domain, "seniority": p.cv.seniority,
              "years_experience": p.cv.years_experience,
              "skills": sorted(p.cv.skills), "summary": p.cv.summary,
              **_profile_shortlist(p, in_domain, by_id, week_of)}

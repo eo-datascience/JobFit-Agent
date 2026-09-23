@@ -45,13 +45,17 @@ export default function Roles() {
   }
 
   const shown = useMemo(() => s.roles
+    // Only the field the chosen profile belongs to. Mixing fields would put
+    // product roles in a data analyst's list, scored on a taxonomy that does
+    // not describe them.
+    .filter((r) => r.domain === profile.domain)
     .map((r): Scored => ({ ...r, fit: r.scores[profile.id] }))
     .filter((r) => r.fit !== undefined)
     .filter((r) => matches(r, q))
     .filter((r) => !level || (level === 'unstated' ? !r.seniority : r.seniority === level))
     .filter((r) => !fullOnly || !r.fit.provisional)
     .filter((r) => r.fit.total >= min)
-    .sort(compare(sort)), [s.roles, profile.id, q, level, fullOnly, min, sort])
+    .sort(compare(sort)), [s.roles, profile.id, profile.domain, q, level, fullOnly, min, sort])
 
   const shortlisted = new Set(profile.shortlist)
 
@@ -60,7 +64,8 @@ export default function Roles() {
       <header className="page-head">
         <h1>This week's roles</h1>
         <p className="lead">
-          Every data role from the latest run, scored out of 100 for a junior{' '}
+          Every {(s.domains.find((d) => d.id === profile.domain)?.label ?? '').toLowerCase()} role
+          from the latest run, scored out of 100 for a junior{' '}
           {profile.name.replace(/^Junior\s+/i, '').toLowerCase()}. Grey scores are provisional:
           only an excerpt was available, so skills could not be compared.
         </p>
@@ -100,7 +105,8 @@ export default function Roles() {
       </div>
 
       <p className="results-line" aria-live="polite">
-        Showing {num(shown.length)} of {num(s.roles.length)} roles
+        Showing {num(shown.length)} of {num(s.roles.filter((r) => r.domain === profile.domain).length)}{' '}
+        {(s.domains.find((d) => d.id === profile.domain)?.label ?? '').toLowerCase()} roles
       </p>
 
       {shown.length === 0 ? (

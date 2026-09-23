@@ -1,0 +1,24 @@
+# A public sample profile. No salary floor: a real one is private, and these
+# exist so a visitor can see how scoring behaves, not to represent a person.
+name: Junior Software Engineer
+domain: software
+seniority: junior
+years_experience: 1
+preferred_locations:
+  - London
+open_to_remote: true
+skills:
+  - JavaScript
+  - TypeScript
+  - React
+  - Node.js
+  - Python
+  - SQL
+  - Git
+  - REST APIs
+  - Docker
+  - Testing
+summary: >
+  Junior engineer who has built and shipped web applications with a React front
+  end and a Node and Python back end, working to REST APIs, writing tests and
+  deploying with Docker.

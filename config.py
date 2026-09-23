@@ -9,6 +9,8 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 
+from agents.domains import DOMAINS, PRIMARY_DOMAIN
+
 
 def _require(name: str) -> str:
     value = os.environ.get(name)
@@ -60,14 +62,16 @@ class ReedConfig:
 class Settings:
     adzuna: AdzunaConfig
     reed: ReedConfig
+    # The digest's queries. Deliberately only the primary field, so the weekly
+    # email stays as narrow as it has always been.
     search_queries: list[str] = field(
-        default_factory=lambda: [
-            "data scientist",
-            "data engineer",
-            "machine learning engineer",
-            "data analyst",
-        ]
+        default_factory=lambda: list(DOMAINS[PRIMARY_DOMAIN].queries)
     )
+    # The other fields exist so a visitor to the public site can score their own
+    # CV against real roles in their line of work. They are fetched shallower
+    # and never reach the digest, the forecasting or the outcome monitor.
+    wider_sweep: bool = True
+    wider_sweep_limit: int = 20
     search_location: str = "London"
     request_timeout_seconds: float = 20.0
     max_retries: int = 3
