@@ -142,6 +142,10 @@ export const PRINCIPLES = [
     body: 'The system acts on its own, so the failures that matter are the ones nobody sees. Each step is ordered so that if it breaks halfway, work is repeated rather than lost.',
   },
   {
+    title: "Other people's data never arrives",
+    body: 'Visitors score their own CV against the same live roles, and the file never leaves their browser. There is no upload, no account and no storage, so there is nothing to leak and nothing to look after.',
+  },
+  {
     title: 'Private data is kept apart by design',
     body: 'Code lives in a public repository and personal data in a private one. This site scores against a sample profile, and secrets are redacted from every log after an API key once reached one through an error message.',
   },

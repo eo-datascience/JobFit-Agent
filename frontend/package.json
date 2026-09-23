@@ -10,6 +10,8 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "mammoth": "^1.12.3",
+    "pdfjs-dist": "^6.3.289",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.9.0"

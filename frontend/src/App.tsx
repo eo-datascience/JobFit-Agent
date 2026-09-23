@@ -6,6 +6,7 @@ import Overview from './pages/Overview'
 import Roles from './pages/Roles'
 import RoleDetail from './pages/RoleDetail'
 import Skills from './pages/Skills'
+import YourCv from './pages/YourCv'
 import HowItWorks from './pages/HowItWorks'
 import NotFound from './pages/NotFound'
 
@@ -13,6 +14,7 @@ const TITLES: Record<string, string> = {
   '/': 'This week',
   '/roles': 'Roles',
   '/skills': 'Skills',
+  '/your-cv': 'Score your CV',
   '/how-it-works': 'How it works',
 }
 
@@ -36,6 +38,7 @@ export default function App() {
           <Route path="roles" element={<Gate><Roles /></Gate>} />
           <Route path="roles/:id" element={<Gate><RoleDetail /></Gate>} />
           <Route path="skills" element={<Gate><Skills /></Gate>} />
+          <Route path="your-cv" element={<Gate><YourCv /></Gate>} />
           <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="*" element={<NotFound />} />
         </Route>

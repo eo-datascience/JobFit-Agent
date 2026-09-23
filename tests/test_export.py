@@ -275,3 +275,50 @@ def test_a_profile_without_a_salary_floor_is_explained_not_flagged():
     )
     assert "no salary floor set" not in detail.lower()
     assert "without a threshold" in detail
+
+
+# ---------------------------------------------------------------------------
+# Rules published for in browser scoring
+# ---------------------------------------------------------------------------
+
+
+def test_published_rules_match_the_ones_the_agent_uses():
+    """The site scores a visitor's CV in their browser using these values. If
+    the agent's rules change and these do not, the two quietly disagree."""
+    from agents.scoring import (
+        CATEGORY_MATCH_CREDIT,
+        ESSENTIAL_MULTIPLIER,
+        REMOTE_MARKERS,
+        SENIORITY_ORDER,
+        WEIGHTS,
+    )
+
+    rules = _build([_posting("1", "Data Engineer", DATA_ROLE)])["scoring"]
+
+    assert rules["weights"] == WEIGHTS
+    assert rules["essential_multiplier"] == ESSENTIAL_MULTIPLIER
+    assert rules["category_match_credit"] == CATEGORY_MATCH_CREDIT
+    assert rules["seniority_order"] == list(SENIORITY_ORDER)
+    assert rules["remote_markers"] == list(REMOTE_MARKERS)
+
+
+def test_published_aliases_cover_the_whole_taxonomy():
+    from agents.skills_taxonomy import alias_to_canonical, canonical_skills
+
+    rules = _build([_posting("1", "Data Engineer", DATA_ROLE)])["scoring"]
+
+    assert rules["aliases"] == alias_to_canonical()
+    assert set(rules["aliases"].values()) <= set(canonical_skills())
+    # The guard from the R and Go bug: the ambiguous bare forms are absent, so
+    # "R&D" cannot be read as the R language and "go live" is not Golang.
+    assert "r" not in rules["aliases"]
+    assert "go" not in rules["aliases"]
+    assert rules["aliases"]["r programming"] == "R"
+
+
+def test_published_categories_allow_related_experience_credit():
+    rules = _build([_posting("1", "Data Engineer", DATA_ROLE)])["scoring"]
+    categories = rules["categories"]
+
+    assert categories["PostgreSQL"] == categories["MySQL"]
+    assert categories.get("Airflow") == categories.get("Prefect")

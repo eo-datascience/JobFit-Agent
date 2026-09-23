@@ -62,6 +62,16 @@ export interface Trend {
   current: number
 }
 
+export interface Rules {
+  weights: Record<string, number>
+  essential_multiplier: number
+  category_match_credit: number
+  seniority_order: string[]
+  remote_markers: string[]
+  aliases: Record<string, string>
+  categories: Record<string, string>
+}
+
 export interface Snapshot {
   schema_version: number
   is_sample?: boolean
@@ -80,6 +90,7 @@ export interface Snapshot {
     salary: { stated_count: number; median_minimum: number | null }
     shortlist_threshold: number
   }
+  scoring: Rules
   profiles: Profile[]
   roles: Role[]
   skills: {

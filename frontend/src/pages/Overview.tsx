@@ -59,13 +59,11 @@ export default function Overview() {
           {funnel.map((f, i) => (
             <li key={f.key} className="funnel-row" style={{ ['--i' as string]: i }}>
               <span className="funnel-step" aria-hidden="true">{i + 1}</span>
+              <span className="funnel-count">{num(f.count)}</span>
               <div className="funnel-track">
-                <div className="funnel-bar" style={{ width: `${Math.max((f.count / widest) * 100, 1.5)}%` }} />
-                <div className="funnel-meta">
-                  <span className="funnel-count">{num(f.count)}</span>
-                  <span className="funnel-label">{f.label}</span>
-                </div>
+                <div className="funnel-bar" style={{ width: `${Math.max((f.count / widest) * 100, 2)}%` }} />
               </div>
+              <span className="funnel-label">{f.label}</span>
             </li>
           ))}
         </ol>
@@ -159,7 +157,7 @@ export default function Overview() {
       )}
 
       <section className="section" aria-label="Explore further">
-        <div className="nexts">
+        <div className="nexts four">
           <div className="next">
             <h3><Link to="/roles">Browse the {num(s.roles.length)} roles</Link></h3>
             <p>Filter by seniority and score, and see exactly why each one scored as it did.</p>
@@ -167,6 +165,10 @@ export default function Overview() {
           <div className="next">
             <h3><Link to="/skills">See which skills are asked for</Link></h3>
             <p>How often each skill appears, and how often it is stated as essential.</p>
+          </div>
+          <div className="next">
+            <h3><Link to="/your-cv">Score your own CV</Link></h3>
+            <p>Upload it and see your matches. It is read in your browser and never uploaded.</p>
           </div>
           <div className="next">
             <h3><Link to="/how-it-works">Read how it works</Link></h3>

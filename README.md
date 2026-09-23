@@ -234,6 +234,14 @@ figure on the site recalculates, including the funnel. The scoring is the real
 scorer, so a junior data analyst and a junior machine learning engineer get
 genuinely different shortlists from the same postings.
 
+Visitors can also upload their own CV and have it scored against the same live
+roles. The file is read, parsed and scored entirely in the browser using the
+PDF and Word parsers loaded on demand, and is never uploaded, stored or sent
+anywhere. To keep the two implementations honest, the taxonomy, the skill
+categories and the weights are published in the snapshot and read by the
+browser, so only the arithmetic exists twice, and a test asserts the published
+rules still match the ones the agent uses.
+
 Nothing personal reaches it. The export takes postings, extractions and public
 sample profiles, and is never handed a real CV, the roles already sent, or any
 application outcome, so privacy is a property of the function's inputs rather

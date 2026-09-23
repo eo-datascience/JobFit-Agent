@@ -28,7 +28,16 @@ from agents.digest import _listing_identity, compile_digest
 from agents.extraction import Confidence, Relevance, Requirements
 from agents.forecasting import MIN_WEEKS_FOR_FORECAST, Trend, build_report_from_series
 from agents.ingestion import Posting
-from agents.scoring import FitScore, score
+from agents.scoring import (
+    CATEGORY_MATCH_CREDIT,
+    ESSENTIAL_MULTIPLIER,
+    REMOTE_MARKERS,
+    SENIORITY_ORDER,
+    WEIGHTS,
+    FitScore,
+    score,
+)
+from agents.skills_taxonomy import SKILL_CATEGORIES, alias_to_canonical
 
 logger = logging.getLogger(__name__)
 
@@ -145,6 +154,28 @@ def _skill_demand(in_domain: list[Requirements]) -> list[dict[str, Any]]:
                              if n >= MIN_POSTINGS_FOR_RATE else None)}
         for skill, n in counts.most_common(MAX_SKILLS)
     ]
+
+
+def _scoring_rules() -> dict[str, Any]:
+    """The scoring rules themselves, published so the browser can apply them.
+
+    Visitors score their own CV in their browser, which means the arithmetic
+    exists twice: once in Python for the weekly agent and once in TypeScript
+    for the site. Two hand written copies drift apart. Publishing the taxonomy,
+    the categories and the weights means only the arithmetic is reimplemented,
+    and a test asserts these values still match the ones the agent uses.
+    """
+    return {
+        "weights": dict(WEIGHTS),
+        "essential_multiplier": ESSENTIAL_MULTIPLIER,
+        "category_match_credit": CATEGORY_MATCH_CREDIT,
+        "seniority_order": list(SENIORITY_ORDER),
+        "remote_markers": list(REMOTE_MARKERS),
+        "aliases": alias_to_canonical(),
+        "categories": {skill: category
+                       for category, members in SKILL_CATEGORIES.items()
+                       for skill in members},
+    }
 
 
 def _skill_pairs(in_domain: list[Requirements], top: list[str],
@@ -301,6 +332,7 @@ def build_dashboard(
             for p in profiles
         ],
         "roles": roles,
+        "scoring": _scoring_rules(),
         "skills": {
             "described": described,
             "demand": demand,

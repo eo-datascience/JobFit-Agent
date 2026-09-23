@@ -22,11 +22,11 @@
   /* A major third scale from a 16px base. */
   --t-small: 0.8125rem;
   --t-body: 1rem;
-  --t-lead: 1.25rem;
+  --t-lead: 1.0625rem;
   --t-h3: 1.25rem;
-  --t-h2: 1.5625rem;
-  --t-h1: 2.4414rem;
-  --t-hero: clamp(2.2rem, 5.2vw, 3.815rem);
+  --t-h2: 1.35rem;
+  --t-h1: 1.953rem;
+  --t-hero: clamp(1.9rem, 3.4vw, 2.6rem);
 
   --measure: 68ch;
   --page: 1120px;
@@ -44,6 +44,13 @@ body {
   font-family: var(--sans);
   font-size: var(--t-body);
   line-height: 1.55;
+}
+
+/* Tabular figures line numbers up in columns, but in this typeface they also
+   widen commas and full stops, which put a space before every one. So it is
+   applied to numbers rather than to all text. */
+.score, .funnel-count, .fact strong, .hbar-value, .component-points,
+.skill-table td.num, .detail-score, .salary {
   font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
@@ -90,7 +97,7 @@ p { margin: 0; }
 }
 .sample-banner .frame { padding-top: 0.55rem; padding-bottom: 0.55rem; }
 
-main { padding: 3rem 0 5rem; }
+main { padding: 2.25rem 0 4rem; }
 
 .footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: var(--t-small); }
 .footer .frame {
@@ -105,46 +112,41 @@ main { padding: 3rem 0 5rem; }
 .muted { color: var(--muted); }
 .small { font-size: var(--t-small); }
 
-.section { margin-top: 4.5rem; }
+.section { margin-top: 3rem; }
 .section > h2 { margin-bottom: 0.5rem; }
 .section > .intro { color: var(--muted); max-width: var(--measure); margin-bottom: 1.75rem; }
 
-.page-head { margin-bottom: 2.5rem; max-width: 60rem; }
-.page-head h1 { margin-bottom: 0.9rem; }
+.page-head { margin-bottom: 1.75rem; max-width: 60rem; }
+.page-head h1 { margin-bottom: 0.6rem; }
 
 /* ------------------------------------------------------------------ hero */
 
 .hero h1 {
-  font-size: var(--t-hero); line-height: 1.04; letter-spacing: -0.035em;
-  font-weight: 700; max-width: 17ch;
+  font-size: var(--t-hero); line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 700; max-width: 26ch;
 }
 .hero h1 .out { color: var(--muted); font-weight: 500; }
-.hero .lead { margin-top: 1.4rem; }
-.hero .stamp { margin-top: 0.9rem; color: var(--faint); font-size: var(--t-small); }
+.hero .lead { margin-top: 0.9rem; }
+.hero .stamp { margin-top: 0.6rem; color: var(--faint); font-size: var(--t-small); }
 
 /* ---------------------------------------------------------------- funnel */
 
-.funnel { margin-top: 3rem; display: grid; gap: 0.35rem; }
+.funnel { margin-top: 1.75rem; display: grid; gap: 0.45rem; max-width: 54rem; }
 .funnel-row {
-  display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 1rem; align-items: start;
+  display: grid; grid-template-columns: 1rem 3.2rem minmax(0, 13rem) minmax(0, 1fr);
+  gap: 0.9rem; align-items: center;
 }
-.funnel-step {
-  color: var(--faint); font-size: var(--t-small); font-weight: 600; text-align: right;
-  padding-top: 0.7rem;
-}
-.funnel-track { position: relative; }
+.funnel-step { color: var(--faint); font-size: 0.78rem; font-weight: 600; text-align: right; }
+.funnel-count { font-weight: 700; font-size: 1.05rem; text-align: right; }
+.funnel-track { height: 0.8rem; }
 .funnel-bar {
-  height: 2.6rem; background: var(--ink); border-radius: 0 3px 3px 0;
+  height: 100%; background: var(--ink); border-radius: 0 2px 2px 0;
   transform-origin: left center;
-  animation: draw 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  animation-delay: calc(var(--i) * 110ms);
+  animation: draw 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 85ms);
 }
 .funnel-row:last-child .funnel-bar { background: var(--jade); }
-.funnel-meta {
-  display: flex; align-items: baseline; gap: 0.8rem; margin-top: 0.35rem; margin-bottom: 0.55rem;
-}
-.funnel-count { font-weight: 700; font-size: 1.25rem; min-width: 3ch; }
-.funnel-label { color: var(--muted); }
+.funnel-label { color: var(--muted); font-size: 0.93rem; }
 
 @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
@@ -189,7 +191,8 @@ main { padding: 3rem 0 5rem; }
 
 /* ---------------------------------------------------------------- nexts */
 
-.nexts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.nexts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; }
+.nexts.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .next { border-top: 2px solid var(--ink); padding-top: 1rem; display: grid; gap: 0.5rem; align-content: start; }
 .next h3 a { text-decoration: none; }
 .next h3 a:hover { text-decoration: underline; }
@@ -350,7 +353,7 @@ main { padding: 3rem 0 5rem; }
 /* ------------------------------------------------------------- responsive */
 
 @media (max-width: 860px) {
-  .two-col, .nexts, .skill-cols, .principles, .pairs { grid-template-columns: minmax(0, 1fr); }
+  .two-col, .nexts, .nexts.four, .skill-cols, .principles, .pairs { grid-template-columns: minmax(0, 1fr); }
   .arch { grid-template-columns: minmax(0, 1fr); }
   .arch-cell { border-right: 0; border-bottom: 1px solid var(--rule); }
   .arch-cell:last-child { border-bottom: 0; }
@@ -368,6 +371,8 @@ main { padding: 3rem 0 5rem; }
   .skill-table td.bar-cell { display: none; }
   .entry { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
   .hbar { grid-template-columns: 6rem minmax(0, 1fr) 2.5rem; }
+  .funnel-row { grid-template-columns: 1rem 3.2rem minmax(0, 1fr); row-gap: 0.2rem; }
+  .funnel-label { grid-column: 2 / -1; }
   .field input[type='search'], .field select { min-width: 0; width: 100%; }
   .field { width: 100%; }
 }
@@ -419,3 +424,27 @@ main { padding: 3rem 0 5rem; }
   .segmented { width: 100%; }
   .segmented label { flex: 1 1 auto; text-align: center; }
 }
+
+
+/* ---------------------------------------------------------------- your cv */
+
+.upload { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.upload input[type='file'] {
+  position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;
+}
+.upload-button {
+  display: inline-block; cursor: pointer; font-weight: 600;
+  padding: 0.6rem 1.1rem; border: 1px solid var(--ink); border-radius: 4px; background: #fff;
+}
+.upload-button:hover { background: var(--ink); color: var(--paper); }
+.upload input:focus-visible + .upload-button { outline: 2px solid var(--jade); outline-offset: 3px; }
+
+.notice {
+  margin-top: 1rem; padding: 0.85rem 1.1rem; background: var(--plum-wash);
+  border-left: 3px solid var(--plum); max-width: var(--measure);
+}
+
+.chip.removable {
+  font: inherit; font-size: 0.82rem; cursor: pointer; border: 1px solid transparent;
+}
+.chip.removable:hover { background: var(--plum-wash); color: var(--plum); }

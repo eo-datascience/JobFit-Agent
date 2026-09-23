@@ -38,12 +38,13 @@ export default function Layout() {
             <NavLink to="/" end>This week</NavLink>
             <NavLink to="/roles">Roles</NavLink>
             <NavLink to="/skills">Skills</NavLink>
+            <NavLink to="/your-cv">Score your CV</NavLink>
             <NavLink to="/how-it-works">How it works</NavLink>
           </nav>
         </div>
       </header>
       {/* Hidden where no score is shown, so the control never looks inert. */}
-      {snapshot && snapshot.profiles.length > 1 && pathname !== '/how-it-works' && <ProfileSwitch />}
+      {snapshot && snapshot.profiles.length > 1 && !['/how-it-works', '/your-cv'].includes(pathname) && <ProfileSwitch />}
 
       <main id="main">
         <div className="frame">
