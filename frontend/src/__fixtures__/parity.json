@@ -1,0 +1,1160 @@
+{
+ "rules": {
+  "weights": {
+   "skills": 0.45,
+   "seniority": 0.25,
+   "salary": 0.15,
+   "location": 0.15
+  },
+  "essential_multiplier": 2.0,
+  "category_match_credit": 0.5,
+  "seniority_order": [
+   "junior",
+   "mid",
+   "senior",
+   "lead"
+  ],
+  "remote_markers": [
+   "remote",
+   "work from home",
+   "wfh",
+   "anywhere"
+  ],
+  "aliases": {
+   "python": "Python",
+   "python3": "Python",
+   "r programming": "R",
+   "rstats": "R",
+   "r language": "R",
+   "r studio": "R",
+   "rstudio": "R",
+   "r/python": "R",
+   "python/r": "R",
+   "sql": "SQL",
+   "t-sql": "SQL",
+   "tsql": "SQL",
+   "pl/sql": "SQL",
+   "plsql": "SQL",
+   "ansi sql": "SQL",
+   "scala": "Scala",
+   "java": "Java",
+   "javascript": "JavaScript",
+   "js": "JavaScript",
+   "typescript": "JavaScript",
+   "ts": "JavaScript",
+   "golang": "Go",
+   "go programming": "Go",
+   "c++": "C++",
+   "cpp": "C++",
+   "c#": "C#",
+   "csharp": "C#",
+   "bash": "Bash",
+   "shell scripting": "Bash",
+   "shell script": "Bash",
+   "pyspark": "PySpark",
+   "apache spark": "Apache Spark",
+   "spark": "Apache Spark",
+   "pandas": "pandas",
+   "numpy": "NumPy",
+   "polars": "Polars",
+   "dbt": "dbt",
+   "data build tool": "dbt",
+   "hadoop": "Hadoop",
+   "mapreduce": "Hadoop",
+   "kafka": "Kafka",
+   "apache kafka": "Kafka",
+   "apache flink": "Flink",
+   "flink": "Flink",
+   "airflow": "Airflow",
+   "apache airflow": "Airflow",
+   "prefect": "Prefect",
+   "dagster": "Dagster",
+   "luigi": "Luigi",
+   "azure data factory": "Azure Data Factory",
+   "adf": "Azure Data Factory",
+   "snowflake": "Snowflake",
+   "bigquery": "BigQuery",
+   "big query": "BigQuery",
+   "redshift": "Redshift",
+   "databricks": "Databricks",
+   "postgresql": "PostgreSQL",
+   "postgres": "PostgreSQL",
+   "mysql": "MySQL",
+   "mongodb": "MongoDB",
+   "mongo": "MongoDB",
+   "cassandra": "Cassandra",
+   "elasticsearch": "Elasticsearch",
+   "elastic search": "Elasticsearch",
+   "delta lake": "Delta Lake",
+   "scikit-learn": "scikit-learn",
+   "scikit learn": "scikit-learn",
+   "sklearn": "scikit-learn",
+   "tensorflow": "TensorFlow",
+   "pytorch": "PyTorch",
+   "torch": "PyTorch",
+   "xgboost": "XGBoost",
+   "lightgbm": "LightGBM",
+   "hugging face": "Hugging Face",
+   "huggingface": "Hugging Face",
+   "transformers library": "Hugging Face",
+   "mlflow": "MLflow",
+   "machine learning": "Machine Learning",
+   "ml models": "Machine Learning",
+   "predictive modelling": "Machine Learning",
+   "predictive modeling": "Machine Learning",
+   "deep learning": "Deep Learning",
+   "neural networks": "Deep Learning",
+   "nlp": "NLP",
+   "natural language processing": "NLP",
+   "text mining": "NLP",
+   "computer vision": "Computer Vision",
+   "image recognition": "Computer Vision",
+   "time series": "Time Series",
+   "forecasting": "Time Series",
+   "prophet": "Time Series",
+   "arima": "Time Series",
+   "a/b testing": "A/B Testing",
+   "ab testing": "A/B Testing",
+   "experimentation": "A/B Testing",
+   "hypothesis testing": "A/B Testing",
+   "statistics": "Statistics",
+   "statistical analysis": "Statistics",
+   "statistical modelling": "Statistics",
+   "statistical modeling": "Statistics",
+   "llm": "LLMs",
+   "llms": "LLMs",
+   "large language model": "LLMs",
+   "large language models": "LLMs",
+   "generative ai": "LLMs",
+   "genai": "LLMs",
+   "rag": "RAG",
+   "retrieval augmented generation": "RAG",
+   "retrieval-augmented generation": "RAG",
+   "aws": "AWS",
+   "amazon web services": "AWS",
+   "s3": "AWS",
+   "ec2": "AWS",
+   "lambda": "AWS",
+   "glue": "AWS",
+   "sagemaker": "AWS",
+   "azure": "Azure",
+   "microsoft azure": "Azure",
+   "azure ml": "Azure",
+   "synapse": "Azure",
+   "gcp": "GCP",
+   "google cloud": "GCP",
+   "google cloud platform": "GCP",
+   "vertex ai": "GCP",
+   "docker": "Docker",
+   "containerisation": "Docker",
+   "containerization": "Docker",
+   "kubernetes": "Kubernetes",
+   "k8s": "Kubernetes",
+   "terraform": "Terraform",
+   "infrastructure as code": "Terraform",
+   "iac": "Terraform",
+   "ci/cd": "CI/CD",
+   "cicd": "CI/CD",
+   "continuous integration": "CI/CD",
+   "continuous deployment": "CI/CD",
+   "github actions": "CI/CD",
+   "jenkins": "CI/CD",
+   "linux": "Linux",
+   "unix": "Linux",
+   "power bi": "Power BI",
+   "powerbi": "Power BI",
+   "tableau": "Tableau",
+   "looker": "Looker",
+   "qlik": "Qlik",
+   "qlikview": "Qlik",
+   "qlik sense": "Qlik",
+   "excel": "Excel",
+   "advanced excel": "Excel",
+   "vba": "Excel",
+   "matplotlib": "Matplotlib",
+   "seaborn": "Matplotlib",
+   "plotly": "Matplotlib",
+   "git": "Git",
+   "github": "Git",
+   "gitlab": "Git",
+   "version control": "Git",
+   "rest api": "REST APIs",
+   "rest apis": "REST APIs",
+   "restful": "REST APIs",
+   "api development": "REST APIs",
+   "fastapi": "FastAPI",
+   "flask": "Flask",
+   "django": "Django",
+   "streamlit": "Streamlit",
+   "unit testing": "Testing",
+   "pytest": "Testing",
+   "test driven": "Testing",
+   "tdd": "Testing",
+   "testing": "Testing",
+   "agile": "Agile",
+   "scrum": "Agile",
+   "kanban": "Agile",
+   "sprint": "Agile",
+   "data modelling": "Data Modelling",
+   "data modeling": "Data Modelling",
+   "dimensional modelling": "Data Modelling",
+   "star schema": "Data Modelling",
+   "data quality": "Data Quality",
+   "data validation": "Data Quality",
+   "great expectations": "Data Quality",
+   "etl": "ETL",
+   "elt": "ETL",
+   "data pipeline": "ETL",
+   "data pipelines": "ETL",
+   "data ingestion": "ETL",
+   "data governance": "Data Governance",
+   "gdpr": "Data Governance",
+   "data privacy": "Data Governance",
+   "data lineage": "Data Governance",
+   "data warehouse": "Data Warehousing",
+   "data warehousing": "Data Warehousing",
+   "data lake": "Data Warehousing",
+   "lakehouse": "Data Warehousing"
+  },
+  "categories": {
+   "Airflow": "orchestration",
+   "Prefect": "orchestration",
+   "Dagster": "orchestration",
+   "Luigi": "orchestration",
+   "Azure Data Factory": "orchestration",
+   "AWS": "cloud",
+   "Azure": "cloud",
+   "GCP": "cloud",
+   "Snowflake": "warehouse",
+   "BigQuery": "warehouse",
+   "Redshift": "warehouse",
+   "Databricks": "warehouse",
+   "Delta Lake": "warehouse",
+   "Data Warehousing": "warehouse",
+   "PostgreSQL": "database",
+   "MySQL": "database",
+   "MongoDB": "database",
+   "Cassandra": "database",
+   "Elasticsearch": "database",
+   "PySpark": "distributed",
+   "Apache Spark": "distributed",
+   "Hadoop": "distributed",
+   "Kafka": "distributed",
+   "Flink": "distributed",
+   "pandas": "dataframe",
+   "NumPy": "dataframe",
+   "Polars": "dataframe",
+   "scikit-learn": "ml_framework",
+   "TensorFlow": "ml_framework",
+   "PyTorch": "ml_framework",
+   "XGBoost": "ml_framework",
+   "LightGBM": "ml_framework",
+   "Machine Learning": "ml_concept",
+   "Deep Learning": "ml_concept",
+   "Statistics": "ml_concept",
+   "Time Series": "ml_concept",
+   "NLP": "nlp",
+   "LLMs": "nlp",
+   "RAG": "nlp",
+   "Hugging Face": "nlp",
+   "Power BI": "bi",
+   "Tableau": "bi",
+   "Looker": "bi",
+   "Qlik": "bi",
+   "Matplotlib": "bi",
+   "Docker": "container",
+   "Kubernetes": "container",
+   "Terraform": "infra",
+   "CI/CD": "infra",
+   "Linux": "infra",
+   "FastAPI": "web_framework",
+   "Flask": "web_framework",
+   "Django": "web_framework",
+   "Streamlit": "web_framework",
+   "Python": "language",
+   "R": "language",
+   "Scala": "language",
+   "Java": "language",
+   "JavaScript": "language",
+   "Go": "language",
+   "C++": "language",
+   "C#": "language",
+   "ETL": "pipeline",
+   "dbt": "pipeline",
+   "Data Modelling": "pipeline",
+   "Data Quality": "pipeline",
+   "Git": "practice",
+   "Testing": "practice",
+   "Agile": "practice",
+   "REST APIs": "practice",
+   "Bash": "practice",
+   "SQL": "analytics",
+   "Excel": "analytics",
+   "A/B Testing": "analytics",
+   "MLflow": "ml_ops",
+   "Data Governance": "governance",
+   "Computer Vision": "vision"
+  }
+ },
+ "cases": [
+  {
+   "name": "every essential skill matched",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     },
+     {
+      "name": "SQL",
+      "essential": true
+     }
+    ],
+    "salary_min": 40000,
+    "salary_max": 50000,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 94,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python",
+     "SQL"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "essential skills weigh double the desirable ones",
+   "profile": {
+    "skills": [
+     "Python"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": false
+     },
+     {
+      "name": "Airflow",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 64,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 0.333333,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": [
+     "Airflow"
+    ]
+   }
+  },
+  {
+   "name": "related experience earns partial credit",
+   "profile": {
+    "skills": [
+     "PostgreSQL"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "MySQL",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 72,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 0.5,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [],
+    "partial": [
+     "MySQL"
+    ],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "one level up is a stretch",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "mid",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 88,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 0.75,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "two levels up is a poor fit",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "senior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 74,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 0.2,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "a level below is a step backwards",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "senior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "mid",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 82,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 0.5,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "unstated seniority is neutral",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": null,
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 84,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 0.6,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "an estimated salary cannot score as high as a stated one",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": 30000
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": 50000,
+    "salary_max": 60000,
+    "salary_is_predicted": true,
+    "location": "London"
+   },
+   "expected": {
+    "total": 97,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.8,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "a stated salary comfortably above the floor",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": 30000
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": 50000,
+    "salary_max": 60000,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 100,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 1.0,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "a salary below the floor scores nothing",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": 60000
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": 30000,
+    "salary_max": 35000,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 85,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.0,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "remote suits a candidate open to it",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "Leeds"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "Remote"
+   },
+   "expected": {
+    "total": 94,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "a location outside the preferred ones",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "Aberdeen"
+   },
+   "expected": {
+    "total": 82,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 1.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 0.2,
+      "weight": 0.15
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "a provisional posting redistributes the skills weight",
+   "profile": {
+    "skills": [
+     "Python",
+     "SQL",
+     "pandas"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "partial",
+    "seniority": "junior",
+    "skills": [
+     {
+      "name": "Python",
+      "essential": true
+     }
+    ],
+    "salary_min": 40000,
+    "salary_max": 50000,
+    "salary_is_predicted": false,
+    "location": "London"
+   },
+   "expected": {
+    "total": 89,
+    "provisional": true,
+    "components": [
+     {
+      "name": "seniority",
+      "score": 1.0,
+      "weight": 0.454545
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.272727
+     },
+     {
+      "name": "location",
+      "score": 1.0,
+      "weight": 0.272727
+     }
+    ],
+    "matched": [
+     "Python"
+    ],
+    "partial": [],
+    "missingEssential": []
+   }
+  },
+  {
+   "name": "nothing matches at all",
+   "profile": {
+    "skills": [
+     "Excel"
+    ],
+    "seniority": "junior",
+    "locations": [
+     "London"
+    ],
+    "openToRemote": true,
+    "minimumSalary": null
+   },
+   "role": {
+    "confidence": "full",
+    "seniority": "lead",
+    "skills": [
+     {
+      "name": "Kubernetes",
+      "essential": true
+     },
+     {
+      "name": "Terraform",
+      "essential": true
+     }
+    ],
+    "salary_min": null,
+    "salary_max": null,
+    "salary_is_predicted": false,
+    "location": "Aberdeen"
+   },
+   "expected": {
+    "total": 17,
+    "provisional": false,
+    "components": [
+     {
+      "name": "skills",
+      "score": 0.0,
+      "weight": 0.45
+     },
+     {
+      "name": "seniority",
+      "score": 0.2,
+      "weight": 0.25
+     },
+     {
+      "name": "salary",
+      "score": 0.6,
+      "weight": 0.15
+     },
+     {
+      "name": "location",
+      "score": 0.2,
+      "weight": 0.15
+     }
+    ],
+    "matched": [],
+    "partial": [],
+    "missingEssential": [
+     "Kubernetes",
+     "Terraform"
+    ]
+   }
+  }
+ ]
+}

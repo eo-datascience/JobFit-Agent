@@ -1,21 +1,29 @@
 # JobFit Agent
 
-A six agent system that ingests live UK job postings, extracts the requirements
-behind each one, scores them against a CV, forecasts skill demand, and emails a
-ranked weekly shortlist automatically.
+Six agents read the UK data job market every week, score every posting against a CV, explain each
+score, and email a shortlist with no human in the loop.
+
+**Live site: [jobfit-agent.netlify.app](https://jobfit-agent.netlify.app)**
 
 [![CI](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml)
+[![Weekly run](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/weekly-digest.yml/badge.svg)](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/weekly-digest.yml)
 
-## Status
+[![The dashboard, showing this week's postings narrowing from 400 to 10](docs/dashboard.png)](https://jobfit-agent.netlify.app)
 
-| Agent | Phase | Status |
-|---|---|---|
-| 1. Ingestion | 1 | Built |
-| 2. Skill extraction | 2 | Built |
-| 3. Fit scoring | 3 | Built |
-| 4. Demand forecast | 4 | Built |
-| 5. Weekly digest | 5 | Built |
-| 6. Outcome monitor | 6 | Built |
+## What it does
+
+Every Monday, with no machine of mine running, the system pulls live postings from Reed and
+Adzuna, removes the same role listed twice, turns away the ones that are not really data roles,
+extracts the skills each remaining posting asks for, scores them against a CV, emails a shortlist,
+and republishes the public dashboard above.
+
+On the site you can pick one of three sample profiles and watch every score change, or upload
+your own CV and have it scored against this week's real roles. The file is read in your browser
+and never uploaded, stored or sent anywhere.
+
+Almost every design decision here was forced by real data rather than planned. The
+[engineering log](https://jobfit-agent.netlify.app/how-it-works#log) records twelve bugs that only
+appeared once the system met live postings, each of which now has a test.
 
 ## Why two job sources
 
@@ -274,6 +282,23 @@ Running the forecast and the digest separately would have made roughly four
 hundred redundant Reed requests a week. It also exits non zero when nothing was
 ingested, so a week where both job boards were down fails visibly instead of
 passing green with no email sent.
+
+## Testing
+
+```
+pytest                                    # the Python agents
+cd frontend && npm test                   # the browser scorer
+python scripts/make_parity_fixtures.py    # regenerate the parity fixtures
+```
+
+Scoring exists twice, in Python for the weekly agent and in TypeScript so a
+visitor's CV can be scored without leaving their browser. Two hand written
+implementations drift, and drift here would be invisible, because both sides
+would carry on returning plausible numbers. So Python scores a set of awkward
+cases and writes the answers to a fixture, and the frontend tests assert the
+TypeScript scorer reproduces them exactly. Continuous integration regenerates
+that fixture and fails if it differs, which catches a scoring change that was
+never mirrored.
 
 ## Setup
 

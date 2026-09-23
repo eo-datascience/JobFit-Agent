@@ -26,3 +26,45 @@ jobs:
 
       - name: Run tests
         run: pytest --cov=agents --cov-report=term-missing
+
+      # Scoring exists twice, in Python and in the browser. The frontend tests
+      # below check the two agree, which only means anything if the fixtures
+      # they compare against are current. Regenerating them here and failing on
+      # a difference catches a scoring change that was never mirrored.
+      - name: Check the scoring parity fixtures are up to date
+        run: |
+          python scripts/make_parity_fixtures.py
+          if ! git diff --quiet -- frontend/src/__fixtures__/parity.json; then
+            echo "The Python scorer has changed but the parity fixtures were not regenerated."
+            echo "Run: python scripts/make_parity_fixtures.py"
+            git diff --stat -- frontend/src/__fixtures__/parity.json
+            exit 1
+          fi
+
+  site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm test
+
+      # The same command Netlify runs. Without it, a change can break the
+      # deploy while this workflow stays green.
+      - name: Build
+        run: npm run build
