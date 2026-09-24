@@ -106,7 +106,7 @@ in Big Data and Data Science Technology. Solely authored, including the
 architecture, the agents, the site and the deployment.
 
 Open to junior data scientist and data engineer roles.
-[LinkedIn](https://www.linkedin.com/in/YOUR-LINKEDIN) and
+[LinkedIn](https://www.linkedin.com/in/emmanuel-olusolade-09a5a8347/) and
 [GitHub](https://github.com/eo-datascience).
 
 Released under the [MIT licence](LICENSE).
