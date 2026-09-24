@@ -8,8 +8,10 @@
   command = "npm ci && npm run build"
   publish = "dist"
 
-# Functions live outside the frontend base, so the path is from the repository
-# root rather than from "frontend".
+# Every path in this file is resolved relative to the base above, so this is
+# frontend/netlify/functions. Putting the functions outside the base and giving
+# a repository root path here silently finds nothing, and every call to the
+# function returns 404.
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
