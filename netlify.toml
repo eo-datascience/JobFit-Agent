@@ -8,6 +8,12 @@
   command = "npm ci && npm run build"
   publish = "dist"
 
+# Functions live outside the frontend base, so the path is from the repository
+# root rather than from "frontend".
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [build.environment]
   NODE_VERSION = "22"
 

@@ -216,6 +216,12 @@ def _render_entry(entry: DigestEntry) -> str:
     if f.missing_essential:
         rows.append(f'<div style="font-size:13px;color:#a33"><b>Missing essentials:</b> '
                     f'{_e(", ".join(f.missing_essential))}</div>')
+    # The key is what the Record an outcome form asks for, so it belongs in the
+    # email rather than only in a command line listing.
+    rows.append(
+        f'<div style="font-size:12px;color:#8a969c;margin-top:6px">To record this one, '
+        f'use {_e(entry.key)}</div>'
+    )
     if entry.other_locations:
         count = len(entry.other_locations)
         rows.append(
@@ -281,6 +287,7 @@ def render_text(digest: Digest) -> str:
             lines.append(f"{e.fit.total}/100  {e.posting.title}")
             lines.append(f"        {e.posting.company or ''}, {e.posting.location or ''}")
             lines.append(f"        {explain(e.fit).splitlines()[0]}")
+            lines.append(f"        key: {e.key}")
             if e.other_locations:
                 lines.append(f"        Also listed in: {', '.join(e.other_locations)}")
             if e.posting.url:

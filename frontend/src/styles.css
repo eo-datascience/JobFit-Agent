@@ -459,3 +459,19 @@ main { padding: 2.25rem 0 4rem; }
 .profile-picker { display: flex; align-items: center; gap: 0.6rem; }
 .profile-picker label { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
 .profile-picker select { min-width: 15rem; }
+
+/* --------------------------------------------------------- record outcome */
+
+.record {
+  margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--panel); max-width: 42rem;
+}
+.record h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.record-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.record-button {
+  font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  padding: 0.45rem 0.9rem; border: 1px solid var(--ink); border-radius: 4px;
+  background: #fff; color: var(--ink); text-transform: none;
+}
+.record-button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.record-button:disabled { opacity: 0.45; cursor: not-allowed; }

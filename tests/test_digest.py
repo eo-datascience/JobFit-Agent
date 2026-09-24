@@ -479,3 +479,12 @@ def test_the_highest_scoring_copy_of_a_repeat_listing_is_the_one_kept():
     ]
     kept = compile_digest(scored, set(), WEEK).entries
     assert [e.posting.source_job_id for e in kept] == ["high"]
+
+
+def test_the_email_carries_the_key_used_to_record_an_outcome():
+    """Recording an outcome asks for this key, so looking it up elsewhere
+    should not be necessary."""
+    digest = compile_digest(_scored(("57364886", 90, False)), set(), WEEK)
+
+    assert "reed:57364886" in render_html(digest, "Sample")
+    assert "reed:57364886" in render_text(digest)

@@ -418,3 +418,17 @@ def test_roles_outside_every_field_are_still_turned_away():
 
     assert dashboard["roles"] == []
     assert dashboard["pipeline"]["out_of_domain"] == 1
+
+
+def test_roles_publish_the_key_the_outcome_monitor_expects():
+    """Site ids and outcome keys use different separators. Publishing the key
+    means the browser never has to reconstruct it."""
+    from agents.digest import DigestEntry
+    from agents.scoring import FitScore
+
+    posting = _posting("57364886", "Data Engineer", DATA_ROLE)
+    role = _build([posting])["roles"][0]
+    expected = DigestEntry(posting=posting, fit=FitScore(posting_id="1", total=80)).key
+
+    assert role["outcome_key"] == expected
+    assert role["id"] != role["outcome_key"]

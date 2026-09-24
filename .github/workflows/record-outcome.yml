@@ -1,0 +1,95 @@
+name: Record an outcome
+
+# Recording outcomes used to mean a command line. This gives GitHub's own form
+# instead: a dropdown and a text field, on the Actions tab, authenticated as the
+# repository owner and usable from a phone.
+#
+# The site cannot do this. It is static and public, and outcomes live in a
+# private repository, so a button there would need a write token in the browser
+# where anyone could read it. Here the credentials stay on GitHub.
+
+on:
+  workflow_dispatch:
+    inputs:
+      key:
+        description: "Role key, as shown in the digest email, for example reed:57364886"
+        required: true
+        type: string
+      outcome:
+        description: "What happened"
+        required: true
+        type: choice
+        default: applied
+        options:
+          - applied
+          - response
+          - interview
+          - offer
+          - rejected
+
+permissions:
+  contents: read
+
+# Two outcomes recorded at once would both read the file, and the second write
+# would lose the first.
+concurrency:
+  group: outcomes
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out private state
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/jobfit-state
+          token: ${{ secrets.STATE_REPO_TOKEN }}
+          path: state
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Record it
+        env:
+          JOBFIT_STATE_DIR: state
+          # Passed through the environment rather than interpolated into the
+          # script, which is the standard guard against a crafted input running
+          # as a shell command.
+          KEY: ${{ inputs.key }}
+          OUTCOME: ${{ inputs.outcome }}
+        run: python run_outcomes.py record "$KEY" "$OUTCOME"
+
+      - name: Save it
+        working-directory: state
+        run: |
+          git config user.name "jobfit-agent"
+          git config user.email "jobfit-agent@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed. The outcome may already have been recorded."
+          else
+            git commit -m "Outcome: $OUTCOME"
+            git push
+          fi
+        env:
+          OUTCOME: ${{ inputs.outcome }}
+
+      - name: Show where this leaves the learning
+        env:
+          JOBFIT_STATE_DIR: state
+        run: python run_outcomes.py learn

@@ -33,6 +33,7 @@ export interface Role {
   years_experience: number | null
   skills: { name: string; essential: boolean }[]
   domain: string
+  outcome_key: string
   scores: Record<string, ProfileScore>
   also_listed_in: string[]
 }

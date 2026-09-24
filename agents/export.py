@@ -296,6 +296,10 @@ def build_dashboard(
         role = _role_payload(posting, req, profiles)
         role["also_listed_in"] = others
         role["domain"] = req.domain or PRIMARY_DOMAIN
+        # The key the outcome monitor expects, which differs from the id used
+        # in site URLs. Published rather than reconstructed in the browser, so
+        # the two formats cannot drift apart.
+        role["outcome_key"] = f"{posting.source}:{posting.source_job_id}"
         roles.append(role)
 
     by_source = Counter(p.source for p in canonical)

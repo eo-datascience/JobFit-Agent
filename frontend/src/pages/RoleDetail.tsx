@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useProfile, useSnapshot } from '../data'
 import { capitalise, daysAgo, salaryRange, sourceName } from '../format'
 import NotFound from './NotFound'
+import RecordOutcome from '../components/RecordOutcome'
 
 const COMPONENT_NAMES: Record<string, string> = {
   skills: 'Skills',
@@ -136,6 +137,8 @@ export default function RoleDetail() {
           View the original posting on {sourceName(role.source)}
         </a>
       )}
+
+      <RecordOutcome outcomeKey={role.outcome_key} />
 
       <p className="muted small" style={{ marginTop: '2.5rem', maxWidth: '62ch' }}>
         Scored against the sample {profile.name.toLowerCase()} profile, with{' '}

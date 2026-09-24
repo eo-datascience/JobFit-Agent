@@ -189,6 +189,47 @@ that needs no API keys, run `python scripts/make_sample_data.py`, which writes a
 separate gitignored file that only the development server reads, so invented
 postings can never reach the live site.
 
+## Recording an outcome
+
+Three ways. The first is on the site itself and needs a one time setup.
+
+**From the site.** Open any role and use Record what happened at the bottom.
+Enter your passphrase once and this browser remembers it. The page posts to a
+Netlify function, which holds a GitHub token and triggers the workflow below, so
+whichever route you use, one code path records the outcome.
+
+To switch it on, add three environment variables in Netlify under Project
+configuration, then Environment variables:
+
+| Name | Value |
+|---|---|
+| `GITHUB_TOKEN` | a fine grained token with Actions read and write on the code repository |
+| `GITHUB_REPO` | `<your-username>/JobFit-Agent` |
+| `RECORD_SECRET` | a long random passphrase you invent |
+
+The token is a second one, separate from `STATE_REPO_TOKEN`, and it only needs
+Actions permission on the public repository. It never reaches the browser.
+
+The passphrase is a shared secret rather than an account. It guards an endpoint
+whose worst case is a stranger recording a made up outcome, and running a login
+service for one person is not worth it. Make it long, and do not reuse a
+password.
+
+**From GitHub**, or if you would rather not set the above up at all.
+
+**From GitHub.** Open the Actions tab, choose **Record an outcome**, then **Run
+workflow**. Paste the role's key, which every digest email shows beneath the
+role, pick what happened from the dropdown, and run it. It records the outcome,
+commits it to the private state repository and prints where that leaves the
+learning. It works from the GitHub mobile app too, so an outcome can be logged
+from a phone.
+
+The site cannot offer this. It is static and public, and outcomes live in a
+private repository, so a button there would need a write token in the browser
+where anyone could read it. On GitHub the credentials never leave the runner.
+
+**From your laptop**, if you prefer the terminal, see below.
+
 ## Every week
 
 When you apply to a role or hear back, record it on your laptop. Pull first so
