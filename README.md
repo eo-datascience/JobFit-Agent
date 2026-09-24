@@ -8,24 +8,82 @@ score, and email a shortlist with no human in the loop.
 [![CI](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/ci.yml)
 [![Weekly run](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/weekly-digest.yml/badge.svg)](https://github.com/eo-datascience/JobFit-Agent/actions/workflows/weekly-digest.yml)
 
-[![The dashboard, showing this week's postings narrowing from 400 to 10](docs/dashboard.png)](https://jobfit-agent.netlify.app)
+[![This week's run: 600 UK data postings fetched, narrowed to a shortlist of 10](docs/dashboard.png)](https://jobfit-agent.netlify.app)
 
-## What it does
+## At a glance
+
+| | |
+|---|---|
+| **What** | Six agents ingest live UK job postings, score each one against a CV, and email a weekly shortlist with no approval step |
+| **Runs** | Every Monday on GitHub Actions. No server, no machine of mine involved |
+| **Python** | Extraction, scoring, forecasting, digest, outcome learning. 281 tests |
+| **Frontend** | React, TypeScript, Vite. 25 tests, including parity tests against the Python scorer |
+| **Infrastructure** | GitHub Actions, Netlify, Netlify Functions, Resend, Prophet, pytest, Vitest, ruff |
+| **Data** | Reed and Adzuna APIs, roughly 600 postings a week across three fields |
+
+## Three things worth looking at
+
+**Scoring exists twice and cannot drift.** A visitor's CV is scored in their own
+browser so it never leaves their machine, which means the scoring maths exists in
+Python and in TypeScript. Python writes fixtures from its own scorer, the frontend
+tests assert the TypeScript reproduces them exactly, and CI regenerates the
+fixtures and fails on any difference. See
+[`scripts/make_parity_fixtures.py`](scripts/make_parity_fixtures.py) and
+[`frontend/src/scoring.test.ts`](frontend/src/scoring.test.ts).
+
+**Twelve bugs that only real data could find.** None appeared in the test suite.
+Each now has a test. Three examples:
+
+- The forecaster reported Kubernetes demand rising 155 percent. It was one posting a week. The guard against thin data was summing percentage shares instead of counting postings.
+- One week every skill was falling, the next every skill was rising. Short excerpts were in the denominator, so as their share of a week changed, every skill moved with it.
+- Roles the system knew nothing about outranked roles it had fully analysed, because dropping the unknown skills component spread its weight onto factors that are easy to score highly on.
+
+The [full log](https://jobfit-agent.netlify.app/how-it-works#log) explains all twelve.
+
+**Nothing is invented.** Skills are matched word for word against a curated
+taxonomy, so a skill cannot be reported unless the posting contains it. Where a
+language model is used at all, everything it returns is checked against the
+source text before it is kept.
+
+## Where the code lives
+
+```
+agents/          the six agents, plus the taxonomy, domains and skill families
+  ingestion.py     Reed and Adzuna clients, deduplication
+  extraction.py    skill matching, essential detection, relevance gate
+  scoring.py       the weighted score and its explanation
+  forecasting.py   weekly skill demand, and its refusals to guess
+  digest.py        the weekly email
+  outcomes.py      learning weights from real application results
+  export.py        the public snapshot, built from public inputs only
+frontend/        the React site, including the in browser scorer
+.github/         weekly run, outcome recording, CI
+tests/           281 tests
+```
+
+## How it works in detail
+
+### What it does
 
 Every Monday, with no machine of mine running, the system pulls live postings from Reed and
 Adzuna, removes the same role listed twice, turns away the ones that are not really data roles,
 extracts the skills each remaining posting asks for, scores them against a CV, emails a shortlist,
 and republishes the public dashboard above.
 
-On the site you can pick one of three sample profiles and watch every score change, or upload
-your own CV and have it scored against this week's real roles. The file is read in your browser
-and never uploaded, stored or sent anywhere.
+On the site you can pick a sample profile and watch every score change, or upload your own CV and
+have it scored against this week's real roles. The file is read in your browser and never
+uploaded, stored or sent anywhere.
+
+The weekly email covers data roles only and stays that way. The site also carries a shallower
+sweep of software engineering and product roles, so a visitor from either of those fields can
+score their own CV too. Nothing from that sweep reaches the email, the forecasting or the
+outcome monitor.
 
 Almost every design decision here was forced by real data rather than planned. The
 [engineering log](https://jobfit-agent.netlify.app/how-it-works#log) records twelve bugs that only
 appeared once the system met live postings, each of which now has a test.
 
-## Why two job sources
+### Why two job sources
 
 Reed and Adzuna are not used for redundancy. They do different jobs.
 
@@ -34,14 +92,14 @@ which the extraction agent needs in order to parse requirements at all. Its
 search endpoint returns only a snippet, so the full text is fetched separately
 from its detail endpoint, one request per posting. Adzuna returns excerpts with
 no detail endpoint, but exposes salary histograms and regional trend data that
-Reed does not, which the forecasting agent needs. Adzuna salaries are frequently modelled rather than employer
-stated, so postings carry a `salary_is_predicted` flag and scoring weights a
-stated range above an inferred one.
+Reed does not, which the forecasting agent needs. Adzuna salaries are frequently
+modelled rather than employer stated, so postings carry a `salary_is_predicted`
+flag and scoring weights a stated range above an inferred one.
 
 Where the same role appears on both, the record carrying the full description
 wins. This is asserted directly in the test suite rather than assumed.
 
-## How extraction stays grounded
+### How extraction stays grounded
 
 Skill detection is deterministic. Every skill is matched literally against the
 posting text from a curated taxonomy, and the matched span is kept as evidence,
@@ -70,7 +128,7 @@ extracted at full confidence. Adzuna excerpts are extracted on a reduced basis
 and marked partial, which tells the scoring agent that a missing skill proves
 nothing rather than counting against the role.
 
-## How scoring works
+### How scoring works
 
 Four weighted components: skills at 0.45, seniority at 0.25, salary at 0.15 and
 location at 0.15. Essential skills count for more than desirable ones, because
@@ -105,7 +163,7 @@ the first place.
 Every line of the explanation is built from a field the scoring step computed.
 Nothing in it is generated, so the explanation and the score cannot drift apart.
 
-## How forecasting avoids inventing a trend
+### How forecasting avoids inventing a trend
 
 A new deployment has no history, so nothing can be forecast until the pipeline
 has run weekly for a month or more. History is therefore reconstructed from the
@@ -189,7 +247,7 @@ installed, which is common on Windows given its compiled backend, the agent
 degrades to a least squares trend and labels the result rather than producing
 nothing.
 
-## How the digest acts safely without approval
+### How the digest acts safely without approval
 
 The digest is the first agent that acts rather than reports. It emails a ranked
 shortlist every week with no approval step, so the failure modes that matter
@@ -230,17 +288,17 @@ Both providers are called over plain HTTP rather than through their SDKs, so
 every send path is tested with the same mock transport as the job board
 clients, with no key and no network.
 
-## The public dashboard
+### The public dashboard
 
 Every run publishes a snapshot that a React and TypeScript site renders: this
 week's postings as a narrowing funnel, a filterable list of roles with the
 reasoning behind each score, what the market is asking for, and a written record
 of the twelve bugs that real data exposed.
 
-Visitors choose which of three sample profiles to score against, and every
-figure on the site recalculates, including the funnel. The scoring is the real
-scorer, so a junior data analyst and a junior machine learning engineer get
-genuinely different shortlists from the same postings.
+Visitors choose a sample profile, and every figure recalculates, including the
+funnel and which field's roles are shown. The scoring is the real scorer, so a
+junior data scientist and a junior product manager get genuinely different
+shortlists from the same week's postings.
 
 Visitors can also upload their own CV and have it scored against the same live
 roles. The file is read, parsed and scored entirely in the browser using the
@@ -256,7 +314,7 @@ application outcome, so privacy is a property of the function's inputs rather
 than something to remember. Full job descriptions are not republished either.
 None of the sample profiles carries a salary floor, since a real one is private.
 
-## Deployment
+### Deployment
 
 The digest runs every Monday on GitHub Actions, with no machine of mine
 involved. See [DEPLOYMENT.md](DEPLOYMENT.md) for setup.
